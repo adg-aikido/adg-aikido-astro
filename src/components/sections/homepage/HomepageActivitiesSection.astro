@@ -1,20 +1,29 @@
 ---
-import activitiesData from '../../../data/activities.yaml';
-import { marked } from 'marked';
+import activitiesData from "../../../data/activities.yaml";
+import { marked } from "marked";
 
 const activities = activitiesData.activities;
 
 const formatDate = (dateStr: string) => {
   const date = new Date(dateStr);
-  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('sv-SE', options);
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return date.toLocaleDateString("sv-SE", options);
 };
 
-const formatDateRange = (start: string, end: string) => {
-  if (start === end) {
-    return formatDate(start);
+const formatDateRange = (
+  startDate: string,
+  startTime: string | null,
+  endDate: string | null,
+  endTime: String | null
+) => {
+  if (startDate === endDate) {
+    return formatDate(startDate);
   }
-  return `${formatDate(start)} - ${formatDate(end)}`;
+  return `${formatDate(startDate)} - ${formatDate(endDate)}`;
 };
 
 const formatDateTime = (date: string, time: string | null) => {
@@ -26,20 +35,31 @@ const formatDateTime = (date: string, time: string | null) => {
 };
 ---
 
-<div class="p-4 border-2 rounded-lg shadow-lg border-primary-200 backdrop-blur-sm">
-  <h2 class="mt-1 font-serif text-3xl font-bold leading-tight">Kommande aktiviteter</h2>
+<div
+  class="p-4 border-2 rounded-lg shadow-lg border-primary-200 backdrop-blur-sm"
+>
+  <h2 class="mt-1 font-serif text-3xl font-bold leading-tight">
+    Kommande aktiviteter
+  </h2>
   <ul class="flex flex-col mt-4 space-y-4">
-    {activities.map((activity) => {
-      const dateDisplay = formatDateTime(activity.date_start, activity.time_start);
-      const descriptionHtml = marked.parse(activity.description);
-      return (
-        <li>
-          <div><strong>{dateDisplay}</strong> — <em>{activity.title}</em></div>
-          <div class="ml-3">
-            <div class="mt-1 mb-0" set:html={descriptionHtml}></div>
-          </div>
-        </li>
-      );
-    })}
+    {
+      activities.map((activity) => {
+        const dateDisplay = formatDateTime(
+          activity.date_start,
+          activity.time_start
+        );
+        const descriptionHtml = marked.parse(activity.description);
+        return (
+          <li>
+            <div>
+              <strong>{dateDisplay}</strong> — <em>{activity.title}</em>
+            </div>
+            <div class="ml-3">
+              <div class="mt-1 mb-0" set:html={descriptionHtml} />
+            </div>
+          </li>
+        );
+      })
+    }
   </ul>
 </div>

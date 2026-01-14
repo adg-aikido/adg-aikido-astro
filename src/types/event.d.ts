@@ -24,6 +24,11 @@ export interface Event {
   prices: Price[];
 }
 
+
+export interface Events {
+  events: Event[];
+}
+
 declare module '*.yaml' {
   const content: Event;
   export default content;
