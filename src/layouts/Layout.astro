@@ -1,8 +1,7 @@
 ---
-import "../styles/global.css";
+import "../styles/adg.css";
 import AdgLogo from "../assets/logo_adg_block.svg";
-import HomeIcon from "../assets/home-icon-3abd86.svg";
-import FacebookIcon from "../assets/facebook-icon-929f10.svg";
+import Navigation from "../components/common/Navigation.astro";
 
 export interface Props {
   title?: string;
@@ -36,11 +35,11 @@ const currentPath = Astro.url.pathname;
     />
   </head>
   <body
-    class="relative min-h-full pb-12 bg-fixed bg-center bg-cover border-t-4 border-primary"
+    class="relative min-h-full pb-12 bg-fixed bg-center bg-cover border-t-4 border-primary-500 "
     style="background-image: url(/assets/4e57474a3e57-shomen-adg-white.png)"
   >
     <header
-      class="mb-8 shadow bg-linear-to-br from-primary-mid to-primary-light"
+      class="mb-8 shadow bg-linear-to-br from-primary-400 to-primary-200"
     >
       <div
         class="container flex flex-wrap items-center justify-around max-w-5xl py-2 mx-auto"
@@ -64,112 +63,14 @@ const currentPath = Astro.url.pathname;
         </div>
       </div>
       <div class="pt-2">
-        <nav class="text-sm">
-          <ul class="flex flex-wrap justify-center items-center">
-            <li
-              class:list={[
-                "px-3 py-0 transition ease-in-out",
-                currentPath === "/" && "border-b-4 border-accent",
-              ]}
-            >
-              <a
-                href="/"
-                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
-                aria-label="Huvudsidan"
-              >
-                <HomeIcon class="w-6 h-6" />
-              </a>
-            </li>
-            <li
-              class:list={[
-                "px-3 py-1 transition ease-in-out",
-                currentPath === "/aikido" && "border-b-4 border-accent",
-              ]}
-            >
-              <a
-                href="/aikido"
-                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
-                >Aikido</a
-              >
-            </li>
-            <li
-              class:list={[
-                "px-3 py-1 transition ease-in-out",
-                currentPath === "/priser" && "border-b-4 border-accent",
-              ]}
-            >
-              <a
-                href="/priser"
-                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
-                >Priser</a
-              >
-            </li>
-            <li
-              class:list={[
-                "px-3 py-1 transition ease-in-out",
-                currentPath === "/schema" && "border-b-4 border-accent",
-              ]}
-            >
-              <a
-                href="/schema"
-                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
-                >Schema</a
-              >
-            </li>
-            <li
-              class:list={[
-                "px-3 py-1 transition ease-in-out",
-                currentPath === "/klubben" && "border-b-4 border-accent",
-              ]}
-            >
-              <a
-                href="/klubben"
-                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
-                >Klubben</a
-              >
-            </li>
-            <li
-              class:list={[
-                "px-3 py-1 transition ease-in-out",
-                currentPath === "/media" && "border-b-4 border-accent",
-              ]}
-            >
-              <a
-                href="/media"
-                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
-                >Media</a
-              >
-            </li>
-            <li
-              class:list={[
-                "px-3 py-1 transition ease-in-out",
-                currentPath === "/kontakt" && "border-b-4 border-accent",
-              ]}
-            >
-              <a
-                href="/kontakt"
-                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
-                >Kontakt</a
-              >
-            </li>
-            <li class="px-3 py-0">
-              <a
-                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
-                href="https://www.facebook.com/aikidodojogamlestaden/"
-                aria-label="Vår Facebook sida"
-              >
-                <FacebookIcon class="w-6 h-6" />
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <Navigation currentPath={currentPath} />
       </div>
     </header>
 
     <slot />
 
     <footer
-      class="absolute inset-x-0 bottom-0 py-2 text-sm text-center border-b-4 bg-linear-to-br from-primary-mid to-primary-light border-primary"
+      class="absolute inset-x-0 bottom-0 py-2 text-sm text-center border-b-4 bg-linear-to-br from-primary-400 to-primary-200 border-primary-500 "
     >
       <div class="text-gray-800">© 2007-2026 Aikido Dojo Gamlestaden.</div>
     </footer>

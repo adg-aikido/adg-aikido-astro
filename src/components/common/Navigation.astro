@@ -1,0 +1,45 @@
+---
+import HomeIcon from "../../assets/home-icon-3abd86.svg";
+import FacebookIcon from "../../assets/facebook-icon-929f10.svg";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const navItems = [
+  { href: "/", label: "Huvudsidan", icon: "home" },
+  { href: "/aikido", label: "Aikido" },
+  { href: "/priser", label: "Priser" },
+  { href: "/schema", label: "Schema" },
+  { href: "/klubben", label: "Klubben" },
+  { href: "/media", label: "Media" },
+  { href: "/kontakt", label: "Kontakt" },
+  { href: "https://www.facebook.com/aikidodojogamlestaden/", label: "Facebook", icon: "facebook", external: true },
+];
+---
+
+<nav class="text-sm">
+  <ul class="flex flex-wrap justify-center items-bottom space-x-6">
+    {navItems.map((item) => (
+      <li
+        class:list={[
+          item.icon === "facebook" || item.icon === "home"  ? "pt-0" : "pt-2 transition ease-in-out duration-400",
+          "border-b-4",
+          !item.external && currentPath === item.href ? "border-accent-400 hover:border-primary-500 ": "border-transparent",
+        ]}
+      >
+        <a
+          href={item.href}
+          class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
+          aria-label={item.label}
+        >
+          {item.icon === "home" && <HomeIcon class="w-6 h-6" />}
+          {item.icon === "facebook" && <FacebookIcon class="w-6 h-6" />}
+          {!item.icon && item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
