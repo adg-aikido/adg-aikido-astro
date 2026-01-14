@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 import yaml from '@rollup/plugin-yaml';
+import astroBrokenLinksChecker from 'astro-broken-links-checker';
 
 export default defineConfig({
 	site: 'http://localhost:4321',
@@ -17,5 +18,13 @@ export default defineConfig({
 			yaml(),
 		],
 	},
-	integrations: [mdx(), sitemap()],
+	integrations: [
+		mdx(), 
+		sitemap(),
+		astroBrokenLinksChecker({
+			logFilePath: 'broken-links.log', // Optional: specify the log file path
+			checkExternalLinks: false, // Optional: check external links (currently, caching to disk is not supported, and it is slow)
+			throwError: true // Optional: throw an error to fail the build if broken links are found. Defaults to false.
+			})
+	],
 })

@@ -1,0 +1,192 @@
+mediaSections:
+  - section: nyhetsbrev
+    title: Nyhetsbrev
+    id: nyhetsbrev
+    gridCols: grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+    items:
+      - href: /assets/library/ADG-Nyhetsbrev-April2024.pdf
+        title: April 2024
+
+  - section: traningsvideor
+    title: Träningsvideor
+    id: traningsvideor
+    items:
+      - href: https://www.youtube.com/watch?v=r-QcwjTs-ao
+        title: Bokken suburi 1-7
+        thumbnail: https://img.youtube.com/vi/r-QcwjTs-ao/hqdefault.jpg
+        tags: [saito, bokken, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=5yAA5oKVQgY
+        title: Bokken suburi 1-3
+        thumbnail: https://img.youtube.com/vi/5yAA5oKVQgY/hqdefault.jpg
+        tags: [dequiros, bokken, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=6keXUcYUE3M
+        title: Bokken suburi 4-7
+        thumbnail: https://img.youtube.com/vi/6keXUcYUE3M/hqdefault.jpg
+        tags: [dequiros, bokken, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=vs157f6dlXs
+        title: Zengo giri, shiho giri och happo giri
+        thumbnail: https://img.youtube.com/vi/vs157f6dlXs/hqdefault.jpg
+        tags: [dequiros, bokken, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=O9U04EU_Qp8
+        title: Jo suburi 1-20
+        thumbnail: https://img.youtube.com/vi/O9U04EU_Qp8/hqdefault.jpg
+        tags: [saito, jo, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=j1TxOYUellc
+        title: 13 jo
+        thumbnail: https://img.youtube.com/vi/j1TxOYUellc/hqdefault.jpg
+        tags: [saito, jo, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=pCWpvAD1Dzk
+        title: 31 jo kata
+        thumbnail: https://img.youtube.com/vi/pCWpvAD1Dzk/hqdefault.jpg
+        tags: [saito, jo, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=G2KAa4bYIL8
+        title: Jo suburi 1-20
+        thumbnail: https://img.youtube.com/vi/G2KAa4bYIL8/hqdefault.jpg
+        tags: [dequiros, jo, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=j5f1-UwwtMg
+        title: 13 jo
+        thumbnail: https://img.youtube.com/vi/j5f1-UwwtMg/hqdefault.jpg
+        tags: [dequiros, jo, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=QMfN6EtKJHg
+        title: 31 jo kata
+        thumbnail: https://img.youtube.com/vi/QMfN6EtKJHg/hqdefault.jpg
+        tags: [dequiros, jo, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=kME3EwCs-SM
+        title: 6 jo kata
+        thumbnail: https://img.youtube.com/vi/kME3EwCs-SM/hqdefault.jpg
+        tags: [dequiros, jo, solo]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=ZitsYfEGxVA
+        title: Kumi tachi 1-5
+        thumbnail: https://img.youtube.com/vi/ZitsYfEGxVA/hqdefault.jpg
+        tags: [saito, bokken, pair]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=98B6U7rKqaI
+        title: Ki musubi no tachi
+        thumbnail: https://img.youtube.com/vi/98B6U7rKqaI/hqdefault.jpg
+        tags: [saito, bokken, pair]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=Qh6pUMp4Rb4
+        title: Kumi jo 1-5
+        thumbnail: https://img.youtube.com/vi/Qh6pUMp4Rb4/hqdefault.jpg
+        tags: [saito, jo, pair]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=RNbYeJMByOY
+        title: Kumi jo 6-10
+        thumbnail: https://img.youtube.com/vi/RNbYeJMByOY/hqdefault.jpg
+        tags: [saito, jo, pair]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=VQYzw_TbhcE
+        title: 31 kata kumi jo
+        thumbnail: https://img.youtube.com/vi/VQYzw_TbhcE/hqdefault.jpg
+        tags: [saito, jo, pair]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=k0fHgU5Olvc
+        title: 13 jo awase
+        thumbnail: https://img.youtube.com/vi/k0fHgU5Olvc/hqdefault.jpg
+        tags: [saito, jo, pair]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=io8d0WazNqs
+        title: Kumi jo 1-10
+        thumbnail: https://img.youtube.com/vi/io8d0WazNqs/hqdefault.jpg
+        tags: [dequiros, jo, pair]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=SHZnOcn5MO0
+        title: 31 kata kumi jo
+        thumbnail: https://img.youtube.com/vi/SHZnOcn5MO0/hqdefault.jpg
+        tags: [dequiros, jo, pair]
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=_0r7S40kp4g
+        title: 31 kata kumi jo
+        thumbnail: https://img.youtube.com/vi/_0r7S40kp4g/hqdefault.jpg
+        tags: [dequiros, jo, pair]
+        isYouTube: true
+
+  - section: dokument
+    title: Dokument
+    subtitle: Blanketter och annat intressant
+    id: dokument
+    items:
+      - href: /assets/library/Graderingskrav_vuxna.pdf
+        title: Anmälan och kravlista gradering vuxna
+      - href: /assets/library/Graderingsansokan_barn_ungdomar.pdf
+        title: Anmälan gradering barn och ungdom
+      - href: /assets/library/Graderingskrav_barn_ungdomar.pdf
+        title: Kravlista gradering barn under 10 år
+      - href: /assets/library/Graderingskrav_barn_ungdomar_2025.pdf
+        title: Kravlista gradering barn 10+ och ungdom
+      - href: /assets/library/Infoblad.pdf
+        title: Introduktionsblad för nybörjare
+      - href: /assets/library/adg_booklet_original.pdf
+        title: Handbok för nybörjare
+      - href: /assets/library/adg-traning-hosten-2020.pdf
+        title: Träningsplanering [Hösten 2020]
+        thumbnail: /assets/90bc0c73677f-adg-traning-schema.jpg
+        thumbnailAlt: Träningsschema
+
+  - section: affischer
+    title: Affischer
+    subtitle: Skriv ut dem och sprid ut dem på stan!
+    id: affischer
+    items:
+      - href: /assets/library/Affisch_ADG_2.pdf
+        title: Nya svart-vita affischen
+        thumbnail: /assets/459d05a02dbb-affisch-adg.jpg
+        thumbnailAlt: ADG Affisch
+      - href: /assets/library/adg-stillhet-1_bw.pdf
+        title: Affisch svart-vit
+        thumbnail: /assets/c8733baf61e0-adg-stillhet.jpg
+        thumbnailAlt: Stillhet affisch
+      - href: /assets/library/adg-beginner_a4_3.pdf
+        title: Flyer A4/3 för nybörjare
+        thumbnail: /assets/578af803a34d-adg-flyer.jpg
+        thumbnailAlt: Nybörjare flyer
+      - href: /assets/library/Children.pdf
+        title: Affisch för barn och ungdomar
+        thumbnail: /assets/df5cca1fde59-children.jpg
+        thumbnailAlt: Barn affisch
+      - href: /assets/library/Modern2.pdf
+        title: Modern flerfärgad affisch
+        thumbnail: /assets/7b16b4ea4e08-modern2.jpg
+        thumbnailAlt: Modern affisch
+
+  - section: foreningsdokument
+    title: Föreningsdokument
+    subtitle: Några dokument av allmän intresse.
+    id: foreningsdokument
+    gridCols: grid-cols-1 md:grid-cols-3
+    items:
+      - href: /assets/library/styrelse/ADG_Stadgar.pdf
+        title: Stadgar
+      - href: /assets/library/styrelse/ADG_Integritetspolicy.pdf
+        title: Integritetspolicy
+      - href: /assets/library/styrelse/ADG_Jamstalldhetsplan.pdf
+        title: Jämställdhetsplan
+
+  - section: videogalleri
+    title: Videogalleri
+    id: videogalleri
+    gridCols: grid-cols-1 md:grid-cols-3
+    items:
+      - href: https://www.youtube.com/watch?v=dT_fGAt6R2s
+        title: Presentationsfilm
+        thumbnail: https://img.youtube.com/vi/dT_fGAt6R2s/hqdefault.jpg
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=Adzo-K9mSvE
+        title: Uppvisning kulturkalaset 1
+        thumbnail: https://img.youtube.com/vi/Adzo-K9mSvE/hqdefault.jpg
+        isYouTube: true
+      - href: https://www.youtube.com/watch?v=lUzVPqTXqHo
+        title: Uppvisning kulturkalaset 2
+        thumbnail: https://img.youtube.com/vi/lUzVPqTXqHo/hqdefault.jpg
+        isYouTube: true
