@@ -1,0 +1,67 @@
+---
+export interface Props {
+  href: string;
+  title: string;
+  thumbnail?: string;
+  thumbnailAlt?: string;
+  icon?: 'document' | 'video';
+  tags?: string[];
+  isYouTube?: boolean;
+  class?: string;
+}
+
+const { 
+  href, 
+  title, 
+  thumbnail, 
+  thumbnailAlt = '',
+  icon = 'document',
+  tags = [],
+  isYouTube = false,
+  class: className 
+} = Astro.props;
+
+import DocumentIcon from "../../assets/document-file-outline-icon-9c9c03.svg";
+---
+
+<li class:list={["flex flex-col justify-between", className]}>
+  <a href={href} class="flex flex-col no-underline">
+    {isYouTube && thumbnail ? (
+      <div class="relative w-full aspect-[16/9] overflow-hidden">
+        <iframe 
+          class="absolute inset-0 w-full h-full" 
+          src={href.includes('youtube') ? href.replace('watch?v=', 'embed/').replace('youtube.com', 'youtube-nocookie.com') : href}
+          frameborder="0" 
+          loading="lazy" 
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+          srcdoc={`<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href='${href.replace('watch?v=', 'embed/').replace('youtube.com', 'youtube-nocookie.com')}?autoplay=1'><img src='${thumbnail}' alt='${title}'><span>▶</span></a>`}
+        ></iframe>
+      </div>
+    ) : thumbnail ? (
+      <div class="flex items-center p-2">
+        <img src={thumbnail} class="w-16 px-1 flex-shrink-0 shadow-lg" alt={thumbnailAlt} />
+        <span class="flex-1 py-2 ml-2">{title}</span>
+      </div>
+    ) : (
+      <div class="flex items-center p-2">
+        <div class="w-8 mr-2 flex-shrink-0">
+          <DocumentIcon />
+        </div>
+        <span class="flex-1 py-2">{title}</span>
+      </div>
+    )}
+    {isYouTube && (
+      <span class="flex-1 py-2">{title}</span>
+    )}
+  </a>
+  {tags.length > 0 && (
+    <div class="flex flex-wrap gap-2 mt-2">
+      {tags.map((tag) => (
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+          {tag}
+        </span>
+      ))}
+    </div>
+  )}
+</li>
