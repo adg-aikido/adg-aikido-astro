@@ -1,0 +1,42 @@
+---
+import Button from "../../common/Button.astro";
+---
+
+<aside class="w-full lg:col-span-1">
+  <h2 class="mt-6 text-center font-serif text-3xl font-bold mb-6 space-y-2.5">
+    <p class="mb-2 mt-3">Dags att skaffa nya vanor?</p>
+    <p class="mb-2 mt-3">Sätta upp nya mål?</p>
+    <p class="mb-2 mt-3">Vill du komma i form, <br />lära dig ett effektivt självförsvar, <br />träffa nya vänner och <br />ha kul medan du gör det?</p>
+    <p class="mb-2 mt-3">Varmt välkommen till oss i Gamlestaden!</p>
+  </h2>
+
+  <div class="my-12 shadow">
+    <div class="relative w-full aspect-video">
+      <iframe
+        class="absolute inset-0 w-full h-full rounded"
+        src="https://www.youtube.com/embed/uQBk769BXp8"
+        frameborder="0"
+        loading="lazy"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        title="Aikido uppvisning video"
+        srcdoc="&lt;style&gt;*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}&lt;/style&gt;&lt;a href='https://www.youtube.com/embed/uQBk769BXp8?autoplay=1'&gt;&lt;img src='https://img.youtube.com/vi/uQBk769BXp8/hqdefault.jpg' alt='Uppvisning video'&gt;&lt;span&gt;▶&lt;/span&gt;&lt;/a&gt;"
+      ></iframe>
+    </div>
+  </div>
+
+  <section>
+    <p class="mb-5">Vi har kontinuerlig intagning av nybörjare i alla åldrar. Samtliga grupper leds av höggraderade erfarna instruktörer som möter dig och coachar dig på din nivå. Välkomna till oss för provträning eller <a href="mailto:info@adg-aikido.se" class="font-medium text-text-dim underline underline-offset-1">kontakta oss</a> om du har några frågor.</p>
+
+    <div class="flex flex-col sm:flex-row justify-center gap-4 w-full my-8">
+      <Button href="/priser#provtraning">Provträning</Button>
+      <Button href="/schema">Träningstider</Button>
+      <Button href="/priser">Priser</Button>
+    </div>
+
+    <p class="mt-2 mb-5">Om du är intresserad eller har frågor om Aikido eller vår verksamhet är du välkommen att höra av dig på mail <a href="mailto:info@adg-aikido.se" class="font-medium text-text-dim underline underline-offset-1">info@adg-aikido.se</a> eller via <a href="/kontakt" class="font-medium text-text-dim underline underline-offset-1">"Kontakt"-sidan</a>.</p>
+
+    <h4 class="mt-8 font-serif text-xl font-bold mb-4">Kommande läger</h4>
+    <p class="mb-5">Kolla listan på <a href="https://www.svenskaikido.se/vara-evenemang/" class="font-medium text-text-dim underline underline-offset-1">förbundets sida</a>.</p>
+  </section>
+</aside>

@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HomepageActivitiesSection from "../components/sections/homepage/HomepageActivitiesSection.astro";
+import HomepageNewsSection from "../components/sections/homepage/HomepageNewsSection.astro";
+import HomepageHeroSection from "../components/sections/homepage/HomepageHeroSection.astro";
+import HomepagePartnersSection from "../components/sections/homepage/HomepagePartnersSection.astro";
+---
+
+<Layout>
+  <div class="container mx-auto mb-12 max-w-5xl">
+    <div class="px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-12">
+        <main class="w-full lg:col-span-2">
+          <HomepageActivitiesSection />
+          <HomepageNewsSection />
+        </main>
+
+        <HomepageHeroSection />
+      </div>
+
+      <HomepagePartnersSection />
+    </div>
+  </div>
+</Layout>
