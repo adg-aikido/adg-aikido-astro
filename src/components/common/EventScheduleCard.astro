@@ -2,7 +2,8 @@
 export interface Props {
   day: string;
   items: Array<{
-    time: string;
+    timeStart: string;
+    timeEnd?: string;
     activity: string;
     subdued?: boolean;
   }>;
@@ -22,7 +23,7 @@ const { day, items, class: className } = Astro.props;
   <ul class="space-y-1 p-4">
     {items.map((item) => (
       <li class="flex justify-between">
-        <span>{item.time}</span>
+        <span>{item.timeStart}{item.timeEnd && <> &ndash; {item.timeEnd}</>}</span>
         <span class:list={[item.subdued && "text-gray-600"]}>{item.activity}</span>
       </li>
     ))}
