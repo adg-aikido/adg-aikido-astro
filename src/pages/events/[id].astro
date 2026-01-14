@@ -1,36 +1,46 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import SectionHeading from "../components/common/SectionHeading.astro";
-import SectionNav from "../components/common/SectionNav.astro";
-import EventScheduleCard from "../components/common/EventScheduleCard.astro";
-import SimplePriceCard from "../components/common/SimplePriceCard.astro";
-import eventData from "../data/dequiros2025-event.yaml";
+import Layout from "../../layouts/Layout.astro";
+import SectionHeading from "../../components/common/SectionHeading.astro";
+import SectionNav from "../../components/common/SectionNav.astro";
+import EventScheduleCard from "../../components/common/EventScheduleCard.astro";
+import SimplePriceCard from "../../components/common/SimplePriceCard.astro";
+import eventsData from "../../data/events.yaml";
 import { marked } from 'marked';
 
-const { eventDate, paymentDeadline, senseiInfo, schedule, prices } = eventData;
+export async function getStaticPaths() {
+  return eventsData.events.map((event) => ({
+    params: { id: event.id },
+    props: { event }
+  }));
+}
+
+const { event } = Astro.props;
+const { name, eventDate, paymentDeadline, senseiInfo, schedule, prices } = event;
 const senseiInfo0 = marked.parse(senseiInfo);
 ---
 
 <Layout
-  title="Lewis Bernaldo de Quiros, 7th dan - {eventDate} - Aikido Dojo Gamlestaden"
-  description="Weekend seminar with Sensei Lewis Bernaldo de Quirós, 7th Dan Aikikai and Technical Director of Traditional Aikido Europe (TAE). {eventDate} in Göteborg." 
+  title="{name} - {eventDate} - Aikido Dojo Gamlestaden"
+  description="Weekend seminar with {name}. {eventDate} in Göteborg." 
 >
   <main class="mx-auto max-w-5xl">
     <h1 class="-mt-4 text-center font-serif text-4xl font-bold">
-      Lewis Bernaldo de Quiros, 7th dan<br />{eventDate}
+      {name}<br />{eventDate}
     </h1>
     
     <div class="px-4 pb-5">
       <h2 class="px-8 -mt-4 text-center font-serif text-3xl font-bold text-primary-900">
-        We welcome all aikidoka, regardless of rank or style, to a seminar with Lewis Bernaldo de Quiros sensei
+        We welcome all aikidoka, regardless of rank or style, to a seminar with {name}
       </h2>
 
       <div class="mt-8 flow-root">
-        <img 
-          src="/assets/be0b5bd8a538-lewisdequiros.jpg" 
-          class="w-[250px] p-2 shadow-lg md:float-right md:ml-6 md:mb-4" 
-          alt="Sensei Lewis Bernaldo de Quirós"
-        />
+        {event.image && (
+          <img 
+            src={event.image} 
+            class="w-[250px] p-2 shadow-lg md:float-right md:ml-6 md:mb-4" 
+            alt="Sensei {name}"
+          />
+        )}
         
         <div class="space-y-5 text-gray-800" set:html={senseiInfo0}>
         </div>
@@ -56,7 +66,7 @@ const senseiInfo0 = marked.parse(senseiInfo);
 
       <div class="mt-5 space-y-4">
         <p class="text-lg text-primary-900">
-          <strong class="font-bold">When?</strong> 15-16 February 2025
+          <strong class="font-bold">When?</strong> {eventDate}
         </p>
         
         <p class="text-lg text-primary-900">
@@ -64,7 +74,7 @@ const senseiInfo0 = marked.parse(senseiInfo);
         </p>
         
         <p class="text-center">
-          <a href="https://adg-aikido.se/hendricks2025">
+          <a href="https://adg-aikido.se/{event.id}">
             <button class="rounded border border-primary-500-900 bg-primary-50 px-4 py-2 font-bold text-primary-900 transition hover:bg-primary-400">
               Register here
             </button>
@@ -86,7 +96,7 @@ const senseiInfo0 = marked.parse(senseiInfo);
       </div>
 
       <SectionNav 
-        class="mt-8"
+        class="mt-8 print:hidden"
         items={[
           { href: '#schedule', label: 'Schedule' },
           { href: '#prices', label: 'Prices' },
@@ -150,7 +160,7 @@ const senseiInfo0 = marked.parse(senseiInfo);
         </li>
       </ul>
 
-      <section id="directions" class="scroll-mt-20">
+      <section id="directions" class="scroll-mt-20 print:hidden">
         <SectionHeading level="h3" class="mt-8 text-primary-900">Directions</SectionHeading>
         
         <div class="ml-8 mt-4 space-y-4">
@@ -159,7 +169,7 @@ const senseiInfo0 = marked.parse(senseiInfo);
           <p>Trams 1, 7, 8 to Frölunda torg, buses 92, 93 from Frölunda torg to bus stop "Hults bro".</p>
           
           <iframe 
-            class="w-full max-w-[400px] aspect-4/3 rounded-md border p-2 shadow" 
+            class="w-full max-w-[400px] aspect-4/3 rounded-md p-2 shadow mx-auto" 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2135.3611126682704!2d11.917655516102908!3d57.64234815215293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff2bc1b64c60d%3A0x44779303d26cf081!2sFr%C3%B6lunda%20Judoklubb!5e0!3m2!1sen!2sse!4v1577389677109!5m2!1sen!2sse" 
             allowfullscreen
             loading="lazy" 
