@@ -1,5 +1,6 @@
 ---
 import activitiesData from '../../../data/activities.yaml';
+import { marked } from 'marked';
 
 const activities = activitiesData.activities;
 
@@ -30,11 +31,12 @@ const formatDateTime = (date: string, time: string | null) => {
   <ul class="flex flex-col mt-4 space-y-4">
     {activities.map((activity) => {
       const dateDisplay = formatDateTime(activity.date_start, activity.time_start);
+      const descriptionHtml = marked.parse(activity.description);
       return (
         <li>
           <div><strong>{dateDisplay}</strong> — <em>{activity.title}</em></div>
           <div class="ml-3">
-            <p class="mt-1 mb-0">{activity.description}</p>
+            <div class="mt-1 mb-0" set:html={descriptionHtml}></div>
           </div>
         </li>
       );
