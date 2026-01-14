@@ -1,41 +1,30 @@
+---
+import { marked } from 'marked';
+import newsData from '../../../data/news.yaml';
+
+const newsItems = newsData.news;
+---
+
 <div class="mt-12">
   <h2 class="mb-4 font-serif text-3xl font-bold leading-tight mt-10">Nyheter</h2>
   <ul class="space-y-6">
-    <li class="pb-4 border-b border-primary-300">
-      <h3 class="mb-4 font-serif text-2xl font-bold leading-tight mt-4">Nya grader för Ylva sensei och Alula sensei</h3>
-      <div class="space-y-5">
-        <p>Nu är det officiellt - stort grattis till Ylva sensei for 6:e dan och till Alula sensei för 5:e dan!💕🎉</p>
-        <p>Hela graderingslistan finns <a href="https://aikikai.or.jp/pdf/suisen/2026.pdf" class="font-medium text-text-dim underline decoration-primary-500underline-offset-1">här</a></p>
-      </div>
-    </li>
-    <li class="pb-4 border-b border-primary-300">
-      <h3 class="mb-4 font-serif text-2xl font-bold leading-tight mt-4">Läger med Patricia Hendricks shihan, 7 dan, september 2025</h3>
-      <p>Vi är glada att meddela att den 6-7 september 2025 kommer vi att gästas av Patricia Hendricks shihan, 7 dan, för ett seminarium! <a href="/hendricks2025" class="font-medium text-text-dim underline decoration-primary-500underline-offset-1">Mer information här</a>. <a href="/assets/uploads/ADG_PatriciaHendricks_2025.pdf" class="font-medium text-text-dim underline decoration-primary-500underline-offset-1">Flyer att ladda ner</a></p>
-    </li>
-    <li class="pb-4 border-b border-primary-300">
-      <h3 class="mb-4 font-serif text-2xl font-bold leading-tight mt-4">Läger med Lewis Bernaldo de Quiros, 7 dan, februari 2025</h3>
-      <p>Vi är glada att meddela att 15-16 februari 2025 kommer vi att gästas av Lewis de Quiros, 7 dan, för ett seminarium! <a href="/dequiros2025" class="font-medium text-text-dim underline decoration-primary-500underline-offset-1">Mer information här</a>. <a href="/assets/uploads/ADG_LewisDeQuiros_2025.pdf" class="font-medium text-text-dim underline decoration-primary-500underline-offset-1">Flyer att ladda ner</a></p>
-    </li>
-    <li class="pb-4 border-b border-primary-300">
-      <h3 class="mb-4 font-serif text-2xl font-bold leading-tight mt-4">Sommar Aikido Dojo är tillbaka under sommarlovet 2024!</h3>
-      <div class="space-y-5">
-        <p>Alla aktiviteter är kostnadsfria och är öppna för alla barn mellan 7–14 år. Så klart är dojons medlemmar också välkomna!</p>
-        <h4 class="mt-6 mb-4 font-serif text-xl font-bold leading-tight">Två "prova på" tillfällen på Kulturhuset Bergsjön i juni</h4>
-        <p>Den 10/6 och 14/6, kl. 16.00–17.30, kan du prova på, titta och lyssna på högläsning från barnboken "<em>Mumu Aikido Myō och Havet i Himlen</em>" på Kulturhuset Bergsjön.</p>
-        <h4 class="mt-6 mb-4 font-serif text-xl font-bold leading-tight">Träningar och skapande-tillfällen i augusti</h4>
-        <p>Vecka 31–33 Tisdagar, onsdagar och torsdagar kl. 14.00–16.00. Aktiviteterna äger rum på Kulturhuset Bergsjön, Dojon och Ånäsfältet.</p>
-        <h4 class="mt-6 mb-4 font-serif text-xl font-bold leading-tight">Öppet hus</h4>
-        <p>Lördagen den 17/8 kl.11,00–14.00 på Dojon.</p>
-        <p>Inga förkunskaper krävs, du kan komma så många tillfällen som du vill! Anmäl dig gärna via <a href="mailto:info@adg-aikido.se" class="font-medium text-text-dim underline decoration-primary-500underline-offset-1">info@adg-aikido.se</a>. Hoppas vi ses och varmt välkomna!</p>
-        <div class="flex flex-wrap justify-evenly gap-2 pt-4">
-          <a class="block" href="/assets/716b4279bc28-flyer.png"><img src="/assets/716b4279bc28-flyer.png" width="200" alt="" /></a>
-          <a class="block" href="/assets/6a469ec75370-flyer.png"><img src="/assets/6a469ec75370-flyer.png" width="200" alt="" /></a>
-        </div>
-      </div>
-    </li>
-    <li class="pb-2">
-      <h3 class="mb-4 font-serif text-2xl font-bold leading-tight mt-4">Nyhetsbrev april 2024</h3>
-      <p><a href="/assets/uploads/ADG-Nyhetsbrev-April2024.pdf" class="font-medium text-text-dim underline decoration-primary-500underline-offset-1">Nyhetsbrevet finns att läsa här.</a></p>
-    </li>
+    {newsItems.map((item, index) => (
+      <li class:list={[
+        "pb-4",
+        index < newsItems.length - 1 ? "border-b border-primary-300" : "pb-2"
+      ]}>
+        <h3 class="mb-4 font-serif text-2xl font-bold leading-tight mt-4">{item.title}</h3>
+        <div class="space-y-5" set:html={marked.parse(item.content)}></div>
+        {item.images && (
+          <div class="flex flex-wrap justify-evenly gap-2 pt-4">
+            {item.images.map((image) => (
+              <a class="block" href={image.src}>
+                <img src={image.src} width="200" alt={image.alt} />
+              </a>
+            ))}
+          </div>
+        )}
+      </li>
+    ))}
   </ul>
 </div>
