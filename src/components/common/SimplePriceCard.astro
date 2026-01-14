@@ -1,0 +1,23 @@
+---
+export interface Props {
+  title: string;
+  price: string;
+  note?: string;
+  class?: string;
+}
+
+const { title, price, note, class: className } = Astro.props;
+---
+
+<div class:list={[
+  "flex h-full flex-col justify-between overflow-hidden rounded border-t border-primary shadow-md pb-3",
+  className
+]}>
+  <h5 class="border-b border-primary font-serif text-lg font-bold -mt-2 pt-3 pb-1 text-center text-primary-900">
+    {title}
+  </h5>
+  <span class="mt-2 text-center">{price}</span>
+  {note && (
+    <span class="mt-1 px-2 text-center text-sm">{note}</span>
+  )}
+</div>

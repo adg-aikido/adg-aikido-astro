@@ -1,0 +1,30 @@
+---
+export interface Props {
+  day: string;
+  items: Array<{
+    time: string;
+    activity: string;
+    subdued?: boolean;
+  }>;
+  class?: string;
+}
+
+const { day, items, class: className } = Astro.props;
+---
+
+<div class:list={[
+  "flex h-full flex-col justify-between overflow-hidden rounded-lg border-t-2 border-primary shadow-lg",
+  className
+]}>
+  <h4 class="font-serif text-xl font-bold -mt-8 bg-primary-light pt-12 pb-4 text-center text-primary-900">
+    {day}
+  </h4>
+  <ul class="space-y-1 p-4">
+    {items.map((item) => (
+      <li class="flex justify-between">
+        <span>{item.time}</span>
+        <span class:list={[item.subdued && "text-gray-600"]}>{item.activity}</span>
+      </li>
+    ))}
+  </ul>
+</div>

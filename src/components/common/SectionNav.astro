@@ -1,0 +1,26 @@
+---
+export interface Props {
+  items: Array<{ href: string; label: string }>;
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<div class:list={[
+  "sticky top-0 z-40 border-y-2 border-primary bg-primary-light/95 backdrop-blur-sm",
+  className
+]}>
+  <ul class="flex flex-wrap justify-around">
+    {items.map((item) => (
+      <li class="py-2 text-center text-sm uppercase">
+        <a 
+          href={item.href} 
+          class="font-bold text-gray-800 no-underline hover:underline"
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

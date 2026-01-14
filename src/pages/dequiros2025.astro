@@ -1,0 +1,230 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import SectionNav from "../components/common/SectionNav.astro";
+import EventScheduleCard from "../components/common/EventScheduleCard.astro";
+import SimplePriceCard from "../components/common/SimplePriceCard.astro";
+---
+
+<Layout
+  title="Lewis Bernaldo de Quiros, 7th dan - February 15-16 2025 - Aikido Dojo Gamlestaden"
+  description="Weekend seminar with Sensei Lewis Bernaldo de Quirós, 7th Dan Aikikai and Technical Director of Traditional Aikido Europe (TAE). February 15-16, 2025 in Göteborg."
+>
+  <main class="mx-auto max-w-5xl">
+    <h1 class="-mt-4 text-center font-serif text-4xl font-bold">
+      Lewis Bernaldo de Quiros, 7th dan<br />February 15-16 2025
+    </h1>
+    
+    <div class="px-4 pb-5">
+      <h2 class="px-8 -mt-4 text-center font-serif text-3xl font-bold text-primary-900">
+        We welcome all aikidoka, regardless of rank or style, to a seminar with Lewis Bernaldo de Quiros sensei
+      </h2>
+
+      <div class="mt-8 flow-root">
+        <img 
+          src="/assets/be0b5bd8a538-lewisdequiros.jpg" 
+          class="w-[250px] p-2 shadow-lg md:float-right md:ml-6 md:mb-4" 
+          alt="Sensei Lewis Bernaldo de Quirós"
+        />
+        
+        <div class="space-y-5 text-gray-800">
+          <p>
+            The weekend seminar will be led by Sensei Lewis Bernaldo de Quirós, 7th Dan Aikikai 
+            and Technical Director of Traditional Aikido Europe (TAE).
+          </p>
+          
+          <p>
+            Sensei de Quirós trained full-time under the late Morihiro Saito Sensei (9th Dan) from 
+            1986 until 1993 in the Iwama Dojo in Japan. Prior to beginning his training in Aikido, he 
+            trained for 10 years in both Judo and Karate (Shotokan Karate under the late Keinosuke 
+            Enoeda Sensei 9th Dan in London). During his stay in Japan, he also practiced Kyudo 
+            (Traditional Japanese Archery), Japanese calligraphy and Zen.
+          </p>
+          
+          <p>
+            Since returning from Japan, he has taught Aikido on a full time basis and to date has 
+            conducted well over 350 international seminars. After returning from Japan he 
+            maintained regular contact with his teacher through seminars both as a participant as 
+            well as assistant and translator until his passing away in 2002.
+          </p>
+          
+          <p>
+            Lewis received the rank of 5th Dan Aikikai from Morihiro Saito Sensei in 1999 and 6th 
+            Dan Aikikai from Doshu Moriteru Ueshiba (Hombu Dojo Tokyo) in 2009. In 2024 he was 
+            awarded the rank of 7th Dan Aikikai.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-5 space-y-5 text-gray-800">
+        <p>
+          He is the Senior Instructor and Examiner on behalf of Hombu Dojo of a European network 
+          of Dojos (TAE) committed to developing, researching and transmitting the style of Aikido 
+          known as Takemusu Aikido (Iwama Aikido) which was transmitted directly to Morihiro Saito 
+          Sensei from the Founder of Aikido Morihei Ueshiba during his more than 23-years as a 
+          direct student at the Founder's Dojo in Iwama Japan.
+        </p>
+        
+        <p class="border-l border-r border-primary-border bg-primary-light p-2">
+          We are looking forward to seeing dear friends and meeting new ones for dynamic training 
+          and social opportunity to enjoy what we all share — aikido.
+        </p>
+        
+        <p>
+          Weapons: Bokken and jo. If you need to borrow weapons, please let us know by indicating 
+          that in the registration form.
+        </p>
+        
+        <p>
+          Please find the details regarding location, schedule, accommodation, prices and contact 
+          information below.
+        </p>
+      </div>
+
+      <div class="mt-5 space-y-4">
+        <p class="text-lg text-primary-900">
+          <strong class="font-bold">When?</strong> 15-16 February 2025
+        </p>
+        
+        <p class="text-lg text-primary-900">
+          <strong class="font-bold">Where?</strong> Frölunda Judoklubb, Klubbvägen 8, Västra Frölunda
+        </p>
+        
+        <p class="text-center">
+          <a href="https://adg-aikido.se/hendricks2025">
+            <button class="rounded border border-primary-900 bg-primary-light px-4 py-2 font-bold text-primary-900 transition hover:bg-primary-border">
+              Register here
+            </button>
+          </a>
+        </p>
+        
+        <p class="text-lg">
+          Contact information: 
+          <a href="mailto:info@adg-aikido.se" class="font-medium text-text-dim underline decoration-primary underline-offset-1">
+            info@adg-aikido.se
+          </a> or 
+          <a href="tel:+46768800674" class="font-medium text-text-dim underline decoration-primary underline-offset-1">
+            +46&nbsp;768&nbsp;800&nbsp;674&nbsp;(Vlad)
+          </a> or 
+          <a href="tel:+46739659090" class="font-medium text-text-dim underline decoration-primary underline-offset-1">
+            +46&nbsp;739&nbsp;659&nbsp;090&nbsp;(Alula)
+          </a>
+        </p>
+      </div>
+
+      <SectionNav 
+        class="mt-8"
+        items={[
+          { href: '#schedule', label: 'Schedule' },
+          { href: '#prices', label: 'Prices' },
+          { href: '#directions', label: 'Directions' }
+        ]}
+      />
+
+      <section id="schedule" class="scroll-mt-20">
+        <SectionHeading level="h3" class="mt-8 text-primary-900">Schedule</SectionHeading>
+        
+        <div class="-mx-3 mt-4 flex flex-wrap justify-center">
+          <div class="my-2 w-full px-3 sm:w-1/2">
+            <EventScheduleCard
+              day="Saturday"
+              items={[
+                { time: '09.30', activity: 'Registration' },
+                { time: '10.00 – 12.00', activity: 'Training' },
+                { time: '12.00 – 13.15', activity: 'Lunch', subdued: true },
+                { time: '13.15 – 16.15', activity: 'Training' },
+                { time: '17.30 –', activity: 'Party!' }
+              ]}
+            />
+          </div>
+          
+          <div class="my-2 w-full px-3 sm:w-1/2">
+            <EventScheduleCard
+              day="Sunday"
+              items={[
+                { time: '10.00 – 11.30', activity: 'Training' },
+                { time: '11.30 – 12.00', activity: 'Short break', subdued: true },
+                { time: '12.00 – 13.30', activity: 'Training' },
+                { time: '\u00A0', activity: '\u00A0' }
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="prices" class="scroll-mt-20">
+        <SectionHeading level="h3" class="mt-8 text-primary-900">Prices</SectionHeading>
+        
+        <div class="-mx-2 mt-4 flex flex-wrap justify-center">
+          <div class="my-2 w-full px-2 sm:w-1/2 md:w-1/4">
+            <SimplePriceCard
+              title="Whole seminar"
+              price="900 kr / 80 €"
+              note="Vegetarian lunch meal at dojo, 220 kr / 20 € - check the box in the registration form!"
+            />
+          </div>
+          
+          <div class="my-2 w-full px-2 sm:w-1/2 md:w-1/4">
+            <SimplePriceCard
+              title="Saturday only"
+              price="700 kr / 60 €"
+            />
+          </div>
+          
+          <div class="my-2 w-full px-2 sm:w-1/2 md:w-1/4">
+            <SimplePriceCard
+              title="Sunday only"
+              price="500 kr / 40 €"
+            />
+          </div>
+          
+          <div class="my-2 w-full px-2 sm:w-1/2 md:w-1/4">
+            <SimplePriceCard
+              title="Sleeping in the dojo"
+              price="90 kr / 8 € per night"
+            />
+          </div>
+        </div>
+      </section>
+
+      <p class="mt-6">
+        <strong class="font-bold">Note!</strong> Young people under 16 years need to be accompanied by an adult!
+      </p>
+
+      <h4 class="mt-6 font-serif text-xl font-bold text-primary-900">Payment information</h4>
+      
+      <ul class="ml-8 mt-4 list-none space-y-2">
+        <li>Postgiro: <strong class="font-bold">462 37 05-3</strong></li>
+        <li>Swish: <strong class="font-bold">123-16 17 109</strong></li>
+        <li>Bank account: <strong class="font-bold">SE83 9500 0099 6042 4623 7053 (NDEASESS)</strong></li>
+        <li>
+          We would like to keep cash payments to a minimum, please pay to one of the options of 
+          the above if possible.
+        </li>
+        <li class="underline">
+          The fees should be paid by January 18th. If you register after that date, make the 
+          payment together with the registration.
+        </li>
+      </ul>
+
+      <section id="directions" class="scroll-mt-20">
+        <SectionHeading level="h3" class="mt-8 text-primary-900">Directions</SectionHeading>
+        
+        <div class="ml-8 mt-4 space-y-4">
+          <p>Frölunda Judoklubb, Klubbvägen 8, Västra Frölunda</p>
+          
+          <p>Trams 1, 7, 8 to Frölunda torg, buses 92, 93 from Frölunda torg to bus stop "Hults bro".</p>
+          
+          <iframe 
+            class="w-full max-w-[400px] aspect-[4/3] rounded-md border p-2 shadow" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2135.3611126682704!2d11.917655516102908!3d57.64234815215293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff2bc1b64c60d%3A0x44779303d26cf081!2sFr%C3%B6lunda%20Judoklubb!5e0!3m2!1sen!2sse!4v1577389677109!5m2!1sen!2sse" 
+            allowfullscreen
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade" 
+            title="Location of Frölunda Judoklubb"
+          ></iframe>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
