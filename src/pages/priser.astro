@@ -1,0 +1,224 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import PriceCard from "../components/common/PriceCard.astro";
+---
+
+<Layout
+  title="Priser och avgifter - Aikido Dojo Gamlestaden"
+  description="Information om priser, avgifter och rabatter för träning hos Aikido Dojo Gamlestaden i Göteborg."
+>
+  <main class="mx-auto max-w-6xl px-4 py-2 sm:px-6 lg:px-8">
+    <div class="flow-root">
+      <SectionHeading level="h1">Börja träna!</SectionHeading>
+      
+      <div class="mt-3">
+        <div>
+          <div class="float-right ml-2 w-36 max-w-xs sm:ml-4">
+            <div class="mb-4 bg-gray-50 p-1 shadow-lg">
+              <img src="/assets/00f56b5d45de-welcome.jpg" alt="Välkommen till träning" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="space-y-5">
+          <p>Vi har kontinuerlig intagning och inga särskilda nybörjarpass. Vi tar naturligtvis hand om nybörjarna så att man kan lära sig grunderna i egen takt.</p>
+          <p>
+            Om du har frågor, kan du alltid ställa dem via e-post till 
+            <a href="mailto:info@adg-aikido.se" class="font-medium text-text-dim underline decoration-primary underline-offset-1">info@adg-aikido.se</a>, 
+            men det går lika bra att komma förbi, kolla läget och stilla nyfikenheten på plats.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <SectionHeading level="h2">Priser och avgifter</SectionHeading>
+      
+      <div class="mt-3">
+        <p>
+          <em>Medlemsavgift</em> betalas av alla medlemmar och ingår i respektive terminsavgift. 
+          Inbakad i denna är också en avgift till Svenska Budoförbundet. Alla som tränar är därmed 
+          <a href="#forsakring" class="font-medium text-text-dim underline decoration-primary underline-offset-1">försäkrade mot olycksfall</a>.
+        </p>
+      </div>
+
+      <SectionHeading level="h3">Betalning</SectionHeading>
+      
+      <div class="mt-3 flow-root">
+        <img 
+          src="/assets/b1df185dfa79-asset.svg" 
+          class="float-right ml-6 h-32 w-32" 
+          alt="QR kod för Swish-betalning"
+        />
+        <p>
+          Betala på plusgiro <strong>462 37 05-3</strong> eller med Swish <strong>123-1617109</strong>. 
+          Vänligen specificera vad betalningen gäller (t ex "träning &lt;namn&gt; HT 2022").
+        </p>
+        <p class="mt-5">
+          Om man börjar i mitten eller slutet på en termin, får man betala träningsavgift för delen av 
+          terminen som man tränar (dvs en månadsavgift som är terminsavgiften delat på 6). Vi föredrar 
+          att man betalar för en termin eller ett år i taget, men det går bra att betala månadsvis också: 
+          prata med oss om det.
+        </p>
+      </div>
+
+      <SectionHeading level="h3" id="provtraning">Provträning</SectionHeading>
+      
+      <div class="mt-3">
+        <ul class="-mx-2 flex flex-wrap list-none justify-start">
+          <li class="w-full p-2 md:max-w-sm">
+            <PriceCard
+              title="Barn och ungdom"
+              subtitle="två träningstillfällen"
+              amount="0"
+              unit="kr"
+            />
+          </li>
+          <li class="w-full p-2 md:max-w-sm">
+            <PriceCard
+              title="Vuxna"
+              subtitle="två träningstillfällen; om du fortsätter, dras beloppet av från terminsavgiften"
+              amount="100"
+              unit="kr"
+            />
+          </li>
+        </ul>
+      </div>
+
+      <SectionHeading level="h3" id="priser">Avgifter</SectionHeading>
+      
+      <div class="mt-3">
+        <div class="space-y-5">
+          <p><span class="font-bold">Våren 2024 erbjuder vi 600kr i rabatt för vuxna nybörjare!</span></p>
+          <p>I alla avgifter ingår medlemsavgift 100 kr/termin.</p>
+        </div>
+        
+        <ul class="-mx-2 mt-5 flex flex-wrap list-none justify-start">
+          <li class="w-full p-2 md:w-1/2 lg:max-w-sm">
+            <PriceCard
+              title="Barn"
+              subtitle="7-9 år"
+              amount="700"
+              unit="kr/termin"
+            />
+          </li>
+          <li class="w-full p-2 md:w-1/2 lg:max-w-sm">
+            <PriceCard
+              title="Ungdomar"
+              subtitle="10-18 år"
+              amount="1000"
+              unit="kr/termin"
+            />
+          </li>
+          <li class="w-full p-2 md:w-1/2 lg:max-w-sm">
+            <PriceCard
+              title="Vuxna"
+              subtitle="19+ år"
+              amount="2300"
+              unit="kr/termin"
+            />
+          </li>
+          <li class="w-full p-2 md:w-1/2 lg:max-w-sm">
+            <PriceCard
+              title="Vuxna"
+              subtitle="19+ år"
+              description="studerande, pensionärer, arbetslösa"
+              amount="1700"
+              unit="kr/termin"
+            />
+          </li>
+        </ul>
+        
+        <p class="mt-5">
+          Observera att när det gäller barn under 7 år (dvs innan de börjar skolan), en förälder ska 
+          vara med på träningen tills vi kan se att barnet fungerar bra i gruppen. Föräldern är med utan 
+          extra kostnad och ska finnas på mattan för att hjälpa till; det går bra att träna med, om så önskas.
+        </p>
+        
+        <ul class="-mx-2 mt-5 flex flex-wrap list-none justify-start">
+          <li class="w-full p-2 md:max-w-sm">
+            <PriceCard
+              title="Mattavgift"
+              subtitle="Enstaka tillfällen"
+              amount="100"
+              unit="kr/tillfälle"
+            />
+          </li>
+          <li class="w-full p-2 md:max-w-sm">
+            <PriceCard
+              title="Graderingsavgift"
+              subtitle="för kyu grader"
+              amount="100"
+              unit="kr/tillfälle"
+            />
+          </li>
+        </ul>
+      </div>
+
+      <SectionHeading level="h3">Rabatter</SectionHeading>
+      
+      <div class="mt-3">
+        <div>
+          <ul class="-mx-2 flex flex-wrap items-stretch justify-start">
+            <li class="w-full p-2 md:w-1/2">
+              <PriceCard
+                title="Nybörjare (vuxna)"
+                subtitle="per person, första terminen"
+                amount="-600"
+                unit="kr/termin"
+              />
+            </li>
+            <li class="w-full p-2 md:w-1/2">
+              <PriceCard
+                title="2 familjemedlemmar"
+                subtitle="per person, per termin"
+                amount="-200"
+                unit="kr/termin"
+              />
+            </li>
+            <li class="w-full p-2 md:w-1/2">
+              <PriceCard
+                title="3 eller fler familjemedlemmar"
+                subtitle="per person, per termin"
+                amount="-400"
+                unit="kr/termin"
+              />
+            </li>
+            <li class="w-full p-2 md:w-1/2">
+              <PriceCard
+                title="Ta med en kompis"
+                subtitle="som betalar terminsavgift och ni får båda rabatt i en termin (endast vuxna)"
+                amount="-200"
+                unit="kr/termin"
+              />
+            </li>
+          </ul>
+          <p class="mt-5">Observera att det är upp till er att meddela oss om rabatter gäller i ert fall!</p>
+        </div>
+      </div>
+
+      <SectionHeading level="h3" id="forsakring">Försäkringar</SectionHeading>
+      
+      <div class="mt-3">
+        <p>
+          Alla medlemmar är försäkrade mot olycksfall genom medlemskapet i Budo och Kampsportsförbundet. 
+          Villkor och detaljer finns 
+          <a 
+            href="https://www.budokampsport.se/klubb/forsakring/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="font-medium text-text-dim underline decoration-primary underline-offset-1"
+          >på Budo och Kampsportsförbundets webbsida</a>. 
+          Observera att för att försäkringen ska gälla på läger utomlands, måste man 
+          <a 
+            href="https://www.budokampsport.se/ansokningar/anmalningar/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="font-medium text-text-dim underline decoration-primary underline-offset-1"
+          >lämna in en ansökan</a>.
+        </p>
+      </div>
+    </div>
+  </main>
+</Layout>

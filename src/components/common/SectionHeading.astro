@@ -1,0 +1,22 @@
+---
+export interface Props {
+  level?: 'h1' | 'h2' | 'h3';
+  id?: string;
+  class?: string;
+}
+
+const { level = 'h2', id, class: className } = Astro.props;
+const Element = level;
+
+const sizeClasses = {
+  h1: 'text-4xl',
+  h2: 'text-3xl',
+  h3: 'text-2xl'
+};
+---
+
+<Element class:list={["mt-6 mb-6 font-serif font-bold", sizeClasses[level], className]} id={id}>
+  <span class="inline-block border-b-2 border-accent pr-12">
+    <slot />
+  </span>
+</Element>
