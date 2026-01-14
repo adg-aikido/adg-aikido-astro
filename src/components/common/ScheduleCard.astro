@@ -1,0 +1,46 @@
+---
+export interface Props {
+  day: string;
+  sessions: Array<{
+    startTime: string;
+    endTime: string;
+    title: string;
+    subtitle?: string;
+    instructors?: string;
+    color: 'primary' | 'accent';
+  }>;
+}
+
+const { day, sessions } = Astro.props;
+
+const colorClasses = {
+  primary: 'border-primary',
+  accent: 'border-accent'
+};
+---
+
+<div class="flex flex-col overflow-hidden rounded-lg shadow-md bg-slate-50/30 backdrop-blur-sm">
+  <h3 class="py-2 mx-6 font-serif text-2xl font-bold text-center border-b border-primary-border">
+    {day}
+  </h3>
+  <ul class="p-1 pb-2">
+    {sessions.map((session) => (
+      <li class:list={[
+        "flex flex-col p-2 m-1 bg-white/75 rounded-md shadow border-l-8",
+        colorClasses[session.color]
+      ]}>
+        <div class="flex justify-between">
+          <span class="font-bold">{session.startTime}</span>
+          <span class="text-gray-600">{session.endTime}</span>
+        </div>
+        <div class="text-center font-semibold" set:html={session.title} />
+        <div class="text-sm text-center text-gray-500">
+          {session.subtitle ? session.subtitle : '\u00A0'}
+        </div>
+        {session.instructors && (
+          <div class="px-2 text-xs text-right text-gray-400">{session.instructors}</div>
+        )}
+      </li>
+    ))}
+  </ul>
+</div>
