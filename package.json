@@ -3,11 +3,19 @@
 	"type": "module",
 	"version": "0.0.3",
 	"scripts": {
-		"dev": "nua dev",
-		"build": "nua build",
-		"preview": "nua preview"
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview"
 	},
 	"dependencies": {
-		"@nuasite/nua": "^0.0.53"
+		"@astrojs/check": "^0.9.6",
+		"@astrojs/mdx": "^4.3.13",
+		"@astrojs/rss": "^4.0.14",
+		"@astrojs/sitemap": "^3.6.1",
+		"@tailwindcss/vite": "^4.1.18",
+		"astro": "^5.16.9",
+		"tailwindcss": "^4.1.18",
+		"typescript": "^5",
+		"vite": "^6"
 	}
 }

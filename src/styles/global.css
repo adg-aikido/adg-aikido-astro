@@ -1,12 +1,5 @@
 @import "tailwindcss";
 
-@source "../../node_modules/@nuasite/components";
-
-/* Optional - if you use flowbite */
-@import "flowbite/src/themes/default";
-@plugin "flowbite/plugin";
-@source "../../node_modules/flowbite";
-
 /* Design tokens */
 @theme {
   /* Colors */
