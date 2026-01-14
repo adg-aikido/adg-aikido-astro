@@ -42,25 +42,25 @@ const currentPath = Astro.url.pathname;
       class="mb-8 shadow bg-linear-to-br from-primary-400 to-primary-200"
     >
       <div
-        class="container flex flex-wrap items-center justify-around max-w-5xl py-2 mx-auto"
+        class="container flex items-center content-center justify-around max-w-5xl py-2 mx-auto sm:py-4"
       >
         <a
           href="/"
-          class="w-16 h-8 text-gray-800 shrink-0 md:w-24 md:h-12"
+          class="w-16 h-8 text-gray-800 shrink-0 md:h-16 lg:h-24 md:w-24 lg:w-32"
           aria-label="ADG logo"
         >
-          <AdgLogo class="w-full h-full" />
+          <AdgLogo class="fill-current" />
         </a>
-        <div class="hidden sm:flex items-center justify-center gap-1 md:gap-2">
-          <img src="/assets/1.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/2.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/3.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/4.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/5.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/6.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/7.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/8.png" class="h-10 md:h-16" alt="" />
-        </div>
+        
+          <img src="/assets/1.png" class="h-8 sm:h-16 md:h-20 lg:h-24" alt="" />
+          <img src="/assets/2.png" class="h-8 sm:h-16 md:h-20 lg:h-24" alt="" />
+          <img src="/assets/3.png" class="h-8 sm:h-16 md:h-20 lg:h-24" alt="" />
+          <img src="/assets/4.png" class="h-8 sm:h-16 md:h-20 lg:h-24" alt="" />
+          <img src="/assets/5.png" class="h-8 sm:h-16 md:h-20 lg:h-24" alt="" />
+          <img src="/assets/6.png" class="h-8 sm:h-16 md:h-20 lg:h-24" alt="" />
+          <img src="/assets/7.png" class="h-8 sm:h-16 md:h-20 lg:h-24" alt="" />
+          <img src="/assets/8.png" class="h-8 sm:h-16 md:h-20 lg:h-24" alt="" />
+        
       </div>
       <div class="pt-2">
         <Navigation currentPath={currentPath} />
