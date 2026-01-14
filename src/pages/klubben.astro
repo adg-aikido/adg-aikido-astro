@@ -1,0 +1,173 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import WavyDivider from "../components/common/WavyDivider.astro";
+import LinkList from "../components/common/LinkList.astro";
+
+const swedishDojos = [
+  { href: "https://takemusuaikidogoteborg.se/", label: "Takemusu Aikido, Göteborg" },
+  { href: "http://www.borasaikido.se/", label: "Borås Aikidoklubb" },
+  { href: "#", label: "Göteborg Aikido Shuren Dojo" },
+  { href: "http://www.varbergs-aikido.se/", label: "Varbergs Aikido" },
+  { href: "#", label: "Karlstad Aikidoklubb" },
+  { href: "http://www.aikidoliljeholmen.se/", label: "Aikido Dojo Liljeholmen" },
+  { href: "http://www.malmoaikido.org/", label: "Malmö Aikidoklubb" },
+  { href: "http://www.aikidodojo.nu/", label: "Norrköping Aikido Dojo" },
+  { href: "http://www.riaiaikidodojo.se/", label: "Riai Aikido Dojo" },
+  { href: "http://www.stenkullensaikido.se/", label: "Stenkullens Aikidoförening" },
+  { href: "#", label: "Trollhättans Aikidoklubb" },
+  { href: "http://www.orebroaikido.com/", label: "Örebro Aikido" },
+  { href: "http://www.arvikaaikido.se/", label: "Arvika Aikido Dojo Iwama Ryu" },
+  { href: "http://www.torsbyaikido.se/", label: "Torsby Aikidoklubb" },
+  { href: "http://www.goteborgsaikidoklubb.se/", label: "Göteborgs Aikidoklubb" },
+  { href: "http://www.halmstadaikido.se/", label: "Halmstads Aikidoklubb" },
+  { href: "http://www.lundsaikido.se/", label: "Lunds Aikidoklubb" },
+  { href: "http://www.takemusu.nu/", label: "Malmö Takemusu Aikido dojo" },
+  { href: "#", label: "Sunne Aikidoklubb Iwama Ryu" },
+  { href: "#", label: "Takemusu Aikido Scandinavia" }
+];
+
+const caaDojos = [
+  { href: "http://www.aiki-akademie.org/content/standort-hannover", label: "Aiki-Akademie Hanover" },
+  { href: "http://www.aiki-akademie.org/content/standort-hinterzarten", label: "Aiki-Akademie Hinterzarten" },
+  { href: "http://www.aiki-akademie.org/content/standort-mainz", label: "Aiki-Akademie Mainz" },
+  { href: "http://www.aikido-ingelheim.de/", label: "Aikido Dojo Ingelheim" },
+  { href: "http://www.sparksaikido.com/", label: "Aikido in Sparks" },
+  { href: "http://www.aikikaiinternational-inc.com/", label: "Aikikai International, Inc" },
+  { href: "https://www.facebook.com/aikido.jeodojo", label: "Aikido Jeo Dojo" },
+  { href: "http://www.aikidoofarlington.com/", label: "Aikido of Arlington, VA" },
+  { href: "http://www.caerphillyaikido.com/", label: "Aikido of Caerphilly" },
+  { href: "http://aikidocharlottesville.org/", label: "Aikido of Charlottesville" },
+  { href: "http://www.aikido-sanleandro.com/", label: "Aikido of San Leandro" },
+  { href: "#", label: "Aikido of Sandpoint" },
+  { href: "https://www.facebook.com/Aikido-of-Virginia-Beach-306529899367805/", label: "Aikido of Virginia Beach" },
+  { href: "http://www.aikidowinnipeg.com/", label: "Aikido of Winnipeg" },
+  { href: "#", label: "Aikido Querétaro" },
+  { href: "#", label: "Akkan Dojo" },
+  { href: "http://www.borasaikido.se/", label: "Borås Aikido Dojo" },
+  { href: "#", label: "Fudo Aiki Juku" },
+  { href: "http://www.goldentriangleaikido.ca/", label: "Golden Triangle Aikido" },
+  { href: "http://www.aikido-hikaridojo.com/", label: "Hikari Dojo" },
+  { href: "#", label: "Hilltop Aikido" },
+  { href: "http://www.huttcityaikido.com/", label: "Hutt City Aikido" },
+  { href: "http://www.iwama.pl/o-nas/", label: "Iwama Aikido Dojo Poland" },
+  { href: "http://aikido.kinjo-dojo.org/", label: "Kinjo Aikido Dojo" },
+  { href: "http://aikidocornwall.uk/", label: "Kokoro Kai Aikido" },
+  { href: "http://www.northtexasaikido.com/", label: "North Texas Aikido" },
+  { href: "#", label: "Royal City Aikido" },
+  { href: "http://stockholm-aikido.se/", label: "Stockholm Aikido Club" },
+  { href: "http://www.takemusu.spb.ru/", label: "St Petersburg Traditional Aikido Club" },
+  { href: "#", label: "Takemusu Aikido Frimley" },
+  { href: "http://www.aikidonm.webs.com/", label: "Takemusu Aikido New Mexico" },
+  { href: "http://takemusu.co.uk/", label: "Takemusu Aikido Salisbury" },
+  { href: "https://www.aikido-tuebingen.de/", label: "Takemusu Aikido Tübingen eV" },
+  { href: "http://www.threeriversaikido.co.uk/", label: "Three Rivers Aikido" },
+  { href: "http://www.cos-aikido.com", label: "Traditional Aikido of Colorado Springs" },
+  { href: "http://www.ysaohio.com/", label: "Yellow Springs Aikido" }
+];
+
+const aikidoFriends = [
+  { href: "https://svenskaikido.se/", label: "Svenska Budoförbundet, Aikidosektionen" },
+  { href: "https://www.ai-ki-do.org/division1", label: "CAA (California Aikido Association)" },
+  { href: "https://traditionalaikido.eu/", label: "Traditional Aikido Europe" },
+  { href: "http://www.aikido.com/", label: "Aikido.com" }
+];
+---
+
+<Layout
+  title="Klubben - Aikido Dojo Gamlestaden"
+  description="Information om Aikido Dojo Gamlestaden, våra instruktörer och aikidovänner runt om i världen."
+>
+  <main class="container mx-auto max-w-6xl">
+    <!-- Dojon Section -->
+    <section class="overflow-auto px-2 pt-4 pb-8">
+      <SectionHeading level="h1">Dojon</SectionHeading>
+      
+      <div class="mt-3 flow-root">
+        <div class="float-left mr-2 w-fit max-w-xs sm:mr-4">
+          <div class="p-1 mb-4 bg-gray-50 shadow-lg">
+            <img 
+              src="/assets/c87032091e78-adg-dojon.jpg" 
+              alt="Photo of the inside of the dojo, showing a large matted area."
+              class="w-full h-auto"
+            />
+          </div>
+        </div>
+        
+        <div class="space-y-5">
+          <p>
+            <strong class="font-bold">Aikido Dojo Gamlestaden</strong> är en ideell förening som startades 1989. 
+            Föreningens mål är att skapa god Aikido och en trevlig samvaro inom föreningens ramar. Vi har vuxen-, 
+            barn- och ungdomsträning i flera nivåer och ett träningsråd med höggraderade instruktörer som leder 
+            och planerar verksamheten.
+          </p>
+          <p>
+            Vi finns på Byfogdegatan 3B i en väldigt fin lokal anpassad för verksamheten. Träningens 
+            innehåll och andan i klubben är viktigast för oss. Vi strävar efter att hålla hög nivå på både 
+            aikido och trivsel!
+          </p>
+        </div>
+      </div>
+
+      <SectionHeading level="h2" class="mt-12">Huvudinstruktörer</SectionHeading>
+      
+      <div class="mt-3 flow-root">
+        <div class="float-right ml-2 max-w-xs sm:ml-4">
+          <div class="p-1 mb-4 bg-gray-50 shadow-lg">
+            <img 
+              src="/assets/4d6715c9e695-hemsida1.jpg" 
+              alt="Two aikido instructors performing a technique."
+              class="w-full h-auto"
+            />
+          </div>
+        </div>
+        
+        <div>
+          <ul class="mb-5 list-none space-y-1">
+            <li>John Patrick Johnsen, 7 dan (vuxna)</li>
+            <li>Ylva Beckman, 6 dan (vuxna, barn)</li>
+            <li>Alula Kassa, 5 dan (vuxna)</li>
+          </ul>
+          <p>
+            Du kan kontakta instruktörerna på 
+            <a 
+              href="mailto:radet@adg-aikido.se" 
+              class="text-gray-800 font-medium underline decoration-primary underline-offset-1"
+            >
+              radet@adg-aikido.se
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wavy Divider -->
+    <WavyDivider />
+
+    <!-- Aikido Friends Section -->
+    <section class="overflow-auto px-2 pt-4 pb-8">
+      <SectionHeading level="h2">Några aikidovänner</SectionHeading>
+      
+      <div class="mt-3">
+        <ul class="mb-5 space-y-2">
+          {aikidoFriends.map((friend) => (
+            <li class="px-2 py-1">
+              <a 
+                href={friend.href} 
+                class="font-normal text-gray-800 no-underline hover:underline"
+              >
+                {friend.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <h3 class="font-serif text-2xl font-bold mt-8 mb-6">Svenska dojos</h3>
+        <LinkList items={swedishDojos} columns={3} />
+
+        <h3 class="font-serif text-2xl font-bold mt-8 mb-6">CAA-dojos</h3>
+        <LinkList items={caaDojos} columns={3} />
+      </div>
+    </section>
+  </main>
+</Layout>
