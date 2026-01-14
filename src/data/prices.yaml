@@ -1,0 +1,71 @@
+priceCategories:
+  - category: trialTraining
+    title: Provträning
+    heading: Provträning
+    id: provtraning
+    prices:
+      - title: Barn och ungdom
+        subtitle: två träningstillfällen
+        amount: "0"
+        unit: kr
+      - title: Vuxna
+        subtitle: två träningstillfällen; om du fortsätter, dras beloppet av från terminsavgiften
+        amount: "100"
+        unit: kr
+
+  - category: regularFees
+    title: Avgifter
+    heading: Avgifter
+    id: priser
+    prices:
+      - title: Barn
+        subtitle: 7-9 år
+        amount: "700"
+        unit: kr/termin
+      - title: Ungdomar
+        subtitle: 10-18 år
+        amount: "1000"
+        unit: kr/termin
+      - title: Vuxna
+        subtitle: 19+ år
+        amount: "2300"
+        unit: kr/termin
+      - title: Vuxna
+        subtitle: 19+ år
+        description: studerande, pensionärer, arbetslösa
+        amount: "1700"
+        unit: kr/termin
+
+  - category: otherFees
+    title: Övriga avgifter
+    heading: Övriga avgifter
+    prices:
+      - title: Mattavgift
+        subtitle: Enstaka tillfällen
+        amount: "100"
+        unit: kr/tillfälle
+      - title: Graderingsavgift
+        subtitle: för kyu grader
+        amount: "100"
+        unit: kr/tillfälle
+
+  - category: discounts
+    title: Rabatter
+    heading: Rabatter
+    prices:
+      - title: Nybörjare (vuxna)
+        subtitle: per person, första terminen
+        amount: "-600"
+        unit: kr/termin
+      - title: 2 familjemedlemmar
+        subtitle: per person, per termin
+        amount: "-200"
+        unit: kr/termin
+      - title: 3 eller fler familjemedlemmar
+        subtitle: per person, per termin
+        amount: "-400"
+        unit: kr/termin
+      - title: Ta med en kompis
+        subtitle: som betalar terminsavgift och ni får båda rabatt i en termin (endast vuxna)
+        amount: "-200"
+        unit: kr/termin

@@ -2,90 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import SectionHeading from "../components/common/SectionHeading.astro";
 import PriceCard from "../components/common/PriceCard.astro";
+import pricesData from "../data/prices.yaml";
 
-const priceCards = {
-  trialTraining: [
-    {
-      title: "Barn och ungdom",
-      subtitle: "två träningstillfällen",
-      amount: "0",
-      unit: "kr",
-    },
-    {
-      title: "Vuxna",
-      subtitle: "två träningstillfällen; om du fortsätter, dras beloppet av från terminsavgiften",
-      amount: "100",
-      unit: "kr",
-    },
-  ],
-  regularFees: [
-    {
-      title: "Barn",
-      subtitle: "7-9 år",
-      amount: "700",
-      unit: "kr/termin",
-    },
-    {
-      title: "Ungdomar",
-      subtitle: "10-18 år",
-      amount: "1000",
-      unit: "kr/termin",
-    },
-    {
-      title: "Vuxna",
-      subtitle: "19+ år",
-      amount: "2300",
-      unit: "kr/termin",
-    },
-    {
-      title: "Vuxna",
-      subtitle: "19+ år",
-      description: "studerande, pensionärer, arbetslösa",
-      amount: "1700",
-      unit: "kr/termin",
-    },
-  ],
-  otherFees: [
-    {
-      title: "Mattavgift",
-      subtitle: "Enstaka tillfällen",
-      amount: "100",
-      unit: "kr/tillfälle",
-    },
-    {
-      title: "Graderingsavgift",
-      subtitle: "för kyu grader",
-      amount: "100",
-      unit: "kr/tillfälle",
-    },
-  ],
-  discounts: [
-    {
-      title: "Nybörjare (vuxna)",
-      subtitle: "per person, första terminen",
-      amount: "-600",
-      unit: "kr/termin",
-    },
-    {
-      title: "2 familjemedlemmar",
-      subtitle: "per person, per termin",
-      amount: "-200",
-      unit: "kr/termin",
-    },
-    {
-      title: "3 eller fler familjemedlemmar",
-      subtitle: "per person, per termin",
-      amount: "-400",
-      unit: "kr/termin",
-    },
-    {
-      title: "Ta med en kompis",
-      subtitle: "som betalar terminsavgift och ni får båda rabatt i en termin (endast vuxna)",
-      amount: "-200",
-      unit: "kr/termin",
-    },
-  ],
-};
+const priceCategories = pricesData.priceCategories;
 ---
 
 <Layout
@@ -147,84 +66,65 @@ const priceCards = {
         </p>
       </div>
 
-      <SectionHeading level="h3" id="provtraning">Provträning</SectionHeading>
-      
-      <div class="mt-3">
-        <ul class="-mx-2 flex flex-wrap list-none justify-start">
-          {priceCards.trialTraining.map((card) => (
-            <li class="w-full p-2 md:max-w-sm">
-              <PriceCard
-                title={card.title}
-                subtitle={card.subtitle}
-                amount={card.amount}
-                unit={card.unit}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
+      {priceCategories.map((category) => (
+        <>
+          <SectionHeading level="h3" id={category.id}>{category.heading}</SectionHeading>
+          
+          {category.category === 'regularFees' && (
+            <div class="mt-3">
+              <div class="space-y-5">
+                <p><span class="font-bold">Våren 2024 erbjuder vi 600kr i rabatt för vuxna nybörjare!</span></p>
+                <p>I alla avgifter ingår medlemsavgift 100 kr/termin.</p>
+              </div>
+            </div>
+          )}
 
-      <SectionHeading level="h3" id="priser">Avgifter</SectionHeading>
-      
-      <div class="mt-3">
-        <div class="space-y-5">
-          <p><span class="font-bold">Våren 2024 erbjuder vi 600kr i rabatt för vuxna nybörjare!</span></p>
-          <p>I alla avgifter ingår medlemsavgift 100 kr/termin.</p>
-        </div>
-        
-        <ul class="-mx-2 mt-5 flex flex-wrap list-none justify-start">
-          {priceCards.regularFees.map((card) => (
-            <li class="w-full p-2 md:w-1/2 lg:max-w-sm">
-              <PriceCard
-                title={card.title}
-                subtitle={card.subtitle}
-                description={card.description}
-                amount={card.amount}
-                unit={card.unit}
-              />
-            </li>
-          ))}
-        </ul>
-        
-        <p class="mt-5">
-          Observera att när det gäller barn under 7 år (dvs innan de börjar skolan), en förälder ska 
-          vara med på träningen tills vi kan se att barnet fungerar bra i gruppen. Föräldern är med utan 
-          extra kostnad och ska finnas på mattan för att hjälpa till; det går bra att träna med, om så önskas.
-        </p>
-        
-        <ul class="-mx-2 mt-5 flex flex-wrap list-none justify-start">
-          {priceCards.otherFees.map((card) => (
-            <li class="w-full p-2 md:max-w-sm">
-              <PriceCard
-                title={card.title}
-                subtitle={card.subtitle}
-                amount={card.amount}
-                unit={card.unit}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
+          <div class="mt-3">
+            <ul class="-mx-2 flex flex-wrap list-none justify-start">
+              {category.prices.map((card) => (
+                <li class={category.category === 'discounts' ? 'w-full p-2 md:w-1/2' : 'w-full p-2 md:max-w-sm'}>
+                  <PriceCard
+                    title={card.title}
+                    subtitle={card.subtitle}
+                    description={card.description}
+                    amount={card.amount}
+                    unit={card.unit}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
 
-      <SectionHeading level="h3">Rabatter</SectionHeading>
-      
-      <div class="mt-3">
-        <div>
-          <ul class="-mx-2 flex flex-wrap items-stretch justify-start">
-            {priceCards.discounts.map((card) => (
-              <li class="w-full p-2 md:w-1/2">
-                <PriceCard
-                  title={card.title}
-                  subtitle={card.subtitle}
-                  amount={card.amount}
-                  unit={card.unit}
-                />
-              </li>
-            ))}
-          </ul>
-          <p class="mt-5">Observera att det är upp till er att meddela oss om rabatter gäller i ert fall!</p>
-        </div>
-      </div>
+          {category.category === 'regularFees' && (
+            <p class="mt-5">
+              Observera att när det gäller barn under 7 år (dvs innan de börjar skolan), en förälder ska 
+              vara med på träningen tills vi kan se att barnet fungerar bra i gruppen. Föräldern är med utan 
+              extra kostnad och ska finnas på mattan för att hjälpa till; det går bra att träna med, om så önskas.
+            </p>
+          )}
+
+          {category.category === 'otherFees' && (
+            <div class="mt-5">
+              <ul class="-mx-2 flex flex-wrap list-none justify-start">
+                {category.prices.map((card) => (
+                  <li class="w-full p-2 md:max-w-sm">
+                    <PriceCard
+                      title={card.title}
+                      subtitle={card.subtitle}
+                      amount={card.amount}
+                      unit={card.unit}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {category.category === 'discounts' && (
+            <p class="mt-5">Observera att det är upp till er att meddela oss om rabatter gäller i ert fall!</p>
+          )}
+        </>
+      ))}
 
       <SectionHeading level="h3" id="forsakring">Försäkringar</SectionHeading>
       
