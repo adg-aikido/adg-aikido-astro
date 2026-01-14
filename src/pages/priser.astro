@@ -2,6 +2,90 @@
 import Layout from "../layouts/Layout.astro";
 import SectionHeading from "../components/common/SectionHeading.astro";
 import PriceCard from "../components/common/PriceCard.astro";
+
+const priceCards = {
+  trialTraining: [
+    {
+      title: "Barn och ungdom",
+      subtitle: "två träningstillfällen",
+      amount: "0",
+      unit: "kr",
+    },
+    {
+      title: "Vuxna",
+      subtitle: "två träningstillfällen; om du fortsätter, dras beloppet av från terminsavgiften",
+      amount: "100",
+      unit: "kr",
+    },
+  ],
+  regularFees: [
+    {
+      title: "Barn",
+      subtitle: "7-9 år",
+      amount: "700",
+      unit: "kr/termin",
+    },
+    {
+      title: "Ungdomar",
+      subtitle: "10-18 år",
+      amount: "1000",
+      unit: "kr/termin",
+    },
+    {
+      title: "Vuxna",
+      subtitle: "19+ år",
+      amount: "2300",
+      unit: "kr/termin",
+    },
+    {
+      title: "Vuxna",
+      subtitle: "19+ år",
+      description: "studerande, pensionärer, arbetslösa",
+      amount: "1700",
+      unit: "kr/termin",
+    },
+  ],
+  otherFees: [
+    {
+      title: "Mattavgift",
+      subtitle: "Enstaka tillfällen",
+      amount: "100",
+      unit: "kr/tillfälle",
+    },
+    {
+      title: "Graderingsavgift",
+      subtitle: "för kyu grader",
+      amount: "100",
+      unit: "kr/tillfälle",
+    },
+  ],
+  discounts: [
+    {
+      title: "Nybörjare (vuxna)",
+      subtitle: "per person, första terminen",
+      amount: "-600",
+      unit: "kr/termin",
+    },
+    {
+      title: "2 familjemedlemmar",
+      subtitle: "per person, per termin",
+      amount: "-200",
+      unit: "kr/termin",
+    },
+    {
+      title: "3 eller fler familjemedlemmar",
+      subtitle: "per person, per termin",
+      amount: "-400",
+      unit: "kr/termin",
+    },
+    {
+      title: "Ta med en kompis",
+      subtitle: "som betalar terminsavgift och ni får båda rabatt i en termin (endast vuxna)",
+      amount: "-200",
+      unit: "kr/termin",
+    },
+  ],
+};
 ---
 
 <Layout
@@ -67,22 +151,16 @@ import PriceCard from "../components/common/PriceCard.astro";
       
       <div class="mt-3">
         <ul class="-mx-2 flex flex-wrap list-none justify-start">
-          <li class="w-full p-2 md:max-w-sm">
-            <PriceCard
-              title="Barn och ungdom"
-              subtitle="två träningstillfällen"
-              amount="0"
-              unit="kr"
-            />
-          </li>
-          <li class="w-full p-2 md:max-w-sm">
-            <PriceCard
-              title="Vuxna"
-              subtitle="två träningstillfällen; om du fortsätter, dras beloppet av från terminsavgiften"
-              amount="100"
-              unit="kr"
-            />
-          </li>
+          {priceCards.trialTraining.map((card) => (
+            <li class="w-full p-2 md:max-w-sm">
+              <PriceCard
+                title={card.title}
+                subtitle={card.subtitle}
+                amount={card.amount}
+                unit={card.unit}
+              />
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -95,39 +173,17 @@ import PriceCard from "../components/common/PriceCard.astro";
         </div>
         
         <ul class="-mx-2 mt-5 flex flex-wrap list-none justify-start">
-          <li class="w-full p-2 md:w-1/2 lg:max-w-sm">
-            <PriceCard
-              title="Barn"
-              subtitle="7-9 år"
-              amount="700"
-              unit="kr/termin"
-            />
-          </li>
-          <li class="w-full p-2 md:w-1/2 lg:max-w-sm">
-            <PriceCard
-              title="Ungdomar"
-              subtitle="10-18 år"
-              amount="1000"
-              unit="kr/termin"
-            />
-          </li>
-          <li class="w-full p-2 md:w-1/2 lg:max-w-sm">
-            <PriceCard
-              title="Vuxna"
-              subtitle="19+ år"
-              amount="2300"
-              unit="kr/termin"
-            />
-          </li>
-          <li class="w-full p-2 md:w-1/2 lg:max-w-sm">
-            <PriceCard
-              title="Vuxna"
-              subtitle="19+ år"
-              description="studerande, pensionärer, arbetslösa"
-              amount="1700"
-              unit="kr/termin"
-            />
-          </li>
+          {priceCards.regularFees.map((card) => (
+            <li class="w-full p-2 md:w-1/2 lg:max-w-sm">
+              <PriceCard
+                title={card.title}
+                subtitle={card.subtitle}
+                description={card.description}
+                amount={card.amount}
+                unit={card.unit}
+              />
+            </li>
+          ))}
         </ul>
         
         <p class="mt-5">
@@ -137,22 +193,16 @@ import PriceCard from "../components/common/PriceCard.astro";
         </p>
         
         <ul class="-mx-2 mt-5 flex flex-wrap list-none justify-start">
-          <li class="w-full p-2 md:max-w-sm">
-            <PriceCard
-              title="Mattavgift"
-              subtitle="Enstaka tillfällen"
-              amount="100"
-              unit="kr/tillfälle"
-            />
-          </li>
-          <li class="w-full p-2 md:max-w-sm">
-            <PriceCard
-              title="Graderingsavgift"
-              subtitle="för kyu grader"
-              amount="100"
-              unit="kr/tillfälle"
-            />
-          </li>
+          {priceCards.otherFees.map((card) => (
+            <li class="w-full p-2 md:max-w-sm">
+              <PriceCard
+                title={card.title}
+                subtitle={card.subtitle}
+                amount={card.amount}
+                unit={card.unit}
+              />
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -161,38 +211,16 @@ import PriceCard from "../components/common/PriceCard.astro";
       <div class="mt-3">
         <div>
           <ul class="-mx-2 flex flex-wrap items-stretch justify-start">
-            <li class="w-full p-2 md:w-1/2">
-              <PriceCard
-                title="Nybörjare (vuxna)"
-                subtitle="per person, första terminen"
-                amount="-600"
-                unit="kr/termin"
-              />
-            </li>
-            <li class="w-full p-2 md:w-1/2">
-              <PriceCard
-                title="2 familjemedlemmar"
-                subtitle="per person, per termin"
-                amount="-200"
-                unit="kr/termin"
-              />
-            </li>
-            <li class="w-full p-2 md:w-1/2">
-              <PriceCard
-                title="3 eller fler familjemedlemmar"
-                subtitle="per person, per termin"
-                amount="-400"
-                unit="kr/termin"
-              />
-            </li>
-            <li class="w-full p-2 md:w-1/2">
-              <PriceCard
-                title="Ta med en kompis"
-                subtitle="som betalar terminsavgift och ni får båda rabatt i en termin (endast vuxna)"
-                amount="-200"
-                unit="kr/termin"
-              />
-            </li>
+            {priceCards.discounts.map((card) => (
+              <li class="w-full p-2 md:w-1/2">
+                <PriceCard
+                  title={card.title}
+                  subtitle={card.subtitle}
+                  amount={card.amount}
+                  unit={card.unit}
+                />
+              </li>
+            ))}
           </ul>
           <p class="mt-5">Observera att det är upp till er att meddela oss om rabatter gäller i ert fall!</p>
         </div>
