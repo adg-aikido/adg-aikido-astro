@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import AdgLogo from "../assets/adg-alido-gamestadt-training-logo-3aa238.svg";
+import AdgLogo from "../assets/logo_adg_block.svg";
 import HomeIcon from "../assets/home-icon-3abd86.svg";
 import FacebookIcon from "../assets/facebook-icon-929f10.svg";
 
@@ -11,7 +11,7 @@ export interface Props {
 
 const {
   title = "Aikido Dojo Gamlestaden i Göteborg - träningsglädje sedan 1989",
-  description = "Aikido Dojo Gamlestaden - Välkommen till oss i Gamlestaden för träningsglädje och effektivt självförsvar."
+  description = "Aikido Dojo Gamlestaden - Välkommen till oss i Gamlestaden för träningsglädje och effektivt självförsvar.",
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
@@ -25,60 +25,139 @@ const currentPath = Astro.url.pathname;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#3b82f6" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/icon" href="/favicon.ico" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="relative min-h-full pb-12 bg-fixed bg-center bg-cover border-t-4 border-primary" style="background-image: url(/assets/4e57474a3e57-shomen-adg-white.png)">
-    
-    <header class="mb-8 shadow bg-gradient-to-br from-primary-mid to-primary-light">
-      <div class="container flex flex-wrap items-center justify-around max-w-5xl py-2 mx-auto">
-        <a href="/" class="w-16 h-8 text-gray-800 shrink-0 md:w-24 md:h-12" aria-label="ADG logo">
+  <body
+    class="relative min-h-full pb-12 bg-fixed bg-center bg-cover border-t-4 border-primary"
+    style="background-image: url(/assets/4e57474a3e57-shomen-adg-white.png)"
+  >
+    <header
+      class="mb-8 shadow bg-linear-to-br from-primary-mid to-primary-light"
+    >
+      <div
+        class="container flex flex-wrap items-center justify-around max-w-5xl py-2 mx-auto"
+      >
+        <a
+          href="/"
+          class="w-16 h-8 text-gray-800 shrink-0 md:w-24 md:h-12"
+          aria-label="ADG logo"
+        >
           <AdgLogo class="w-full h-full" />
         </a>
         <div class="hidden sm:flex items-center justify-center gap-1 md:gap-2">
-          <img src="/assets/ad031a9779d3-asset.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/9c0d07192e2a-asset.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/a16377228874-asset.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/550df2836185-asset.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/4a490d943c4d-asset.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/352c5eb4408b-asset.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/5a0e0f3083c2-asset.png" class="h-10 md:h-16" alt="" />
-          <img src="/assets/a32128a6f73c-asset.png" class="h-10 md:h-16" alt="" />
+          <img src="/assets/1.png" class="h-10 md:h-16" alt="" />
+          <img src="/assets/2.png" class="h-10 md:h-16" alt="" />
+          <img src="/assets/3.png" class="h-10 md:h-16" alt="" />
+          <img src="/assets/4.png" class="h-10 md:h-16" alt="" />
+          <img src="/assets/5.png" class="h-10 md:h-16" alt="" />
+          <img src="/assets/6.png" class="h-10 md:h-16" alt="" />
+          <img src="/assets/7.png" class="h-10 md:h-16" alt="" />
+          <img src="/assets/8.png" class="h-10 md:h-16" alt="" />
         </div>
       </div>
       <div class="pt-2">
         <nav class="text-sm">
           <ul class="flex flex-wrap justify-center items-center">
-            <li class:list={["px-3 py-0 transition ease-in-out", currentPath === "/" && "border-b-4 border-accent"]}>
-              <a href="/" class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black" aria-label="Huvudsidan">
+            <li
+              class:list={[
+                "px-3 py-0 transition ease-in-out",
+                currentPath === "/" && "border-b-4 border-accent",
+              ]}
+            >
+              <a
+                href="/"
+                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
+                aria-label="Huvudsidan"
+              >
                 <HomeIcon class="w-6 h-6" />
               </a>
             </li>
-            <li class:list={["px-3 py-1 transition ease-in-out", currentPath === "/aikido" && "border-b-4 border-accent"]}>
-              <a href="/aikido" class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black">Aikido</a>
+            <li
+              class:list={[
+                "px-3 py-1 transition ease-in-out",
+                currentPath === "/aikido" && "border-b-4 border-accent",
+              ]}
+            >
+              <a
+                href="/aikido"
+                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
+                >Aikido</a
+              >
             </li>
-            <li class:list={["px-3 py-1 transition ease-in-out", currentPath === "/priser" && "border-b-4 border-accent"]}>
-              <a href="/priser" class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black">Priser</a>
+            <li
+              class:list={[
+                "px-3 py-1 transition ease-in-out",
+                currentPath === "/priser" && "border-b-4 border-accent",
+              ]}
+            >
+              <a
+                href="/priser"
+                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
+                >Priser</a
+              >
             </li>
-            <li class:list={["px-3 py-1 transition ease-in-out", currentPath === "/schema" && "border-b-4 border-accent"]}>
-              <a href="/schema" class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black">Schema</a>
+            <li
+              class:list={[
+                "px-3 py-1 transition ease-in-out",
+                currentPath === "/schema" && "border-b-4 border-accent",
+              ]}
+            >
+              <a
+                href="/schema"
+                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
+                >Schema</a
+              >
             </li>
-            <li class:list={["px-3 py-1 transition ease-in-out", currentPath === "/klubben" && "border-b-4 border-accent"]}>
-              <a href="/klubben" class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black">Klubben</a>
+            <li
+              class:list={[
+                "px-3 py-1 transition ease-in-out",
+                currentPath === "/klubben" && "border-b-4 border-accent",
+              ]}
+            >
+              <a
+                href="/klubben"
+                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
+                >Klubben</a
+              >
             </li>
-            <li class:list={["px-3 py-1 transition ease-in-out", currentPath === "/media" && "border-b-4 border-accent"]}>
-              <a href="/media" class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black">Media</a>
+            <li
+              class:list={[
+                "px-3 py-1 transition ease-in-out",
+                currentPath === "/media" && "border-b-4 border-accent",
+              ]}
+            >
+              <a
+                href="/media"
+                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
+                >Media</a
+              >
             </li>
-            <li class:list={["px-3 py-1 transition ease-in-out", currentPath === "/kontakt" && "border-b-4 border-accent"]}>
-              <a href="/kontakt" class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black">Kontakt</a>
+            <li
+              class:list={[
+                "px-3 py-1 transition ease-in-out",
+                currentPath === "/kontakt" && "border-b-4 border-accent",
+              ]}
+            >
+              <a
+                href="/kontakt"
+                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
+                >Kontakt</a
+              >
             </li>
             <li class="px-3 py-0">
-              <a class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black" href="https://www.facebook.com/aikidodojogamlestaden/" aria-label="Vår Facebook sida">
+              <a
+                class="inline-block font-bold text-gray-800 no-underline uppercase hover:text-black"
+                href="https://www.facebook.com/aikidodojogamlestaden/"
+                aria-label="Vår Facebook sida"
+              >
                 <FacebookIcon class="w-6 h-6" />
               </a>
             </li>
@@ -89,7 +168,9 @@ const currentPath = Astro.url.pathname;
 
     <slot />
 
-    <footer class="absolute inset-x-0 bottom-0 py-2 text-sm text-center border-b-4 bg-gradient-to-br from-primary-mid to-primary-light border-primary">
+    <footer
+      class="absolute inset-x-0 bottom-0 py-2 text-sm text-center border-b-4 bg-linear-to-br from-primary-mid to-primary-light border-primary"
+    >
       <div class="text-gray-800">© 2007-2026 Aikido Dojo Gamlestaden.</div>
     </footer>
   </body>

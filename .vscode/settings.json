@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "src/types/*.d.ts"
+    }
+}

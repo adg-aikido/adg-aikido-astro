@@ -1,0 +1,69 @@
+eventDate: 15-16 February 2025
+paymentDeadline: January 18th
+senseiInfo: |-
+  The weekend seminar will be led by Sensei Lewis Bernaldo de Quirós, 7th Dan
+  Aikikai and Technical Director of Traditional Aikido Europe (TAE).
+
+  **Sensei de Quirós** trained full-time under the late Morihiro Saito Sensei (9th
+  Dan) from 1986 until 1993 in the Iwama Dojo in Japan. Prior to beginning his
+  training in Aikido, he trained for 10 years in both Judo and Karate (Shotokan
+  Karate under the late Keinosuke Enoeda Sensei 9th Dan in London). During his
+  stay in Japan, he also practiced Kyudo (Traditional Japanese Archery),
+  Japanese calligraphy and Zen.
+
+  Since returning from Japan, he has taught Aikido on a full time basis and to
+  date has conducted well over 350 international seminars. After returning from
+  Japan he maintained regular contact with his teacher through seminars both as
+  a participant as well as assistant and translator until his passing away in
+  2002.
+
+  Lewis sensei received the rank of 5th Dan Aikikai from Morihiro Saito Sensei
+  in 1999 and 6th Dan Aikikai from Doshu Moriteru Ueshiba (Hombu Dojo Tokyo) in
+  2009. In 2024 he was awarded the rank of 7th Dan Aikikai.
+
+  He is the Senior Instructor and Examiner on behalf of Hombu Dojo of a European
+  network of Dojos (TAE) committed to developing, researching and
+  transmitting the style of Aikido known as Takemusu Aikido (Iwama
+  Aikido) which was transmitted directly to Morihiro Saito Sensei from
+  the Founder of Aikido Morihei Ueshiba during his more than 23-years as
+  a direct student at the Founder's Dojo in Iwama Japan.
+schedule:
+  saturday:
+    - timeStart: "09.30"
+      activity: Registration
+    - timeStart: "10.00"
+      timeEnd: "12.00"
+      activity: Training
+    - timeStart: "12.00"
+      timeEnd: "13.15"
+      activity: Lunch
+      subdued: true
+    - timeStart: "13.15"
+      timeEnd: "16.15"
+      activity: Training
+    - timeStart: "17.30"
+      activity: Party!
+  sunday:
+    - timeStart: "10.00"
+      timeEnd: "11.30"
+      activity: Training
+    - timeStart: "11.30"
+      timeEnd: "12.00"
+      activity: Short break
+      subdued: true
+    - timeStart: "12.00"
+      timeEnd: "13.30"
+      activity: Training
+    - timeStart: " "
+      activity: " "
+prices:
+  - title: Whole seminar
+    price: 900 kr / 80 €
+    note: Vegetarian lunch meal at dojo, 220 kr / 20 € - check the box in the
+      registration form!
+  - title: Saturday only
+    price: 700 kr / 60 €
+  - title: Sunday only
+    price: 500 kr / 40 €
+  - title: Sleeping in the dojo
+    price: 90 kr / 8 € per night

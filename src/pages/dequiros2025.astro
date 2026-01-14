@@ -4,44 +4,11 @@ import SectionHeading from "../components/common/SectionHeading.astro";
 import SectionNav from "../components/common/SectionNav.astro";
 import EventScheduleCard from "../components/common/EventScheduleCard.astro";
 import SimplePriceCard from "../components/common/SimplePriceCard.astro";
+import eventData from "../data/dequiros2025-event.yaml";
+import { marked } from 'marked';
 
-const eventDate = "15-16 February 2025";
-
-const schedule = {
-  saturday: [
-    { timeStart: '09.30', activity: 'Registration' },
-    { timeStart: '10.00', timeEnd: '12.00', activity: 'Training' },
-    { timeStart: '12.00', timeEnd: '13.15', activity: 'Lunch', subdued: true },
-    { timeStart: '13.15', timeEnd: '16.15', activity: 'Training' },
-    { timeStart: '17.30', activity: 'Party!' }
-  ],
-  sunday: [
-    { timeStart: '10.00', timeEnd: '11.30', activity: 'Training' },
-    { timeStart: '11.30', timeEnd: '12.00', activity: 'Short break', subdued: true },
-    { timeStart: '12.00', timeEnd: '13.30', activity: 'Training' },
-    { timeStart: '\u00A0', activity: '\u00A0' }
-  ]
-};
-
-const prices = [
-  {
-    title: "Whole seminar",
-    price: "900 kr / 80 €",
-    note: "Vegetarian lunch meal at dojo, 220 kr / 20 € - check the box in the registration form!"
-  },
-  {
-    title: "Saturday only",
-    price: "700 kr / 60 €"
-  },
-  {
-    title: "Sunday only",
-    price: "500 kr / 40 €"
-  },
-  {
-    title: "Sleeping in the dojo",
-    price: "90 kr / 8 € per night"
-  }
-];
+const { eventDate, paymentDeadline, senseiInfo, schedule, prices } = eventData;
+const senseiInfo0 = marked.parse(senseiInfo);
 ---
 
 <Layout
@@ -65,43 +32,11 @@ const prices = [
           alt="Sensei Lewis Bernaldo de Quirós"
         />
         
-        <div class="space-y-5 text-gray-800">
-          <p>
-            The weekend seminar will be led by Sensei Lewis Bernaldo de Quirós, 7th Dan Aikikai 
-            and Technical Director of Traditional Aikido Europe (TAE).
-          </p>
-          
-          <p>
-            Sensei de Quirós trained full-time under the late Morihiro Saito Sensei (9th Dan) from 
-            1986 until 1993 in the Iwama Dojo in Japan. Prior to beginning his training in Aikido, he 
-            trained for 10 years in both Judo and Karate (Shotokan Karate under the late Keinosuke 
-            Enoeda Sensei 9th Dan in London). During his stay in Japan, he also practiced Kyudo 
-            (Traditional Japanese Archery), Japanese calligraphy and Zen.
-          </p>
-          
-          <p>
-            Since returning from Japan, he has taught Aikido on a full time basis and to date has 
-            conducted well over 350 international seminars. After returning from Japan he 
-            maintained regular contact with his teacher through seminars both as a participant as 
-            well as assistant and translator until his passing away in 2002.
-          </p>
-          
-          <p>
-            Lewis received the rank of 5th Dan Aikikai from Morihiro Saito Sensei in 1999 and 6th 
-            Dan Aikikai from Doshu Moriteru Ueshiba (Hombu Dojo Tokyo) in 2009. In 2024 he was 
-            awarded the rank of 7th Dan Aikikai.
-          </p>
+        <div class="space-y-5 text-gray-800" set:html={senseiInfo0}>
         </div>
       </div>
 
       <div class="mt-5 space-y-5 text-gray-800">
-        <p>
-          He is the Senior Instructor and Examiner on behalf of Hombu Dojo of a European network 
-          of Dojos (TAE) committed to developing, researching and transmitting the style of Aikido 
-          known as Takemusu Aikido (Iwama Aikido) which was transmitted directly to Morihiro Saito 
-          Sensei from the Founder of Aikido Morihei Ueshiba during his more than 23-years as a 
-          direct student at the Founder's Dojo in Iwama Japan.
-        </p>
         
         <p class="border-l border-r border-primary-border bg-primary-light p-2">
           We are looking forward to seeing dear friends and meeting new ones for dynamic training 
@@ -210,7 +145,7 @@ const prices = [
           the above if possible.
         </li>
         <li class="underline">
-          The fees should be paid by January 18th. If you register after that date, make the 
+          The fees should be paid by {paymentDeadline}. If you register after that date, make the 
           payment together with the registration.
         </li>
       </ul>
