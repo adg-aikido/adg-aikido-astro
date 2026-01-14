@@ -131,7 +131,7 @@ mediaSections:
         title: Handbok för nybörjare
       - href: /assets/library/adg-traning-hosten-2020.pdf
         title: Träningsplanering [Hösten 2020]
-        thumbnail: /assets/90bc0c73677f-adg-traning-schema.jpg
+        thumbnail: /assets/adg-traning-schema.jpg
         thumbnailAlt: Träningsschema
 
   - section: affischer
@@ -141,23 +141,23 @@ mediaSections:
     items:
       - href: /assets/library/Affisch_ADG_2.pdf
         title: Nya svart-vita affischen
-        thumbnail: /assets/459d05a02dbb-affisch-adg.jpg
+        thumbnail: /assets/affisch-adg.jpg
         thumbnailAlt: ADG Affisch
       - href: /assets/library/adg-stillhet-1_bw.pdf
         title: Affisch svart-vit
-        thumbnail: /assets/c8733baf61e0-adg-stillhet.jpg
+        thumbnail: /assets/adg-stillhet.jpg
         thumbnailAlt: Stillhet affisch
       - href: /assets/library/adg-beginner_a4_3.pdf
         title: Flyer A4/3 för nybörjare
-        thumbnail: /assets/578af803a34d-adg-flyer.jpg
+        thumbnail: /assets/adg-flyer.jpg
         thumbnailAlt: Nybörjare flyer
       - href: /assets/library/Children.pdf
         title: Affisch för barn och ungdomar
-        thumbnail: /assets/df5cca1fde59-children.jpg
+        thumbnail: /assets/children.jpg
         thumbnailAlt: Barn affisch
       - href: /assets/library/Modern2.pdf
         title: Modern flerfärgad affisch
-        thumbnail: /assets/7b16b4ea4e08-modern2.jpg
+        thumbnail: /assets/modern2.jpg
         thumbnailAlt: Modern affisch
 
   - section: foreningsdokument
