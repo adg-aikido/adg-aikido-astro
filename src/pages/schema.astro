@@ -2,6 +2,90 @@
 import Layout from "../layouts/Layout.astro";
 import SectionHeading from "../components/common/SectionHeading.astro";
 import ScheduleCard from "../components/common/ScheduleCard.astro";
+
+const schedule = [
+  {
+    day: "Tisdag",
+    sessions: [
+      {
+        startTime: "17:00",
+        endTime: "18:00",
+        title: "Fri träning<sup>*</sup>",
+        instructors: "/*",
+        color: "accent",
+      },
+      {
+        startTime: "18:00",
+        endTime: "19:45",
+        title: "Vuxna och ungdomar",
+        instructors: "/AK/MH",
+        color: "primary",
+      },
+    ],
+  },
+  {
+    day: "Torsdag",
+    sessions: [
+      {
+        startTime: "17:30",
+        endTime: "18:45",
+        title: "Barn och ungdomar",
+        subtitle: "10+ år",
+        instructors: "/YB",
+        color: "primary",
+      },
+    ],
+  },
+  {
+    day: "Fredag",
+    sessions: [
+      {
+        startTime: "18:00",
+        endTime: "20:00",
+        title: "Tema träning<sup>*</sup>",
+        subtitle: "annonseras på WhatsApp",
+        instructors: "/*",
+        color: "primary",
+      },
+    ],
+  },
+  {
+    day: "Lördag",
+    sessions: [
+      {
+        startTime: "10:30",
+        endTime: "11:30",
+        title: "Barn, ungdomar, föräldrar och vuxna",
+        subtitle: "7+ år",
+        instructors: "/YB",
+        color: "accent",
+      },
+      {
+        startTime: "11:45",
+        endTime: "13:15",
+        title: "Vuxna och ungdomar",
+        instructors: "/JPJ /AK /YB",
+        color: "primary",
+      },
+      {
+        startTime: "13:15",
+        endTime: "14:00",
+        title: "Fri träning<sup>*</sup>",
+        subtitle: "och städning",
+        instructors: "/*",
+        color: "primary",
+      },
+    ],
+  },
+];
+
+const instructors = [
+  { initials: "JPJ", name: "John Patrick Johnsen", grade: "7 dan" },
+  { initials: "YB", name: "Ylva Beckman", grade: "6 dan" },
+  { initials: "AK", name: "Alula Kassa", grade: "5 dan" },
+  { initials: "MH", name: "Martin Holmgren", grade: "3 dan" },
+  { initials: "DW", name: "Dawn Hang Yue Wong", grade: "2 dan" },
+];
 ---
 
 <Layout
@@ -16,82 +100,12 @@ import ScheduleCard from "../components/common/ScheduleCard.astro";
         <p class="font-bold mb-4">Vårterminen börjar den 17 januari</p>
         
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <ScheduleCard
-            day="Tisdag"
-            sessions={[
-              {
-                startTime: "17:00",
-                endTime: "18:00",
-                title: "Fri träning<sup>*</sup>",
-                instructors: "/*",
-                color: "accent"
-              },
-              {
-                startTime: "18:00",
-                endTime: "19:45",
-                title: "Vuxna och ungdomar",
-                instructors: "/AK/MH",
-                color: "primary"
-              }
-            ]}
-          />
-
-          <ScheduleCard
-            day="Torsdag"
-            sessions={[
-              {
-                startTime: "17:30",
-                endTime: "18:45",
-                title: "Barn och ungdomar",
-                subtitle: "10+ år",
-                instructors: "/YB",
-                color: "primary"
-              }
-            ]}
-          />
-
-          <ScheduleCard
-            day="Fredag"
-            sessions={[
-              {
-                startTime: "18:00",
-                endTime: "20:00",
-                title: "Tema träning<sup>*</sup>",
-                subtitle: "annonseras på WhatsApp",
-                instructors: "/*",
-                color: "primary"
-              }
-            ]}
-          />
-
-          <ScheduleCard
-            day="Lördag"
-            sessions={[
-              {
-                startTime: "10:30",
-                endTime: "11:30",
-                title: "Barn, ungdomar, föräldrar och vuxna",
-                subtitle: "7+ år",
-                instructors: "/YB",
-                color: "accent"
-              },
-              {
-                startTime: "11:45",
-                endTime: "13:15",
-                title: "Vuxna och ungdomar",
-                instructors: "/JPJ /AK /YB",
-                color: "primary"
-              },
-              {
-                startTime: "13:15",
-                endTime: "14:00",
-                title: "Fri träning<sup>*</sup>",
-                subtitle: "och städning",
-                instructors: "/*",
-                color: "primary"
-              }
-            ]}
-          />
+          {schedule.map((daySchedule) => (
+            <ScheduleCard
+              day={daySchedule.day}
+              sessions={daySchedule.sessions}
+            />
+          ))}
         </div>
 
         <div class="flex flex-wrap mt-8 gap-8">
@@ -117,11 +131,9 @@ import ScheduleCard from "../components/common/ScheduleCard.astro";
 
           <div class="w-full md:w-[35%] lg:w-[30%]">
             <ul class="space-y-1 text-sm sm:text-base text-gray-700">
-              <li>JPJ = John Patrick Johnsen, 7 dan</li>
-              <li>YB = Ylva Beckman, 6 dan</li>
-              <li>AK = Alula Kassa, 5 dan</li>
-              <li>MH = Martin Holmgren, 3 dan</li>
-              <li>DW = Dawn Hang Yue Wong, 2 dan</li>
+              {instructors.map((instructor) => (
+                <li>{instructor.initials} = {instructor.name}, {instructor.grade}</li>
+              ))}
             </ul>
           </div>
         </div>
