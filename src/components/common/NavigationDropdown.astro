@@ -1,0 +1,164 @@
+---
+import type { NavItem } from '../../types/navigation';
+
+interface Props {
+  item: NavItem;
+  currentPath: string;
+}
+
+const { item, currentPath } = Astro.props;
+
+// Check if current path matches any variant
+const isVariantActive = item.variants?.some(v => currentPath === v.href) || false;
+---
+
+<div class="relative inline-block nav-dropdown-wrapper">
+  <!-- Chevron Icon -->
+  <svg
+    class="inline-block w-3 h-3 ml-1 text-primary-950 transition-transform duration-200 dropdown-chevron"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+  </svg>
+
+  <!-- Dropdown Menu -->
+  <div
+    class="absolute -left-4 top-full z-50 hidden pt-1 bg-white border rounded-lg shadow-lg dropdown-menu border-gray-200 min-w-40"
+    role="menu"
+    aria-label={`${item.label} variants`}
+  >
+    {item.variants && item.variants.length > 0 ? (
+      item.variants.map((variant) => {
+        const isActive = currentPath === variant.href;
+        return (
+          <a
+            href={variant.href}
+            role="menuitem"
+            class:list={[
+              "block px-4 py-2 text-sm transition-colors first:rounded-t-lg last:rounded-b-lg",
+              isActive
+                ? "bg-primary-100 text-primary-900 font-bold"
+                : "text-gray-700 hover:bg-gray-100"
+            ]}
+            aria-current={isActive ? "page" : undefined}
+          >
+            {variant.label}
+          </a>
+        );
+      })
+    ) : (
+      <span
+        class="block px-4 py-2 text-sm italic text-gray-400 cursor-not-allowed"
+        role="menuitem"
+        aria-disabled="true"
+      >
+        no variants
+      </span>
+    )}
+  </div>
+</div>
+
+<script>
+  // Handle dropdown interactions
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropdownWrappers = document.querySelectorAll('.nav-dropdown-wrapper');
+
+    dropdownWrappers.forEach((wrapper) => {
+      const chevron = wrapper.querySelector('.dropdown-chevron');
+      const menu = wrapper.querySelector('.dropdown-menu');
+      const navItem = wrapper.closest('li');
+
+      if (!chevron || !menu || !navItem) return;
+
+      let isOpen = false;
+
+      // Toggle dropdown
+      const toggleDropdown = (show: boolean) => {
+        isOpen = show;
+        if (show) {
+          menu.classList.remove('hidden');
+          chevron.classList.add('rotate-180');
+        } else {
+          menu.classList.add('hidden');
+          chevron.classList.remove('rotate-180');
+        }
+      };
+
+      // Desktop: Hover behavior
+      navItem.addEventListener('mouseenter', () => {
+        if (window.innerWidth >= 768) { // md breakpoint
+          toggleDropdown(true);
+        }
+      });
+
+      navItem.addEventListener('mouseleave', () => {
+        if (window.innerWidth >= 768) {
+          toggleDropdown(false);
+        }
+      });
+
+      // Mobile: Click on chevron to toggle
+      chevron.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (window.innerWidth < 768) {
+          toggleDropdown(!isOpen);
+        }
+      });
+
+      // Keyboard navigation
+      navItem.addEventListener('keydown', (e) => {
+        const key = (e as KeyboardEvent).key;
+
+        if (key === 'ArrowDown' || key === 'Enter') {
+          e.preventDefault();
+          if (!isOpen) {
+            toggleDropdown(true);
+            // Focus first menu item
+            const firstMenuItem = menu.querySelector('a[role="menuitem"]') as HTMLElement;
+            firstMenuItem?.focus();
+          }
+        } else if (key === 'Escape' && isOpen) {
+          e.preventDefault();
+          toggleDropdown(false);
+          // Return focus to nav item
+          const navLink = navItem.querySelector('a') as HTMLElement;
+          navLink?.focus();
+        }
+      });
+
+      // Arrow navigation within dropdown
+      menu.addEventListener('keydown', (e) => {
+        const key = (e as KeyboardEvent).key;
+        const menuItems = Array.from(menu.querySelectorAll('a[role="menuitem"]')) as HTMLElement[];
+        const currentIndex = menuItems.indexOf(document.activeElement as HTMLElement);
+
+        if (key === 'ArrowDown') {
+          e.preventDefault();
+          const nextIndex = (currentIndex + 1) % menuItems.length;
+          menuItems[nextIndex]?.focus();
+        } else if (key === 'ArrowUp') {
+          e.preventDefault();
+          const prevIndex = (currentIndex - 1 + menuItems.length) % menuItems.length;
+          menuItems[prevIndex]?.focus();
+        } else if (key === 'Escape') {
+          e.preventDefault();
+          toggleDropdown(false);
+          const navLink = navItem.querySelector('a') as HTMLElement;
+          navLink?.focus();
+        }
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!navItem.contains(e.target as Node) && isOpen) {
+          toggleDropdown(false);
+        }
+      });
+    });
+  });
+</script>
