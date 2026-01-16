@@ -4,41 +4,43 @@
 @import 'tailwindcss';
 @import './elements.css' layer(components);
 
-@plugin "daisyui";
+@plugin "daisyui"{
+  themes: light, dark, cupcake, bumblebee, emerald --default, corporate, synthwave, retro, cyberpunk, valentine, halloween, garden, forest, aqua, lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn, business, acid, lemonade, night, coffee, winter, dim, nord, sunset;
+}
 @plugin "daisyui/theme" {
   name: "adg";
-  default: true;
+  default: false;
   prefersdark: false;
   color-scheme: light;
 
-  --color-base-100: #ffffff;
-  --color-base-200: #f1f5f9;
-  --color-base-300: #e2e8f0;
-  --color-base-content: #1e293b;
+  --color-base-100: var(--color-white);
+  --color-base-200: var(--color-slate-100);
+  --color-base-300: var(--color-slate-200);
+  --color-base-content: var(--color-slate-800);
   
-  --color-primary: #0ea5e9;
-  --color-primary-content: #ffffff;
+  --color-primary: var(--color-sky-500);
+  --color-primary-content: var(--color-white);
   
-  --color-secondary: #10b981;
-  --color-secondary-content: #ffffff;
+  --color-secondary: var(--color-emerald-500);
+  --color-secondary-content: var(--color-white);
   
-  --color-accent: #f59e0b;
-  --color-accent-content: #ffffff;
+  --color-accent: var(--color-amber-500);
+  --color-accent-content: var(--color-white);
   
-  --color-neutral: #64748b;
-  --color-neutral-content: #ffffff;
+  --color-neutral: var(--color-slate-500);
+  --color-neutral-content: var(--color-white);
   
-  --color-info: #3b82f6;
-  --color-info-content: #ffffff;
+  --color-info: var(--color-blue-500);
+  --color-info-content: var(--color-white);
   
-  --color-success: #22c55e;
-  --color-success-content: #ffffff;
+  --color-success: var(--color-green-500);
+  --color-success-content: var(--color-white);
   
-  --color-warning: #facc15;
-  --color-warning-content: #000000;
+  --color-warning: var(--color-yellow-400);
+  --color-warning-content: var(--color-black);
   
-  --color-error: #ef4444;
-  --color-error-content: #ffffff;
+  --color-error: var(--color-red-500);
+  --color-error-content: var(--color-white);
 
   --radius-selector: 0.5rem;
   --radius-field: 0.5rem;
