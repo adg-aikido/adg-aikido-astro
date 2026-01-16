@@ -7,10 +7,15 @@ module.exports = {
             transparent: colors.transparent,
             white: colors.white,
             black: colors.black,
-            primary: colors.blue,
-            accent: colors.violet,
+
+            primary: colors.sky,
+            secondary: colors.emerald,
+            accent: colors.amber,
+
             error: colors.red,
             ok: colors.green,
+            info: colors.blue,
         },
     },
 };
+

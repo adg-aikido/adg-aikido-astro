@@ -1,0 +1,23 @@
+---
+import ConversionLayout from "../layouts/ConversionLayout.astro";
+import HeroSection from "../components/sections/conversion/HeroSection.astro";
+import BenefitsSection from "../components/sections/conversion/BenefitsSection.astro";
+import HowItWorksSection from "../components/sections/conversion/HowItWorksSection.astro";
+import CommunitySection from "../components/sections/conversion/CommunitySection.astro";
+import PricingSection from "../components/sections/conversion/PricingSection.astro";
+import NewsSection from "../components/sections/conversion/NewsSection.astro";
+import FinalCtaSection from "../components/sections/conversion/FinalCtaSection.astro";
+
+const title = "Aikido Dojo Gamlestaden i Göteborg - Discover Your Strength";
+const description = "Learn aikido from expert instructors. Join 200+ members in Göteborg. Free trial for all ages. Start your transformation today.";
+---
+
+<ConversionLayout title={title} description={description}>
+  <HeroSection />
+  <BenefitsSection />
+  <HowItWorksSection />
+  <CommunitySection />
+  <PricingSection />
+  <NewsSection />
+  <FinalCtaSection />
+</ConversionLayout>

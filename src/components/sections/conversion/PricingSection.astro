@@ -1,0 +1,129 @@
+---
+import Button from "../../common/Button.astro";
+---
+
+<section class="py-20 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-center font-serif text-4xl md:text-5xl font-bold mb-4">
+      Välj din väg
+    </h2>
+    <p class="text-center text-gray-600 text-lg mb-16 max-w-2xl mx-auto">
+      Enkelt och transparent prissättning. Börja med två gratis provträningar och välj sedan en plan som passar dig.
+    </p>
+
+    <!-- Pricing Cards -->
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+      <!-- Free Trial Card -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+        <div class="bg-gray-100 p-6">
+          <h3 class="font-serif text-2xl font-bold text-gray-800">Provträning</h3>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-600 mb-6">
+            Perfekt för att utforska aikido helt gratis.
+          </p>
+          <div class="mb-6">
+            <p class="text-3xl font-bold text-primary-600 mb-2">0 kr</p>
+            <p class="text-gray-600 text-sm">Två gratis klasser</p>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 font-bold">✓</span>
+              <span class="text-gray-700">Två gratis klasser</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 font-bold">✓</span>
+              <span class="text-gray-700">Ingen bindning</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 font-bold">✓</span>
+              <span class="text-gray-700">Alla åldrar välkomna</span>
+            </li>
+          </ul>
+          <Button href="/priser#provtraning" variant="secondary" class="w-full">
+            Kom igång
+          </Button>
+        </div>
+    </div>
+      <!-- Monthly Card -->
+      <div class="bg-white rounded-lg shadow-xl overflow-hidden transform md:scale-105 border-2 border-primary-500">
+        <div class="bg-gradient-to-r from-primary-500 to-primary-600 p-6">
+          <h3 class="font-serif text-2xl font-bold text-white">Månadlig</h3>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-600 mb-6">
+            Flexibelt medlemskap med full tillgång till alla klasser.
+          </p>
+          <div class="mb-6">
+            <p class="text-3xl font-bold text-primary-600 mb-2">875 kr</p>
+            <p class="text-gray-600 text-sm">per månad</p>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 font-bold">✓</span>
+              <span class="text-gray-700">Obegränsade klasser</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 font-bold">✓</span>
+              <span class="text-gray-700">Säg upp när som helst</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 font-bold">✓</span>
+              <span class="text-gray-700">Gemenskapsåtkomst</span>
+            </li>
+          </ul>
+          <Button href="/priser" variant="primary" class="w-full bg-primary-600 hover:bg-primary-700">
+            Gå med nu
+          </Button>
+        </div>
+      </div>
+
+      <!-- Annual Card -->
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+        <div class="bg-gray-100 p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="font-serif text-2xl font-bold text-gray-800">Terminvis</h3>
+            <span class="bg-primary-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+              Spara 20%
+            </span>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-600 mb-6">
+            Bästa värde för engagerade aikido-utövare.
+          </p>
+          <div class="mb-6">
+            <p class="text-3xl font-bold text-primary-600 mb-2">4 200 kr</p>
+            <p class="text-gray-600 text-sm">per termin</p>
+          </div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 font-bold">✓</span>
+              <span class="text-gray-700">Obegränsade klasser</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 font-bold">✓</span>
+              <span class="text-gray-700">20% rabatt</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary-600 font-bold">✓</span>
+              <span class="text-gray-700">Full gemenskapsåtkomst</span>
+            </li>
+          </ul>
+          <Button href="/priser" variant="secondary" class="w-full">
+            Gå med nu
+          </Button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Link -->
+    <div class="text-center text-gray-600">
+      <p class="mb-4">Frågor om prissättning eller medlemskap?</p>
+      <div class="space-x-4">
+        <Button href="/priser" variant="ghost">Se fullständig prissättning</Button>
+        <Button href="/kontakt" variant="ghost">Kontakta oss</Button>
+      </div>
+    </div>
+  </div>
+</section>

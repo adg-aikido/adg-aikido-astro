@@ -1,0 +1,43 @@
+---
+import Button from "../../common/Button.astro";
+
+---
+
+<section class="py-20 px-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="font-serif text-5xl font-bold mb-4">
+      Redo att förändra ditt liv?
+    </h2>
+    <p class="text-xl text-white mb-8">
+      Gå med i vår gemenskap av aikido-utövare och upptäck din inre styrka.
+    </p>
+
+    <div class="bg-white text-gray-800 p-8 rounded-lg inline-block mb-8">
+      <p class="font-serif text-2xl font-bold mb-2">Börja din gratis provträning</p>
+      <p class="text-gray-600 mb-6">
+        Två gratis klasser, ingen bindning, alla åldrar välkomna.
+      </p>
+      <Button href="/priser#provtraning" variant="primary" size="large">
+        Boka din gratis provträningsklass nu
+      </Button>
+    </div>
+
+    <div class="space-y-4">
+      <p class="text-lg font-semibold">Frågor? Vi är här för att hjälpa.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="mailto:info@adg-aikido.se"
+          class="px-6 py-2 bg-white text-primary-600 font-semibold rounded hover:bg-gray-100 transition"
+        >
+          📧 info@adg-aikido.se
+        </a>
+        <a
+          href="/kontakt"
+          class="px-6 py-2 border-2 border-white text-white font-semibold rounded hover:bg-white hover:text-primary-600 transition"
+        >
+          📞 Kontaktformulär
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

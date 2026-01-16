@@ -1,0 +1,76 @@
+---
+import "../../../styles/adg.css";
+import Button from "../../common/Button.astro";
+
+---
+
+<section class="relative h-[70vh] flex items-center justify-center overflow-hidden bg-contain  bg-center bg-no-repeat" 
+  style="background-image: url('/assets/main_throw.jpg')">
+  <!-- Color tint overlay -->
+  <div class="absolute inset-0 bg-primary-900 opacity-70"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 text-center px-4 max-w-2xl">
+    <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4 leading-tight text-white text-shadow-sm text-shadow-primary-800">
+       En träningsplats för alla åldrar och nivåer
+    </h1>
+    <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4 leading-tight text-white">
+        Lär dig ett japanskt kampsystem, bygga nya vänskaper, och utvecklas tillsammans med erfarna instruktörer
+    </h2>
+    <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4 leading-tight text-white">
+       Kom igång med träning idag &ndash; provträningen är kostnadsfri!
+    </h2>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+      <Button
+        href="/priser#provtraning"
+        variant="primary"
+        size="large"
+      >
+        Starta din kostnadsfria provträning idag
+      </Button>
+      <Button
+        href="/schema"
+        variant="secondary"
+        size="large"
+      >
+        Se schema
+      </Button>
+    </div>
+
+    <a
+      href="#benefits"
+      class="inline-block text-white hover:text-gray-100 transition"
+    >
+      <span class="block text-sm mb-2">Läs mer om aikido</span>
+      <svg
+        class="w-6 h-6 mx-auto animate-bounce"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"
+        ></path>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+</style>

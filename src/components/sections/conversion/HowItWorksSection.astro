@@ -1,0 +1,139 @@
+---
+import Button from "../../common/Button.astro";
+
+---
+
+<section class="py-20 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-center font-serif text-4xl md:text-5xl font-bold mb-4">
+      Kom igång
+    </h2>
+    <p class="text-center text-gray-600 text-lg mb-16 max-w-2xl mx-auto">
+      Det är enklare än du tror. Följ dessa enkla steg för att börja din aiкido-resa.
+    </p>
+
+    <!-- Steps -->
+    <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-16">
+      <!-- Step 1 -->
+      <div class="bg-white p-8 rounded-lg shadow-md flex-1 max-w-xs">
+        <div class="flex items-center justify-center w-12 h-12 bg-primary-500 text-white rounded-full font-bold text-lg mb-4">
+          1
+        </div>
+        <h3 class="font-serif text-xl font-bold mb-3">Välj en klass</h3>
+        <p class="text-gray-600 mb-4 text-sm">
+          Bläddra i vårt schema och hitta en klass som passar din nivå och tid.
+        </p>
+        <p class="text-xs text-gray-500 font-semibold">~ 10 minuter</p>
+      </div>
+
+      <!-- Arrow 1 -->
+      <svg
+        class="hidden md:block w-6 h-6 text-primary-400 flex-shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+
+      <!-- Step 2 -->
+      <div class="bg-white p-8 rounded-lg shadow-md flex-1 max-w-xs">
+        <div class="flex items-center justify-center w-12 h-12 bg-primary-500 text-white rounded-full font-bold text-lg mb-4">
+          2
+        </div>
+        <h3 class="font-serif text-xl font-bold mb-3">Provträning</h3>
+        <p class="text-gray-600 mb-4 text-sm">
+          Prova din första klass helt gratis, ingen bindande åtagande.
+        </p>
+        <p class="text-xs text-gray-500 font-semibold">~ 60 minuter</p>
+      </div>
+
+      <!-- Arrow 2 -->
+      <svg
+        class="hidden md:block w-6 h-6 text-primary-400 flex-shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+
+      <!-- Step 3 -->
+      <div class="bg-white p-8 rounded-lg shadow-md flex-1 max-w-xs">
+        <div class="flex items-center justify-center w-12 h-12 bg-primary-500 text-white rounded-full font-bold text-lg mb-4">
+          3
+        </div>
+        <h3 class="font-serif text-xl font-bold mb-3">Bli medlem</h3>
+        <p class="text-gray-600 mb-4 text-sm">
+          Välj en medlemsplan och gå med i vår växande aiкido-gemenskap.
+        </p>
+        <p class="text-xs text-gray-500 font-semibold">Kontinuerlig tillväxt</p>
+      </div>
+    </div>
+
+    <!-- Key Benefits -->
+    <div class="bg-white p-8 rounded-lg shadow-md mb-12">
+      <h3 class="font-serif text-2xl font-bold mb-6 text-center">Varför det fungerar</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">✓</span>
+          <div>
+            <p class="font-semibold text-gray-800">Ingen erfarenhet behövs</p>
+            <p class="text-gray-600 text-sm">
+              Vi välkomnar totala nybörjare på alla nivåer.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">✓</span>
+          <div>
+            <p class="font-semibold text-gray-800">Alla åldrar välkomna</p>
+            <p class="text-gray-600 text-sm">
+              Från barn till pensionärer, aikido är för alla.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">✓</span>
+          <div>
+            <p class="font-semibold text-gray-800">Flexibel schemaläggning</p>
+            <p class="text-gray-600 text-sm">
+              Flera klasser under hela veckan på olika tider.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">✓</span>
+          <div>
+            <p class="font-semibold text-gray-800">Experthandledning</p>
+            <p class="text-gray-600 text-sm">
+              Erfarna instruktörer guidar dig varje steg.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <Button
+        href="/schema"
+        variant="primary"
+        size="large"
+        class="bg-primary-600 hover:bg-primary-700 text-white"
+      >
+        Se vårt klassschema
+      </Button>
+    </div>
+  </div>
+</section>
