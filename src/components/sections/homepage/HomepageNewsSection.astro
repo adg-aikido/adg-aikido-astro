@@ -11,7 +11,7 @@ const newsItems = newsData.news;
     {newsItems.map((item, index) => (
       <li class:list={[
         "pb-4",
-        index < newsItems.length - 1 ? "border-b border-primary-300" : "pb-2"
+        index < newsItems.length - 1 ? "border-b border-primary/30" : "pb-2"
       ]}>
         <h3 class="mb-4 font-serif text-2xl font-bold leading-tight mt-4">{item.title}</h3>
         <div class="space-y-5" set:html={marked.parse(item.content)}></div>

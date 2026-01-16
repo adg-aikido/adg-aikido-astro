@@ -35,8 +35,8 @@ const currentPath = Astro.url.pathname;
     />
   </head>
   <body
-    class="relative min-h-full pb-12 bg-fixed bg-center bg-cover border-t-4 border-primary-500 "
-    style="background-image: url(/assets/shomen-adg-white.png)"
+    class="relative min-h-full pb-12 bg-fixed bg-center bg-cover border-t-4 border-primary bg-base-200"
+    satyle="background-image: url(/assets/shomen-adg-white.png)"
   >
     <header
       class="mb-8 shadow bg-linear-to-br from-primary-400 to-primary-200"
@@ -70,7 +70,7 @@ const currentPath = Astro.url.pathname;
     <slot />
 
     <footer
-      class="absolute inset-x-0 bottom-0 py-2 text-sm text-center border-b-4 bg-linear-to-br from-primary-400 to-primary-200 border-primary-500 "
+      class="absolute inset-x-0 bottom-0 py-2 text-sm text-center border-b-4 bg-primary/20 border-primary "
     >
       <div class="text-gray-800">© 2007-2026 Aikido Dojo Gamlestaden.</div>
     </footer>

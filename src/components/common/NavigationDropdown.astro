@@ -41,8 +41,8 @@ const isVariantActive = item.variants?.some(v => currentPath === v.href) || fals
             class:list={[
               "block px-4 py-2 text-sm transition-colors first:rounded-t-lg last:rounded-b-lg",
               isActive
-                ? "bg-primary-100 text-primary-900 font-bold"
-                : "text-gray-700 hover:bg-gray-100"
+                ? "bg-primary/10 text-primary font-bold"
+                : "hover:bg-base-200"
             ]}
             aria-current={isActive ? "page" : undefined}
           >

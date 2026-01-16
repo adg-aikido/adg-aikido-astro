@@ -7,11 +7,11 @@ import Button from "../../common/Button.astro";
 <section class="relative h-[70vh] flex items-center justify-center overflow-hidden bg-contain  bg-center bg-no-repeat" 
   style="background-image: url('/assets/main_throw.jpg')">
   <!-- Color tint overlay -->
-  <div class="absolute inset-0 bg-primary-900 opacity-70"></div>
+  <div class="absolute inset-0 bg-primary/70"></div>
 
   <!-- Content -->
   <div class="relative z-10 text-center px-4 max-w-2xl">
-    <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4 leading-tight text-white text-shadow-sm text-shadow-primary-800">
+    <h1 class="font-serif text-5xl md:text-6xl font-bold mb-4 leading-tight text-white">
        En träningsplats för alla åldrar och nivåer
     </h1>
     <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4 leading-tight text-white">
@@ -40,11 +40,11 @@ import Button from "../../common/Button.astro";
 
     <a
       href="#benefits"
-      class="inline-block text-white hover:text-gray-100 transition"
+      class="link link-hover inline-block text-white transition"
     >
       <span class="block text-sm mb-2">Läs mer om aikido</span>
       <svg
-        class="w-6 h-6 mx-auto animate-bounce"
+        class="size-6 mx-auto animate-bounce"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"

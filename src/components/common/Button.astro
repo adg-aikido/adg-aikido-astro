@@ -14,22 +14,22 @@ const {
 } = Astro.props;
 
 const variantClasses = {
-  primary: "bg-accent-600 text-white hover:opacity-90",
-  secondary: "border-2 border-gray-300 text-gray-800 hover:bg-gray-50",
-  ghost: "text-primary-600 hover:underline"
+  primary: "btn-accent",
+  secondary: "btn-outline",
+  ghost: "btn-ghost"
 };
 
 const sizeClasses = {
-  small: "px-4 py-2 text-sm",
-  medium: "px-6 py-3",
-  large: "px-8 py-4 text-lg"
+  small: "btn-sm",
+  medium: "btn-md",
+  large: "btn-lg"
 };
 ---
 
 <a
   href={href}
   class:list={[
-    "inline-flex items-center justify-center font-bold no-underline transition-all duration-300 whitespace-nowrap rounded-lg",
+    "btn",
     variantClasses[variant],
     sizeClasses[size],
     className

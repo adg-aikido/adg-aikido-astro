@@ -44,17 +44,17 @@ const navItems = buildNavigationConfig(baseNavItems, variantMap);
           class:list={[
             item.icon === "facebook" || item.icon === "home"  ? "pt-0" : "pt-2 transition ease-in-out duration-400",
             "border-b-4",
-            isActive ? "border-primary-600 hover:border-secondary-500" : "border-transparent",
+            isActive ? "border-primary" : "border-transparent",
           ]}
         >
           <a
             href={item.href}
-            class="inline-block font-bold text-primary-950 no-underline uppercase hover:text-primary-800"
+            class="link link-primary inline-block font-bold no-underline uppercase"
             aria-label={item.label}
             aria-haspopup={!item.external ? "true" : undefined}
           >
-            {item.icon === "home" && <HomeIcon class="w-6 h-6" />}
-            {item.icon === "facebook" && <FacebookIcon class="w-6 h-6" />}
+            {item.icon === "home" && <HomeIcon class="size-6" />}
+            {item.icon === "facebook" && <FacebookIcon class="size-6" />}
             {!item.icon && item.label}
           </a>
           {/* Show dropdown for all internal navigation items */}

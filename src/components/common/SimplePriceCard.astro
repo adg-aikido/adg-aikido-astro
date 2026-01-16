@@ -10,14 +10,16 @@ const { title, price, note, class: className } = Astro.props;
 ---
 
 <div class:list={[
-  "flex h-full flex-col justify-between overflow-hidden rounded border-t border-primary-500 shadow-md pb-3",
+  "card card-border h-full shadow-md",
   className
 ]}>
-  <h5 class="border-b border-primary-500 font-serif text-lg font-bold -mt-2 pt-3 pb-1 text-center text-primary-900">
-    {title}
-  </h5>
-  <span class="mt-2 text-center">{price}</span>
-  {note && (
-    <span class="mt-1 px-2 text-center text-sm">{note}</span>
-  )}
+  <div class="card-body p-3 gap-2">
+    <h5 class="card-title text-lg justify-center border-b border-primary pb-1">
+      {title}
+    </h5>
+    <span class="text-center">{price}</span>
+    {note && (
+      <span class="text-center text-sm opacity-70">{note}</span>
+    )}
+  </div>
 </div>
