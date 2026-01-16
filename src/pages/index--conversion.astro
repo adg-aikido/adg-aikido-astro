@@ -1,5 +1,5 @@
 ---
-import ConversionLayout from "../layouts/ConversionLayout.astro";
+import Layout from "../layouts/Layout.astro";
 import HeroSection from "../components/sections/conversion/HeroSection.astro";
 import BenefitsSection from "../components/sections/conversion/BenefitsSection.astro";
 import HowItWorksSection from "../components/sections/conversion/HowItWorksSection.astro";
@@ -12,7 +12,7 @@ const title = "Aikido Dojo Gamlestaden i Göteborg - Discover Your Strength";
 const description = "Learn aikido from expert instructors. Join 200+ members in Göteborg. Free trial for all ages. Start your transformation today.";
 ---
 
-<ConversionLayout title={title} description={description}>
+<Layout title={title} description={description}>
   <HeroSection />
   <BenefitsSection />
   <HowItWorksSection />
@@ -20,4 +20,4 @@ const description = "Learn aikido from expert instructors. Join 200+ members in 
   <PricingSection />
   <NewsSection />
   <FinalCtaSection />
-</ConversionLayout>
+</Layout>

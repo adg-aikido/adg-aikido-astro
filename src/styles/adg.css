@@ -5,7 +5,7 @@
 @import './elements.css' layer(components);
 
 @plugin "daisyui"{
-  themes: light, dark, cupcake, bumblebee, emerald --default, corporate, synthwave, retro, cyberpunk, valentine, halloween, garden, forest, aqua, lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn, business, acid, lemonade, night, coffee, winter, dim, nord, sunset;
+  themes: light, dark, cupcake, bumblebee, emerald, corporate, synthwave, retro, cyberpunk, valentine, halloween, garden, forest, aqua, lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn, business, acid, lemonade, night, coffee, winter, dim, nord, sunset;
 }
 @plugin "daisyui/theme" {
   name: "adg";
@@ -55,6 +55,7 @@
   --noise: 0;
 }
 @plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -90,7 +91,6 @@
 
 @layer base {
   :root {
-    color-scheme: light;
   }
 }
 

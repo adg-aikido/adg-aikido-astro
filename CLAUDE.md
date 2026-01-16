@@ -94,7 +94,7 @@ Two layouts with different purposes:
    - Background image overlay
    - Used by most pages
 
-2. **`ConversionLayout.astro`** - Conversion-focused landing page
+2. **`Layout.astro`** - Conversion-focused landing page
    - Sticky header that shrinks on scroll (with JavaScript)
    - Optimized for lead generation
    - Same header/footer structure but with scroll interaction

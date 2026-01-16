@@ -38,7 +38,7 @@ src/
 │   └── media.yaml          # Videos, documents, posters
 ├── layouts/
 │   ├── Layout.astro        # Main layout with header/nav/footer
-│   └── ConversionLayout.astro  # Alternative layout for conversion page
+│   └── Layout.astro  # Alternative layout for conversion page
 ├── pages/                  # Static routes and dynamic pages
 │   ├── index.astro         # Homepage
 │   ├── index-conversion.astro  # Conversion landing page

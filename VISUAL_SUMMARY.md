@@ -179,7 +179,7 @@ Overall Goal:     Trial signup rate     > 3% of traffic
 ```
 src/
 ├── layouts/
-│   └── ConversionLayout.astro ............ Sticky header, footer
+│   └── Layout.astro ............ Sticky header, footer
 │
 ├── pages/
 │   └── index-conversion.astro ........... Main page component

@@ -5,7 +5,7 @@ This directory contains a new conversion-optimized landing page design for ADG A
 ## Files Created
 
 ### Layout
-- **`src/layouts/ConversionLayout.astro`** - New sticky header layout with navigation always visible
+- **`src/layouts/Layout.astro`** - New sticky header layout with navigation always visible
 
 ### Components (Conversion Funnel Sections)
 - **`src/components/sections/conversion/ConversionHeroSection.astro`** - Hero section with dual CTA
@@ -114,7 +114,7 @@ To implement analytics, track these events:
 src/
 ├── layouts/
 │   ├── Layout.astro (original)
-│   └── ConversionLayout.astro (new - sticky header)
+│   └── Layout.astro (new - sticky header)
 ├── pages/
 │   ├── index.astro (original)
 │   └── index-conversion.astro (new conversion-focused)
