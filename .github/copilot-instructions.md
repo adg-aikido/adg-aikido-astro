@@ -12,11 +12,13 @@
 - **Node Version**: 18+
 - **Bun Version**: 1.3.6+
 - **Repository Size**: Small (~10 pages)
-- **Styling**: Tailwind CSS 4.1 with custom color theme
+- **Styling**: Tailwind CSS 4.1 + **daisyUI 5** (component library with 30+ themes)
+- **JavaScript**: **Alpine.js 3.x** (lightweight reactivity for theme management)
 - **Content Model**: YAML data collections in `src/data/`
 - **Build Time**: ~800ms for clean build, ~1s with all checks
 - **Output**: Static HTML files to `dist/` directory
 - **Languages Supported**: Swedish + English
+- **Page Variants**: Multiple variants per page (e.g., `priser.astro`, `priser--student.astro`)
 
 ## Directory Structure
 
@@ -147,11 +149,19 @@ Three integrations run during `bun run build`:
 - Both run during build - ordering matters
 - Source maps enabled for debugging
 
-### Color System (Tailwind)
-- Primary: Blue (`#3b82f6` default, customizable in tailwind.config.js)
-- Accent: Violet (secondary brand color)
-- Grays use Slate palette
-- All colors use Tailwind naming: `primary-400`, `primary-600`, etc.
+### Color System (daisyUI + Tailwind)
+- **daisyUI Semantic Colors**: Use theme-aware classes for all UI components
+  - `base-100`, `base-200`, `base-300` - Background colors
+  - `base-content` - Text color (auto-adjusts for light/dark themes)
+  - `primary`, `secondary`, `accent` - Brand colors
+  - `info`, `success`, `warning`, `error` - Status colors
+- **Theme Management**: 30+ built-in themes + custom `adg` theme
+  - User-selected theme stored in localStorage via Alpine.js
+  - Theme persists across sessions
+  - Controlled by `ThemeChooser.astro` component
+- **IMPORTANT**: Always use daisyUI semantic colors instead of hardcoded Tailwind colors
+  - ❌ Bad: `text-gray-800`, `bg-blue-100`
+  - ✅ Good: `text-base-content`, `bg-base-200`
 - Changing colors requires rebuilding
 
 ### Development Watching
@@ -159,6 +169,19 @@ Three integrations run during `bun run build`:
 - Auto-rebuilds on save
 - If build fails due to syntax errors, fix and save again
 - No need to restart dev server for most changes
+
+### Page Variants System
+- **Multiple variants per page** using double-dash naming convention
+- Example: `priser.astro` (default), `priser--student.astro`, `priser--senior.astro`
+- Base page serves as default, variants provide alternate content/layout
+- Navigation dropdown shows all variants for discovery
+- Variants discovered at build time via `discoverPageVariants()` utility
+- Implementation:
+  - Base page: `pages/priser.astro` → `/priser/`
+  - Variant: `pages/priser--student.astro` → `/priser--student/`
+  - Utility: `src/utils/navigationBuilder.ts` handles discovery and navigation
+- **Navigation shows variants** in dropdown when hovering over base page link
+- Conversion page variant: `index--conversion.astro` provides alternate homepage layout
 
 ## Page Structure & Routing
 
@@ -226,6 +249,56 @@ export async function getStaticPaths() {
 - Path is relative from importing file's location
 - File names are case-sensitive
 
+### Using daisyUI Components
+- **Always use daisyUI classes** for UI components instead of custom Tailwind
+- Common daisyUI components:
+  ```astro
+  <!-- Card -->
+  <div class="card card-border bg-base-100 shadow-lg">
+    <div class="card-body">
+      <h2 class="card-title">Title</h2>
+      <p>Content</p>
+    </div>
+  </div>
+  
+  <!-- Button -->
+  <button class="btn btn-primary">Click me</button>
+  
+  <!-- Badge -->
+  <span class="badge badge-primary">New</span>
+  
+  <!-- Menu -->
+  <ul class="menu">
+    <li><a>Item 1</a></li>
+  </ul>
+  ```
+- **Theme-aware colors**: Use semantic color variants
+  - Buttons: `btn-primary`, `btn-secondary`, `btn-accent`, `btn-ghost`, `btn-neutral`
+  - Cards: `bg-base-100`, `bg-base-200`, `bg-primary`, `text-primary-content`
+  - Badges: `badge-primary`, `badge-secondary`, `badge-info`, `badge-success`
+- Avoid hardcoded Tailwind colors - they don't adapt to theme changes
+
+### Alpine.js Patterns
+- **Alpine.js is loaded via CDN** in Layout.astro
+- Used for client-side interactivity and state management
+- Current usage: Theme persistence in `ThemeChooser.astro`
+  ```astro
+  <div x-data="{
+    theme: localStorage.getItem('theme') || 'dark',
+    setTheme(newTheme) {
+      this.theme = newTheme;
+      localStorage.setItem('theme', newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
+    }
+  }">
+    <!-- Component content -->
+  </div>
+  ```
+- Use Alpine.js for:
+  - LocalStorage persistence
+  - Interactive UI elements (dropdowns, modals)
+  - Client-side state without full framework overhead
+
 ## Validation & Quality Checks
 
 ### Automatic Build Checks
@@ -274,12 +347,15 @@ export async function getStaticPaths() {
 
 ## Important Files to Know
 
-- `astro.config.mjs` - Integrations and build configuration (do not remove integrations)
-- `src/layouts/Layout.astro` - Main layout with header/navigation
-- `src/components/common/Button.astro` - Standard button component (used throughout)
+- `astro.config.mjs` - Integrations and build configuration (includes daisyUI)
+- `src/layouts/Layout.astro` - Main layout with Alpine.js integration
+- `src/components/common/ThemeChooser.astro` - daisyUI theme selector with Alpine.js
+- `src/components/common/Navigation.astro` - Main navigation with variant dropdown support
+- `src/components/common/Button.astro` - Standard button component (uses daisyUI)
+- `src/utils/navigationBuilder.ts` - Page variant discovery and navigation logic
 - `src/data/events.yaml` - Controls dynamic event pages
-- `tailwind.config.js` - Color theme and Tailwind configuration
-- `package.json` - Scripts and dependency versions (update carefully)
+- `tailwind.config.js` - Tailwind + daisyUI configuration with custom themes
+- `package.json` - Scripts and dependency versions (includes daisyUI, Alpine.js)
 - `dist/` - Build output directory (auto-generated, git-ignored)
 
 ## Debugging Tips
@@ -312,6 +388,14 @@ export async function getStaticPaths() {
 2. Verify relative import path: `../` for parent directory
 3. Check file extension is `.astro`
 4. Astro imports are case-sensitive
+
+### daisyUI Theme Issues
+1. **Colors not changing with theme**: Likely using hardcoded Tailwind colors instead of daisyUI semantic colors
+   - Replace `text-gray-800` with `text-base-content`
+   - Replace `bg-blue-100` with `bg-base-200` or `bg-primary/10`
+2. **Theme not persisting**: Check Alpine.js console errors and localStorage
+3. **Component not styled**: Verify daisyUI class names (e.g., `btn`, `card`, `badge`)
+4. **Testing themes**: Use ThemeChooser dropdown in navigation to switch between 30+ themes
 
 ## Workflow Summary
 
