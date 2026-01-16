@@ -86,7 +86,12 @@ export function buildNavigationConfig(
 ): NavItem[] {
   return baseNavItems.map(item => {
     // Extract basename from href (remove leading/trailing slashes)
-    const basename = item.href.replace(/^\/|\/$/g, '');
+    let basename = item.href.replace(/^\/|\/$/g, '');
+
+    // Handle root path - treat as "index"
+    if (basename === '') {
+      basename = 'index';
+    }
 
     // Look up variants for this page
     const variants = variantMap.get(basename) || undefined;
