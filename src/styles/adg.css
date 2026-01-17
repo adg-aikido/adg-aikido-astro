@@ -89,6 +89,8 @@
   --depth: 1;
   --noise: 0;
 }
+@import "./githubdark.css";
+@import "./githublight.css";
 
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";

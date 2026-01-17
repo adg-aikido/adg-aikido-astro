@@ -21,9 +21,12 @@
   <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-50 w-52 p-2 shadow-2xl max-h-96 overflow-y-auto">
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Light" value="light" :checked="theme === 'light'" @change="setTheme('light')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dark" value="dark" :checked="theme === 'dark'" @change="setTheme('dark')" /></li>
+    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="ADG Custom" value="adg" :checked="theme === 'adg'" @change="setTheme('adg')" /></li>
+
+    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="GitHub Light" value="githublight" :checked="theme === 'githublight'" @change="setTheme('githublight')" /></li>
+    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="GitHub Dark" value="githubdark" :checked="theme === 'githubdark'" @change="setTheme('githubdark')" /></li>
+
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Cupcake" value="cupcake" :checked="theme === 'cupcake'" @change="setTheme('cupcake')" /></li>
-    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Sweettown" value="sweettown" :checked="theme === 'sweettown'" @change="setTheme('sweettown')" /></li>
-    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Bumblebee" value="bumblebee" :checked="theme === 'bumblebee'" @change="setTheme('bumblebee')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Emerald" value="emerald" :checked="theme === 'emerald'" @change="setTheme('emerald')"/></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Corporate" value="corporate" :checked="theme === 'corporate'" @change="setTheme('corporate')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Synthwave" value="synthwave" :checked="theme === 'synthwave'" @change="setTheme('synthwave')" /></li>
@@ -41,14 +44,11 @@
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="CMYK" value="cmyk" :checked="theme === 'cmyk'" @change="setTheme('cmyk')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Autumn" value="autumn" :checked="theme === 'autumn'" @change="setTheme('autumn')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Business" value="business" :checked="theme === 'business'" @change="setTheme('business')" /></li>
-    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Acid" value="acid" :checked="theme === 'acid'" @change="setTheme('acid')" /></li>
-    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Lemonade" value="lemonade" :checked="theme === 'lemonade'" @change="setTheme('lemonade')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Night" value="night" :checked="theme === 'night'" @change="setTheme('night')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Coffee" value="coffee" :checked="theme === 'coffee'" @change="setTheme('coffee')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Winter" value="winter" :checked="theme === 'winter'" @change="setTheme('winter')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dim" value="dim" :checked="theme === 'dim'" @change="setTheme('dim')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Nord" value="nord" :checked="theme === 'nord'" @change="setTheme('nord')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Sunset" value="sunset" :checked="theme === 'sunset'" @change="setTheme('sunset')" /></li>
-    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="ADG Custom" value="adg" :checked="theme === 'adg'" @change="setTheme('adg')" /></li>
   </ul>
 </div>
