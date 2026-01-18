@@ -15,7 +15,7 @@ const isVariantActive = item.variants?.some(v => currentPath === v.href) || fals
 <div class="relative inline-block nav-dropdown-wrapper">
   <!-- Chevron Icon -->
   <svg
-    class="inline-block w-3 h-3 ml-1 text-primary transition-transform duration-200 dropdown-chevron"
+    class="inline-block w-3 h-3 ml-1 text-neutral transition-transform duration-200 dropdown-chevron"
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
@@ -27,7 +27,7 @@ const isVariantActive = item.variants?.some(v => currentPath === v.href) || fals
 
   <!-- Dropdown Menu -->
   <div
-    class="absolute -left-4 top-full z-50 hidden pt-1 bg-white border rounded-lg shadow-lg dropdown-menu border-base-300 min-w-40"
+    class="absolute -left-16 top-full z-50 hidden pt-1 bg-base-100 border rounded-lg shadow-lg dropdown-menu border-base-300 min-w-40"
     role="menu"
     aria-label={`${item.label} variants`}
   >

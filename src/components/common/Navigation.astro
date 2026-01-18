@@ -32,7 +32,7 @@ const navItems = buildNavigationConfig(baseNavItems, variantMap);
 ---
 
 <nav class="text-sm">
-  <ul class="flex flex-wrap justify-center items-bottom space-x-6">
+  <ul class="flex flex-wrap justify-center items-center space-x-6">
     {navItems.map((item) => {
       // Check if current path matches base page or any variant
       const isActive = !item.external && (
@@ -43,14 +43,13 @@ const navItems = buildNavigationConfig(baseNavItems, variantMap);
       return (
         <li
           class:list={[
-            item.icon === "facebook" || item.icon === "home"  ? "pt-0" : "pt-2 transition ease-in-out duration-400",
-            "border-b-4",
-            isActive ? "border-primary" : "border-transparent",
+            "border-b-4 flex items-center gap-x-1 transition ease-in-out duration-400",
+            isActive ? "border-primary-darker" : "border-transparent",
           ]}
         >
           <a
             href={item.href}
-            class="btn btn-secondary abtn-ghost inline-block font-bold no-underline uppercase"
+            class="btn btn-link text-primary-content font-bold no-underline uppercase"
             aria-label={item.label}
             aria-haspopup={!item.external ? "true" : undefined}
           >
@@ -65,7 +64,7 @@ const navItems = buildNavigationConfig(baseNavItems, variantMap);
         </li>
       );
     })}
-    <li class="pt-0">
+    <li class="flex items-center">
       <ThemeChooser />
     </li>
   </ul>
