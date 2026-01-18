@@ -1,23 +1,32 @@
 ---
 import { marked } from 'marked';
-import newsData from '../../../data/news.yaml';
+import { getCollection } from 'astro:content';
+import categoriesData from '../../../data/news-categories.yaml';
+import { getCategoryMap } from '../../../utils/contentFilters';
 
-const newsItems = newsData.news;
+const newsItems = await getCollection('news');
+// Sort news by date (newest first)
+const sortedNews = newsItems.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Create a lookup map for categories
+const categoryMap = getCategoryMap(categoriesData.categories);
 ---
 
 <div class="mt-12">
   <h2 class="mb-4 font-serif text-3xl font-bold leading-tight mt-10">Nyheter</h2>
   <ul class="space-y-6">
-    {newsItems.map((item, index) => (
+    {sortedNews.map((item, index) => (
       <li class:list={[
         "pb-4",
-        index < newsItems.length - 1 ? "border-b border-primary/30" : "pb-2"
+        index < sortedNews.length - 1 ? "border-b border-primary/30" : "pb-2"
       ]}>
-        <h3 class="mb-4 font-serif text-2xl font-bold leading-tight mt-4">{item.title}</h3>
-        <div class="space-y-5" set:html={marked.parse(item.content)}></div>
-        {item.images && (
+        <h3 class="mb-4 font-serif text-2xl font-bold leading-tight mt-4">{item.data.title}</h3>
+        <div class="space-y-5 ml-4" set:html={marked.parse(item.data.content)}></div>
+        {item.data.images && (
           <div class="flex flex-wrap justify-evenly gap-2 pt-4">
-            {item.images.map((image) => (
+            {item.data.images.map((image) => (
               <a class="block" href={image.src}>
                 <img src={image.src} width="200" alt={image.alt} />
               </a>

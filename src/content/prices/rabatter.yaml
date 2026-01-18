@@ -1,0 +1,21 @@
+category: discounts
+title: Rabatter
+heading: Rabatter
+id: rabatter
+prices:
+  - title: Nybörjare (vuxna)
+    subtitle: per person, första terminen
+    amount: "-600"
+    unit: kr/termin
+  - title: 2 familjemedlemmar
+    subtitle: per person, per termin
+    amount: "-200"
+    unit: kr/termin
+  - title: 3 eller fler familjemedlemmar
+    subtitle: per person, per termin
+    amount: "-400"
+    unit: kr/termin
+  - title: Ta med en kompis
+    subtitle: som betalar terminsavgift och ni får båda rabatt i en termin (endast vuxna)
+    amount: "-200"
+    unit: kr/termin

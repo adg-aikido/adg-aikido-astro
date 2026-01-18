@@ -1,4 +1,22 @@
 ---
+import { getCollection } from 'astro:content';
+import categoriesData from '../../../data/news-categories.yaml';
+import { formatDate, getCategoryMap, getCategoryName } from '../../../utils/contentFilters';
+
+interface Props {
+  maxItems?: number;
+}
+
+const { maxItems = 3 } = Astro.props;
+
+const allNews = await getCollection('news');
+// Sort news by date (newest first) and take maxItems
+const newsItems = allNews
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, maxItems);
+
+// Create a lookup map for categories
+const categoryMap = getCategoryMap(categoriesData.categories);
 ---
 
 <section class="py-20 px-4">
@@ -12,63 +30,34 @@
 
     <!-- News Cards -->
     <div class="grid md:grid-cols-3 gap-8 mb-16">
-      <!-- News 1 -->
-      <div class="card card-border bg-base-100 shadow-lg hover:shadow-xl transition">
-        <div class="h-40 bg-primary text-primary-content flex items-center justify-center">
-          <span class="text-6xl">🏆</span>
+      {newsItems.map((item) => (
+        <div class="card card-border bg-base-100 shadow-lg hover:shadow-xl transition">
+          <div class="h-40 bg-primary text-primary-content flex items-center justify-center">
+            <span class="text-6xl">{item.data.icon}</span>
+          </div>
+          <div class="card-body">
+            <p class="text-xs text-primary font-semibold mb-2">{getCategoryName(item.data.categoryId, categoryMap).toUpperCase()}</p>
+            <h3 class="card-title text-lg mb-2">{item.data.title}</h3>
+            <p class="opacity-70 text-sm mb-4">
+              {item.data.description}
+            </p>
+            <p class="text-xs opacity-50">{formatDate(item.data.date)}</p>
+          </div>
         </div>
-        <div class="card-body">
-          <p class="text-xs text-primary font-semibold mb-2">KOMMANDE EVENT</p>
-          <h3 class="card-title text-lg mb-2">Vårturnering</h3>
-          <p class="opacity-70 text-sm mb-4">
-            Årlig aikido-turnering med studenter från hela regionen.
-          </p>
-          <p class="text-xs opacity-50">15-16 mars 2026</p>
-        </div>
-      </div>
-
-      <!-- News 2 -->
-      <div class="card card-border bg-base-100 shadow-lg hover:shadow-xl transition">
-        <div class="h-40 bg-primary text-primary-content flex items-center justify-center">
-          <span class="text-6xl">🥋</span>
-        </div>
-        <div class="card-body">
-          <p class="text-xs text-primary font-semibold mb-2">NY INSTRUKTÖR</p>
-          <h3 class="card-title text-lg mb-2">Välkommen till vår nya sensei</h3>
-          <p class="opacity-70 text-sm mb-4">
-            Fantastiska nyheter! Vi välkomnar en mycket erfaren instruktör till vårt team.
-          </p>
-          <p class="text-xs opacity-50">1 februari 2026</p>
-        </div>
-      </div>
-
-      <!-- News 3 -->
-      <div class="card card-border bg-base-100 shadow-lg hover:shadow-xl transition">
-        <div class="h-40 bg-primary text-primary-content flex items-center justify-center">
-          <span class="text-6xl">🏕️</span>
-        </div>
-        <div class="card-body">
-          <p class="text-xs text-primary font-semibold mb-2">TRÄNINGSLÄGER</p>
-          <h3 class="card-title text-lg mb-2">Sommar Aikido Camp</h3>
-          <p class="opacity-70 text-sm mb-4">
-            Intensiv träning med besökande senseis från hela Europa.
-          </p>
-          <p class="text-xs opacity-50">20-24 juni 2026</p>
-        </div>
-      </div>
+      ))}
     </div>
 
     <!-- Partners -->
     <div class="bg-base-200 text-base-content p-8 rounded-lg">
       <h3 class="text-center font-serif text-2xl font-bold mb-8">Våra partners</h3>
       <div class="grid md:grid-cols-3 gap-8 items-center">
-        <div class="flex items-center justify-center h-20 bg-base-100 rounded-lg shadow">
+        <div class="flex items-center justify-center h-20 bg-base-300 rounded-lg shadow">
           <span class="opacity-50">Partner Logo</span>
         </div>
-        <div class="flex items-center justify-center h-20 bg-base-100 rounded-lg shadow">
+        <div class="flex items-center justify-center h-20 bg-base-300 rounded-lg shadow">
           <span class="opacity-50">Partner Logo</span>
         </div>
-        <div class="flex items-center justify-center h-20 bg-base-100 rounded-lg shadow">
+        <div class="flex items-center justify-center h-20 bg-base-300 rounded-lg shadow">
           <span class="opacity-50">Partner Logo</span>
         </div>
       </div>

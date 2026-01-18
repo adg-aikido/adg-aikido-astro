@@ -1,0 +1,79 @@
+---
+/**
+ * PriceGrid Component
+ * 
+ * Displays a grid of price cards with consistent layout and spacing.
+ * Used across all pricing page variants.
+ */
+
+import PriceCard from './PriceCard.astro';
+import type { PriceCategory } from '../types/prices';
+
+export interface Props {
+  category: PriceCategory;
+  variant?: 'standard' | 'compact' | 'wide';
+  showCategoryHeading?: boolean;
+}
+
+const { 
+  category,
+  variant = 'standard',
+  showCategoryHeading = false
+} = Astro.props;
+
+// Determine grid layout based on variant and category
+const getGridClass = () => {
+  if (variant === 'compact') {
+    return 'grid grid-cols-1 gap-4 md:grid-cols-2';
+  }
+  if (variant === 'wide') {
+    return 'grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3';
+  }
+  // Standard: flex wrap with responsive widths
+  return '-mx-2 flex flex-wrap list-none justify-start';
+};
+
+const getItemClass = () => {
+  if (variant === 'compact' || variant === 'wide') {
+    return ''; // Grid handles layout
+  }
+  // Standard: manual responsive widths
+  return category.category === 'discounts' 
+    ? 'w-full p-2 md:w-1/2' 
+    : 'w-full p-2 md:max-w-sm';
+};
+---
+
+{showCategoryHeading && (
+  <h3 class="text-2xl font-bold mb-4">{category.heading}</h3>
+)}
+
+<div class={variant === 'standard' ? 'mt-3' : ''}>
+  {variant === 'standard' ? (
+    <ul class={getGridClass()}>
+      {category.prices.map((card) => (
+        <li class={getItemClass()}>
+          <PriceCard
+            title={card.title}
+            subtitle={card.subtitle}
+            description={card.description}
+            amount={card.amount}
+            unit={card.unit}
+          />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class={getGridClass()}>
+      {category.prices.map((card) => (
+        <PriceCard
+          title={card.title}
+          subtitle={card.subtitle}
+          description={card.description}
+          amount={card.amount}
+          unit={card.unit}
+        />
+      ))}
+    </div>
+  )}
+</div>

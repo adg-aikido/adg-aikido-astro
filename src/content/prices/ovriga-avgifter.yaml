@@ -1,0 +1,13 @@
+category: otherFees
+title: Övriga avgifter
+heading: Övriga avgifter
+id: ovriga-avgifter
+prices:
+  - title: Mattavgift
+    subtitle: Enstaka tillfällen
+    amount: "100"
+    unit: kr/tillfälle
+  - title: Graderingsavgift
+    subtitle: för kyu grader
+    amount: "100"
+    unit: kr/tillfälle

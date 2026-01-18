@@ -19,7 +19,11 @@ export default defineConfig({
 		],
 	},
 	integrations: [
-		mdx(), 
+		mdx({
+			// Make Image component available globally in MDX
+			extendMarkdownConfig: false,
+			optimize: true,
+		}), 
 		sitemap(),
 		astroBrokenLinksChecker({
 			logFilePath: 'broken-links.log', // Optional: specify the log file path

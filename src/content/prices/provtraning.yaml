@@ -1,0 +1,13 @@
+category: trialTraining
+title: Provträning
+heading: Provträning
+id: provtraning
+prices:
+  - title: Barn och ungdom
+    subtitle: två träningstillfällen
+    amount: "0"
+    unit: kr
+  - title: Vuxna
+    subtitle: två träningstillfällen; om du fortsätter, dras beloppet av från terminsavgiften
+    amount: "100"
+    unit: kr

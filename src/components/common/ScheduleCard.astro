@@ -2,8 +2,8 @@
 export interface Props {
   day: string;
   sessions: Array<{
-    startTime: string;
-    endTime: string;
+    timeStart: string;
+    timeEnd: string;
     title: string;
     subtitle?: string;
     instructors?: Array<string>;
@@ -14,9 +14,9 @@ export interface Props {
 const { day, sessions } = Astro.props;
 
 const colorClasses = {
-  primary: 'border-l-primary/50',
-  accent: 'border-l-accent/50',
-  secondary: 'border-l-secondary/50'
+  primary: 'border-l-primary',
+  accent: 'border-l-accent',
+  secondary: 'border-l-secondary'
 };
 ---
 
@@ -33,8 +33,8 @@ const colorClasses = {
         ]}>
           <div class="card-body p-2 gap-1">
             <div class="flex justify-between">
-              <span class="font-bold">{session.startTime}</span>
-              <span class="opacity-60">{session.endTime}</span>
+              <span class="font-bold">{session.timeStart}</span>
+              <span class="opacity-60">{session.timeEnd}</span>
             </div>
             <div class="text-center font-semibold" set:html={session.title} />
             <div class="text-sm text-center opacity-50">

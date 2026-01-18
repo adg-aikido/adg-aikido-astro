@@ -46,3 +46,9 @@ p + p {
     @apply mt-5;
 }
 
+a { @apply link; 
+&:hover {
+    @apply link-accent;
+}
+}
+

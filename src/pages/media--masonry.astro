@@ -1,0 +1,135 @@
+---
+import Layout from "../layouts/Layout.astro";
+import MasonryMediaCard from "../components/common/MasonryMediaCard.astro";
+import { getCollection } from 'astro:content';
+
+const mediaSections = await getCollection('media');
+
+// Flatten all media items with their category info and assign varied sizes
+const allMediaItems = mediaSections.flatMap(section => 
+  section.data.items.map((item, index) => {
+    // Create visual variety with different card sizes
+    let size: 'small' | 'medium' | 'large';
+    if (item.isYouTube || section.data.id === 'videogalleri') {
+      size = index % 3 === 0 ? 'large' : 'medium'; // Videos vary between medium and large
+    } else if (section.data.id === 'affischer' || section.data.id === 'nyhetsbrev') {
+      size = index % 2 === 0 ? 'medium' : 'large'; // Posters/newsletters can be larger
+    } else {
+      size = index % 4 === 0 ? 'medium' : 'small'; // Documents mostly small with occasional medium
+    }
+    
+    return {
+      ...item,
+      category: section.data.title,
+      categoryId: section.data.id,
+      size
+    };
+  })
+);
+
+// Get unique categories for filter
+const categories = mediaSections.map(section => ({
+  id: section.data.id,
+  title: section.data.title
+}));
+---
+
+<Layout
+  title="Media - Aikido Dojo Gamlestaden"
+  description="Träningsvideor, dokument, affischer och annat material från Aikido Dojo Gamlestaden."
+>
+  <main class="container mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+    <div class="pb-8">
+      <h1 class="text-4xl font-serif mb-2">Media</h1>
+      <p class="text-base-content/70 mb-8">Utforska vårt mediagalleri med videor, dokument och affischer</p>
+      
+      <!-- Masonry Layout with Filtering -->
+      <div 
+        x-data="{
+          activeFilters: [],
+          toggleFilter(filterId) {
+            if (this.activeFilters.includes(filterId)) {
+              this.activeFilters = this.activeFilters.filter(f => f !== filterId);
+            } else {
+              this.activeFilters.push(filterId);
+            }
+          },
+          clearFilters() {
+            this.activeFilters = [];
+          },
+          isVisible(categoryId) {
+            return this.activeFilters.length === 0 || this.activeFilters.includes(categoryId);
+          }
+        }"
+        class="w-full"
+      >
+        <!-- Filter Pills -->
+        <div class="mb-8 flex flex-wrap gap-3 items-center">
+          <span class="text-sm font-medium text-base-content/70 mr-2">Filter:</span>
+          {categories.map((cat) => (
+            <button
+              @click={`toggleFilter('${cat.id}')`}
+              :class={`activeFilters.includes('${cat.id}') && 'badge-primary'`}
+              class="badge badge-lg badge-outline cursor-pointer transition-all hover:scale-105"
+              type="button"
+            >
+              {cat.title}
+            </button>
+          ))}
+          <button
+            @click="clearFilters()"
+            x-show="activeFilters.length > 0"
+            x-transition
+            class="badge badge-ghost badge-lg cursor-pointer"
+            type="button"
+          >
+            ✕ Rensa
+          </button>
+        </div>
+
+        <!-- Masonry Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 auto-rows-auto">
+          {allMediaItems.map((item) => {
+            // Assign grid span classes based on size
+            const spanClass = item.size === 'large' 
+              ? 'col-span-2 row-span-2' 
+              : item.size === 'medium'
+              ? 'col-span-1 row-span-1'
+              : 'col-span-1';
+            
+            return (
+              <div 
+                x-show={`isVisible('${item.categoryId}')`}
+                x-transition
+                class={spanClass}
+              >
+                <MasonryMediaCard
+                  href={item.href}
+                  title={item.title}
+                  category={item.category}
+                  thumbnail={item.thumbnail}
+                  thumbnailAlt={item.thumbnailAlt}
+                  tags={item.tags}
+                  isYouTube={item.isYouTube}
+                  size={item.size}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        <!-- Empty State -->
+        <div 
+          x-show="activeFilters.length > 0 && Array.from(document.querySelectorAll('[x-show]')).filter(el => el.style.display !== 'none').length <= 2"
+          x-transition
+          class="text-center py-16"
+        >
+          <p class="text-base-content/50 text-lg mb-4">Inga resultat hittades</p>
+          <button @click="clearFilters()" class="btn btn-primary btn-sm">
+            Rensa filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

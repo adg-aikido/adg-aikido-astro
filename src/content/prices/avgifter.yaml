@@ -1,0 +1,22 @@
+category: regularFees
+title: Avgifter
+heading: Avgifter
+id: priser
+prices:
+  - title: Barn
+    subtitle: 7-9 år
+    amount: "700"
+    unit: kr/termin
+  - title: Ungdomar
+    subtitle: 10-18 år
+    amount: "1000"
+    unit: kr/termin
+  - title: Vuxna
+    subtitle: 19+ år
+    amount: "2300"
+    unit: kr/termin
+  - title: Vuxna
+    subtitle: 19+ år
+    description: studerande, pensionärer, arbetslösa
+    amount: "1700"
+    unit: kr/termin

@@ -1,0 +1,414 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import Image from "../components/common/Image.astro";
+import PriceCalculator from "../components/common/PriceCalculator.astro";
+import { getCollection } from 'astro:content';
+
+const pricesCollection = await getCollection('prices');
+const priceCategories = pricesCollection
+  .sort((a, b) => {
+    const order = ['trialTraining', 'regularFees', 'otherFees', 'discounts'];
+    return order.indexOf(a.data.category) - order.indexOf(b.data.category);
+  })
+  .map(p => p.data);
+
+// Organize categories by their type
+const trialCategory = priceCategories.find(cat => cat.category === 'trialTraining');
+const regularFeesCategory = priceCategories.find(cat => cat.category === 'regularFees');
+const otherFeesCategory = priceCategories.find(cat => cat.category === 'otherFees');
+const discountsCategory = priceCategories.find(cat => cat.category === 'discounts');
+---
+
+<Layout
+  title="Priser och avgifter - Aikido Dojo Gamlestaden"
+  description="Information om priser, avgifter och rabatter för träning hos Aikido Dojo Gamlestaden i Göteborg."
+>
+  <main class="mx-auto max-w-5xl px-4 py-2 sm:px-6 lg:px-8">
+    <!-- Hero Section -->
+    <div class="text-center">
+      <SectionHeading level="h1">Börja träna hos oss!</SectionHeading>
+      
+      <p class="mt-4 text-lg">
+        Vi har kontinuerlig intagning och tar hand om nybörjare så att man kan lära sig grunderna i egen takt.
+      </p>
+
+      <div class="mt-6">
+        <a href="mailto:info@adg-aikido.se" class="btn btn-primary btn-lg gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Kontakta oss
+        </a>
+      </div>
+    </div>
+
+    <!-- Journey Steps -->
+    <div class="mt-12">
+      <ul class="steps w-full">
+        <li class="step step-primary">
+          <div class="mt-2">
+            <div class="text-2xl">🎯</div>
+            <div class="font-bold">Prova</div>
+            <div class="text-xs opacity-70">Testa träning</div>
+          </div>
+        </li>
+        <li class="step step-primary">
+          <div class="mt-2">
+            <div class="text-2xl">📋</div>
+            <div class="font-bold">Välj plan</div>
+            <div class="text-xs opacity-70">Hitta rätt avgift</div>
+          </div>
+        </li>
+        <li class="step step-primary">
+          <div class="mt-2">
+            <div class="text-2xl">💳</div>
+            <div class="font-bold">Betala</div>
+            <div class="text-xs opacity-70">Swish eller Plusgiro</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Special Offer Alert -->
+    <div class="alert alert-info mt-8 shadow-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <div>
+        <h3 class="font-bold">Våren 2024 – Särskilt erbjudande!</h3>
+        <div class="text-sm">Vi erbjuder 600 kr i rabatt för vuxna nybörjare första terminen.</div>
+      </div>
+    </div>
+
+    <!-- Collapsible Sections -->
+    <div class="mt-12 space-y-2">
+      <!-- Step 1: Trial Training -->
+      {trialCategory && (
+        <div class="collapse collapse-arrow bg-base-200" x-data="{ open: true }">
+          <input type="checkbox" x-model="open" checked />
+          <div class="collapse-title text-xl font-bold">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">🎯</span>
+              <span>Steg 1: Provträning</span>
+              <span class="badge badge-accent">Börja här</span>
+            </div>
+          </div>
+          <div class="collapse-content">
+            <p class="mb-4 opacity-80">
+              Testa träning hos oss innan du bestämmer dig. Två träningstillfällen ingår.
+            </p>
+            
+            <div class="grid gap-4 md:grid-cols-2">
+              {trialCategory.prices.map((price) => (
+                <div class="card card-border bg-base-100">
+                  <div class="card-body">
+                    <h3 class="card-title text-lg">{price.title}</h3>
+                    <p class="text-sm opacity-70">{price.subtitle}</p>
+                    <div class="mt-2 flex items-baseline gap-2">
+                      <span class="text-4xl font-bold">{price.amount}</span>
+                      <span class="text-lg opacity-70">{price.unit}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="alert alert-info mt-4">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-5 w-5 shrink-0 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span class="text-sm">För vuxna: provträningsavgiften dras av från terminsavgiften om du fortsätter.</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Step 2: Choose Your Plan -->
+      {regularFeesCategory && (
+        <div class="collapse collapse-arrow bg-base-200">
+          <input type="checkbox" />
+          <div class="collapse-title text-xl font-bold">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">📋</span>
+              <span>Steg 2: Välj din plan</span>
+            </div>
+          </div>
+          <div class="collapse-content">
+            <p class="mb-4 opacity-80">
+              Terminsavgift betalas i förväg för varje termin (ca 6 månader). Medlemsavgift 100 kr ingår.
+            </p>
+
+            <div class="mb-6 flex flex-wrap gap-2">
+              <span class="badge badge-accent badge-lg">🧒 Barn 7-9 år</span>
+              <span class="badge badge-secondary badge-lg">👦 Ungdom 10-18 år</span>
+              <span class="badge badge-primary badge-lg">👨 Vuxna 19+ år</span>
+            </div>
+            
+            <div class="grid gap-4 md:grid-cols-2">
+              {regularFeesCategory.prices.map((price) => (
+                <div class="card card-border bg-base-100">
+                  <div class="card-body">
+                    <h3 class="card-title">{price.title}</h3>
+                    <p class="text-sm opacity-70">{price.subtitle}</p>
+                    {price.description && (
+                      <p class="text-xs opacity-60">{price.description}</p>
+                    )}
+                    <div class="divider my-2"></div>
+                    <div class="flex items-baseline gap-2">
+                      <span class="text-4xl font-bold">{price.amount}</span>
+                      <span class="opacity-70">{price.unit}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-6 space-y-3">
+              <div class="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-5 w-5 shrink-0 stroke-current">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div>
+                  <p class="text-sm font-semibold">För barn under 7 år</p>
+                  <p class="text-xs">En förälder ska vara med på träningen tills barnet fungerar bra i gruppen. Föräldern är med utan extra kostnad.</p>
+                </div>
+              </div>
+
+              <div class="alert alert-info">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-5 w-5 shrink-0 stroke-current">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div>
+                  <p class="text-sm font-semibold">Börjar mitt i terminen?</p>
+                  <p class="text-xs">Betala för delen av terminen du tränar (månadsavgift = terminsavgift ÷ 6). Kontakta oss för detaljer.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Other Fees -->
+      {otherFeesCategory && (
+        <div class="collapse collapse-arrow bg-base-200">
+          <input type="checkbox" />
+          <div class="collapse-title text-xl font-bold">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">💼</span>
+              <span>Övriga avgifter</span>
+            </div>
+          </div>
+          <div class="collapse-content">
+            <p class="mb-4 opacity-80">
+              För dig som vill träna enstaka gånger eller genomgå gradering.
+            </p>
+            
+            <div class="grid gap-4 md:grid-cols-2">
+              {otherFeesCategory.prices.map((price) => (
+                <div class="card card-border bg-base-100">
+                  <div class="card-body">
+                    <h3 class="card-title text-base">{price.title}</h3>
+                    <p class="text-sm opacity-70">{price.subtitle}</p>
+                    <div class="mt-2 flex items-baseline gap-2">
+                      <span class="text-3xl font-bold">{price.amount}</span>
+                      <span class="opacity-70">{price.unit}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Discounts -->
+      {discountsCategory && (
+        <div class="collapse collapse-arrow bg-base-200">
+          <input type="checkbox" />
+          <div class="collapse-title text-xl font-bold">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">💰</span>
+              <span>Rabatter</span>
+              <span class="badge badge-success">Spara pengar!</span>
+            </div>
+          </div>
+          <div class="collapse-content">
+            <p class="mb-4 opacity-80">
+              Vi erbjuder flera rabatter för att göra träningen tillgänglig för fler!
+            </p>
+            
+            <div class="grid gap-4 md:grid-cols-2">
+              {discountsCategory.prices.map((price) => (
+                <div class="card card-border bg-success/10">
+                  <div class="card-body">
+                    <h3 class="card-title text-base">{price.title}</h3>
+                    <p class="text-sm opacity-70">{price.subtitle}</p>
+                    {price.description && (
+                      <p class="text-xs opacity-60 mt-1">{price.description}</p>
+                    )}
+                    <div class="mt-2">
+                      <span class="badge badge-success badge-lg">
+                        <span class="text-xl font-bold">{price.amount}</span>
+                        <span class="ml-1">{price.unit}</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="alert alert-warning mt-4">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-5 w-5 shrink-0 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span class="text-sm"><strong>Viktigt:</strong> Det är upp till er att meddela oss om rabatter gäller!</span>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+
+    <!-- Price Calculator -->
+    <PriceCalculator variant="collapse" checkboxColor="checkbox-accent" selectBgColor="bg-primary-content" selectTextColor="text-base-content" />
+
+    <!-- Step 3: Payment -->
+    <div 
+      x-data="{
+        copied: false,
+        copyToClipboard(text) {
+          navigator.clipboard.writeText(text).then(() => {
+            this.copied = true;
+            setTimeout(() => this.copied = false, 2000);
+          });
+        }
+      }"
+      class="mt-8"
+    >
+      <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title text-xl font-bold">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">💳</span>
+            <span>Steg 3: Betala</span>
+          </div>
+        </div>
+        <div class="collapse-content">
+          <p class="mb-6 opacity-80">
+            Betala enkelt via Swish eller Plusgiro. Glöm inte att ange ditt namn och vad betalningen gäller!
+          </p>
+
+          <div class="grid gap-6 md:grid-cols-2">
+            <!-- Plusgiro -->
+            <div class="card card-border bg-base-100">
+              <div class="card-body items-center text-center">
+                <div class="mb-2 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <h3 class="card-title">Plusgiro</h3>
+                <div class="text-3xl font-bold tracking-wide">462 37 05-3</div>
+                <button 
+                  @click="copyToClipboard('46237053')"
+                  class="btn btn-primary btn-sm mt-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <span x-text="copied ? 'Kopierat!' : 'Kopiera nummer'"></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Swish -->
+            <div class="card card-border bg-base-100">
+              <div class="card-body items-center text-center">
+                <h3 class="card-title">Swish</h3>
+                <div class="text-2xl font-bold">123-1617109</div>
+                <div class="mt-4">
+                  <Image 
+                    src="/assets/swish-qr.svg" 
+                    alt="QR kod för Swish-betalning"
+                  />
+                </div>
+                <p class="mt-2 text-sm opacity-70">Skanna QR-koden med Swish-appen</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert mt-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-5 w-5 shrink-0 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div>
+              <p class="text-sm"><strong>Viktigt:</strong> Specificera vad betalningen gäller</p>
+              <p class="text-xs opacity-70">Exempel: "träning Anna Andersson HT 2024"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Information Accordion -->
+    <div class="mt-8 space-y-2">
+      <!-- Insurance -->
+      <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title font-bold">
+          <div class="flex items-center gap-3">
+            <span class="text-xl">🛡️</span>
+            <span>Försäkringar</span>
+          </div>
+        </div>
+        <div class="collapse-content">
+          <p class="text-sm">
+            Alla medlemmar är försäkrade mot olycksfall genom medlemskapet i Budo och Kampsportsförbundet. 
+            Villkor och detaljer finns 
+            <a 
+              href="https://www.budokampsport.se/klubb/forsakring/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="link link-primary"
+            >på Budo och Kampsportsförbundets webbsida</a>. 
+            Observera att för att försäkringen ska gälla på läger utomlands, måste man 
+            <a 
+              href="https://www.budokampsport.se/ansokningar/anmalningar/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="link link-primary"
+            >lämna in en ansökan</a>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="collapse collapse-arrow bg-base-200">
+        <input type="checkbox" />
+        <div class="collapse-title font-bold">
+          <div class="flex items-center gap-3">
+            <span class="text-xl">📧</span>
+            <span>Har du frågor?</span>
+          </div>
+        </div>
+        <div class="collapse-content">
+          <p class="text-sm mb-4">
+            Om du har frågor om priser, rabatter eller betalning, kan du alltid kontakta oss via e-post 
+            eller komma förbi klubben för att prata med oss.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="mailto:info@adg-aikido.se" class="btn btn-primary btn-sm gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              info@adg-aikido.se
+            </a>
+            <a href="/kontakt" class="btn btn-ghost btn-sm">
+              Kontaktsida
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

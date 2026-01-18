@@ -1,4 +1,8 @@
 ---
+import { getCollection } from 'astro:content';
+
+const instructorsCollection = await getCollection('instructors');
+const instructors = instructorsCollection.map(i => i.data);
 ---
 
 <section class="py-20 px-4">
@@ -12,41 +16,28 @@
 
     <!-- Instructors Grid -->
     <div class="grid md:grid-cols-3 gap-8 mb-16">
-      <!-- Instructor 1 -->
-      <div class="text-center">
-        <div class="w-40 h-40 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-          <span class="text-6xl">👤</span>
+      {instructors.map((instructor) => (
+        <div class="text-center">
+          <div class="w-40 h-40 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden">
+            {instructor.image ? (
+              <img
+                src={instructor.image}
+                alt={instructor.name}
+                class="w-full h-full object-cover"
+              />
+            ) : (
+              <span class="text-6xl">👤</span>
+            )}
+          </div>
+          <h3 class="font-serif text-xl font-bold mb-2">{instructor.name}</h3>
+          <p class="text-primary font-semibold mb-2">{instructor.rank}</p>
+          {instructor.description && (
+            <p class="opacity-70 text-sm">
+              {instructor.description}
+            </p>
+          )}
         </div>
-        <h3 class="font-serif text-xl font-bold mb-2">Instruktörs namn</h3>
-        <p class="text-primary font-semibold mb-2">3:e Dan</p>
-        <p class="opacity-70 text-sm">
-          15+ års erfarenhet, specialiserad på vuxenträning
-        </p>
-      </div>
-
-      <!-- Instructor 2 -->
-      <div class="text-center">
-        <div class="w-40 h-40 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-          <span class="text-6xl">👤</span>
-        </div>
-        <h3 class="font-serif text-xl font-bold mb-2">Instruktörs namn</h3>
-        <p class="text-primary font-semibold mb-2">2:a Dan</p>
-        <p class="opacity-70 text-sm">
-          10+ års erfarenhet, underbar med barn
-        </p>
-      </div>
-
-      <!-- Instructor 3 -->
-      <div class="text-center">
-        <div class="w-40 h-40 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-          <span class="text-6xl">👤</span>
-        </div>
-        <h3 class="font-serif text-xl font-bold mb-2">Instruktörs namn</h3>
-        <p class="text-primary font-semibold mb-2">2:a Dan</p>
-        <p class="opacity-70 text-sm">
-          8+ års erfarenhet, fokus på ungdomsprogram
-        </p>
-      </div>
+      ))}
     </div>
 
     <!-- Video and Image Section -->

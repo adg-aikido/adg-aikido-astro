@@ -1,0 +1,89 @@
+---
+/**
+ * TransportationGuide Component
+ * 
+ * Displays transportation options to the dojo with 2 variants:
+ * - list: Simple bullet list (kontakt.astro default)
+ * - cards: Card-based grid layout (kontakt--new.astro)
+ */
+
+export interface Props {
+  variant?: 'list' | 'cards';
+}
+
+const { variant = 'list' } = Astro.props;
+
+// Transportation options data
+const transportOptions = [
+  {
+    type: 'tram',
+    title: 'Spårvagn',
+    description: 'Ta spårvagn 4, 6, 7, 8, 9 eller 11 och stig av vid hållplats Gamlestadstorget.',
+    shortDesc: 'Linje 4, 6, 7, 8, 9 eller 11 → Gamlestadstorget',
+    icon: 'info'
+  },
+  {
+    type: 'bus-kristinedal',
+    title: 'Buss (Kristinedal)',
+    description: 'Ta buss 58 eller 510 och stig av vid hållplats Kristinedal.',
+    shortDesc: 'Linje 58 eller 510 → Kristinedal',
+    icon: 'info'
+  },
+  {
+    type: 'bus-gamlestaden',
+    title: 'Buss (Gamlestadstorget)',
+    description: 'Ta buss 21, 78 eller 79 och stig av vid hållplats Gamlestadstorget.',
+    shortDesc: 'Linje 21, 78 eller 79 → Gamlestadstorget',
+    icon: 'info'
+  },
+  {
+    type: 'car',
+    title: 'Bil',
+    description: 'Ta bilen (se kartor nedan). Parkeringsplatser finns framför dojon (parkeringsavgift krävs!). Notera att parkeringsplatsen framför Kristinedal endast är till för besökare till deras träningsanläggning.',
+    shortDesc: 'Parkering framför dojon (avgift krävs!)',
+    icon: 'warning'
+  }
+];
+---
+
+{variant === 'list' && (
+  <div class="mt-3">
+    <p>Välj någon av möjligheterna nedan för att ta dig till oss!</p>
+
+    <ul class="mt-4 mb-4 list-disc list-inside space-y-2 text-base-content">
+      {transportOptions.map((option) => (
+        <li>{option.description}</li>
+      ))}
+    </ul>
+  </div>
+)}
+
+{variant === 'cards' && (
+  <div>
+    <p class="text-lg mb-6">Välj någon av möjligheterna nedan för att ta dig till oss!</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      {transportOptions.map((option) => {
+        const strokeColor = option.icon === 'warning' ? 'stroke-warning' : 'stroke-info';
+        
+        return (
+          <div class="alert shadow-lg bg-base-100">
+            {option.icon === 'info' ? (
+              <svg xmlns="http://www.w3.org/2000/svg" class={`${strokeColor} shrink-0 w-6 h-6`} fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" class={`${strokeColor} shrink-0 w-6 h-6`} fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            )}
+            <div>
+              <h3 class="font-bold">{option.title}</h3>
+              <div class="text-xs">{option.shortDesc}</div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+)}

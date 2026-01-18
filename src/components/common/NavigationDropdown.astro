@@ -27,7 +27,7 @@ const isVariantActive = item.variants?.some(v => currentPath === v.href) || fals
 
   <!-- Dropdown Menu -->
   <div
-    class="absolute -left-16 top-full z-50 hidden pt-1 bg-base-100 border rounded-lg shadow-lg dropdown-menu border-base-300 min-w-40"
+    class="absolute -left-16 top-full z-50 hidden pt-1 bg-base-200 border rounded-lg shadow-lg dropdown-menu border-base-300 min-w-40"
     role="menu"
     aria-label={`${item.label} variants`}
   >
@@ -41,8 +41,8 @@ const isVariantActive = item.variants?.some(v => currentPath === v.href) || fals
             class:list={[
               "block px-4 py-2 text-sm transition-colors first:rounded-t-lg last:rounded-b-lg",
               isActive
-                ? "bg-primary/10 text-primary font-bold"
-                : "hover:bg-base-200"
+                ? "bg-primary text-primary-content font-bold"
+                : "hover:bg-base-300 text-base-content"
             ]}
             aria-current={isActive ? "page" : undefined}
           >
@@ -56,7 +56,7 @@ const isVariantActive = item.variants?.some(v => currentPath === v.href) || fals
         role="menuitem"
         aria-disabled="true"
       >
-        no variants
+        (no variants)
       </span>
     )}
   </div>

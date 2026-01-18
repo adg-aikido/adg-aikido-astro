@@ -17,12 +17,8 @@ dojoLinks:
         label: Takemusu Aikido, Göteborg
       - href: http://www.borasaikido.se/
         label: Borås Aikidoklubb
-      - href: "#"
-        label: Göteborg Aikido Shuren Dojo
       - href: http://www.varbergs-aikido.se/
         label: Varbergs Aikido
-      - href: "#"
-        label: Karlstad Aikidoklubb
       - href: http://www.aikidoliljeholmen.se/
         label: Aikido Dojo Liljeholmen
       - href: http://www.malmoaikido.org/
@@ -33,8 +29,6 @@ dojoLinks:
         label: Riai Aikido Dojo
       - href: http://www.stenkullensaikido.se/
         label: Stenkullens Aikidoförening
-      - href: "#"
-        label: Trollhättans Aikidoklubb
       - href: http://www.orebroaikido.com/
         label: Örebro Aikido
       - href: http://www.arvikaaikido.se/
@@ -49,10 +43,6 @@ dojoLinks:
         label: Lunds Aikidoklubb
       - href: http://www.takemusu.nu/
         label: Malmö Takemusu Aikido dojo
-      - href: "#"
-        label: Sunne Aikidoklubb Iwama Ryu
-      - href: "#"
-        label: Takemusu Aikido Scandinavia
 
   - section: CAA-dojos
     columns: 3
@@ -79,26 +69,16 @@ dojoLinks:
         label: Aikido of Charlottesville
       - href: http://www.aikido-sanleandro.com/
         label: Aikido of San Leandro
-      - href: "#"
-        label: Aikido of Sandpoint
       - href: https://www.facebook.com/Aikido-of-Virginia-Beach-306529899367805/
         label: Aikido of Virginia Beach
       - href: http://www.aikidowinnipeg.com/
         label: Aikido of Winnipeg
-      - href: "#"
-        label: Aikido Querétaro
-      - href: "#"
-        label: Akkan Dojo
       - href: http://www.borasaikido.se/
         label: Borås Aikido Dojo
-      - href: "#"
-        label: Fudo Aiki Juku
       - href: http://www.goldentriangleaikido.ca/
         label: Golden Triangle Aikido
       - href: http://www.aikido-hikaridojo.com/
         label: Hikari Dojo
-      - href: "#"
-        label: Hilltop Aikido
       - href: http://www.huttcityaikido.com/
         label: Hutt City Aikido
       - href: http://www.iwama.pl/o-nas/
@@ -109,14 +89,10 @@ dojoLinks:
         label: Kokoro Kai Aikido
       - href: http://www.northtexasaikido.com/
         label: North Texas Aikido
-      - href: "#"
-        label: Royal City Aikido
       - href: http://stockholm-aikido.se/
         label: Stockholm Aikido Club
       - href: http://www.takemusu.spb.ru/
         label: St Petersburg Traditional Aikido Club
-      - href: "#"
-        label: Takemusu Aikido Frimley
       - href: http://www.aikidonm.webs.com/
         label: Takemusu Aikido New Mexico
       - href: http://takemusu.co.uk/

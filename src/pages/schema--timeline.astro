@@ -1,0 +1,353 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import schemaData from "../data/schema.yaml";
+import { getCollection } from 'astro:content';
+
+const { schedule, summer_schedule } = schemaData;
+const instructorsCollection = await getCollection('instructors');
+const instructors = instructorsCollection.map(i => i.data);
+
+// Determine which schedule to display
+const activeSchedule = summer_schedule.enabled ? summer_schedule : schedule;
+const scheduleTitle = summer_schedule.enabled ? "Sommarprogrammet" : "Schema";
+
+// Helper function to convert time string to minutes from midnight
+function timeToMinutes(time: string): number {
+  const [hours, minutes] = time.split(':').map(Number);
+  return hours * 60 + minutes;
+}
+
+// Split days into weekdays and saturdays
+const weekdays = activeSchedule.days.filter(day => day.day !== 'Lördag');
+const saturdays = activeSchedule.days.filter(day => day.day === 'Lördag');
+
+// Helper function to calculate time range for a group of days
+function calculateTimeRange(days: typeof activeSchedule.days) {
+  let earliest = Infinity;
+  let latest = 0;
+  
+  days.forEach(day => {
+    day.sessions.forEach(session => {
+      const start = timeToMinutes(session.timeStart);
+      const end = timeToMinutes(session.timeEnd);
+      earliest = Math.min(earliest, start);
+      latest = Math.max(latest, end);
+    });
+  });
+  
+  const startHour = Math.floor(earliest / 60);
+  const endHour = Math.ceil(latest / 60);
+  const totalHours = endHour - startHour;
+  const startMinutes = startHour * 60;
+  
+  return { startHour, endHour, totalHours, startMinutes };
+}
+
+// Calculate time ranges for each group
+const weekdayRange = calculateTimeRange(weekdays);
+const saturdayRange = calculateTimeRange(saturdays);
+
+// Calculate time range for each day individually (for mobile)
+const dayTimeRanges = activeSchedule.days.map(day => {
+  let earliest = Infinity;
+  let latest = 0;
+  day.sessions.forEach(session => {
+    const start = timeToMinutes(session.timeStart);
+    const end = timeToMinutes(session.timeEnd);
+    earliest = Math.min(earliest, start);
+    latest = Math.max(latest, end);
+  });
+  return {
+    startHour: Math.floor(earliest / 60),
+    endHour: Math.ceil(latest / 60),
+    startMinutes: Math.floor(earliest / 60) * 60,
+    totalHours: Math.ceil(latest / 60) - Math.floor(earliest / 60)
+  };
+});
+
+// Create 15-minute interval slots for precise positioning
+const minuteIntervals = 15;
+const slotHeight = 15;
+
+const colorClasses = {
+  primary: 'bg-primary text-primary-content',
+  accent: 'bg-accent text-accent-content',
+  secondary: 'bg-secondary text-secondary-content'
+};
+---
+
+<Layout
+  title="Schema (Tidslinje) - Aikido Dojo Gamlestaden"
+  description="Träningsschema för Aikido Dojo Gamlestaden. Se våra träningstider för barn, ungdomar och vuxna i en tidslinje."
+>
+  <main class="container mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+    <div class="pb-8 mt-4">
+      <SectionHeading level="h1">{scheduleTitle} - Tidslinje</SectionHeading>
+      
+      <div class="mt-3">
+        <p class="font-bold mb-4">Vårterminen börjar den 17 januari</p>
+        
+        <!-- Desktop Timeline View - Weekdays -->
+        {weekdays.length > 0 && (
+          <div class="hidden lg:block overflow-x-auto mb-8">
+            <h3 class="text-lg font-bold mb-2">Vardagar</h3>
+            <div class="inline-block min-w-full">
+              {(() => {
+                const totalSlots = (weekdayRange.totalHours * 60) / minuteIntervals;
+                const timeSlots = Array.from({ length: weekdayRange.totalHours + 1 }, (_, i) => {
+                  const hour = weekdayRange.startHour + i;
+                  return `${hour.toString().padStart(2, '0')}:00`;
+                });
+                
+                return (
+                  <div class="grid gap-0 border border-base-300 rounded-lg overflow-hidden bg-base-200" style={`grid-template-columns: 80px repeat(${weekdays.length}, minmax(200px, 1fr)); grid-template-rows: auto repeat(${totalSlots}, ${slotHeight}px);`}>
+                    <!-- Header Row -->
+                    <div class="bg-base-300 p-3 font-bold border-b border-r border-base-300" style="grid-column: 1; grid-row: 1;">
+                      Tid
+                    </div>
+                    {weekdays.map((daySchedule, dayIndex) => (
+                      <div class="bg-base-300 p-3 font-bold text-center border-b border-base-300" style={`grid-column: ${dayIndex + 2}; grid-row: 1;`}>
+                        {daySchedule.day}
+                      </div>
+                    ))}
+                    
+                    <!-- Time labels -->
+                    {timeSlots.map((time, rowIndex) => {
+                      const slotsPerHour = 60 / minuteIntervals;
+                      const gridRow = rowIndex * slotsPerHour + 2;
+                      return (
+                        <div 
+                          class="bg-base-200 p-1 text-xs text-base-content/60 border-r border-t border-base-300 flex items-start justify-end pr-2" 
+                          style={`grid-column: 1; grid-row: ${gridRow} / span ${slotsPerHour};`}
+                        >
+                          {time}
+                        </div>
+                      );
+                    })}
+                    
+                    <!-- Session cards -->
+                    {weekdays.map((daySchedule, dayIndex) => (
+                      daySchedule.sessions.map(session => {
+                        const start = timeToMinutes(session.timeStart);
+                        const end = timeToMinutes(session.timeEnd);
+                        const durationMinutes = end - start;
+                        const offsetMinutes = start - weekdayRange.startMinutes;
+                        
+                        const startSlot = Math.floor(offsetMinutes / minuteIntervals) + 2;
+                        const spanSlots = Math.ceil(durationMinutes / minuteIntervals);
+                        
+                        return (
+                          <div 
+                            class:list={[
+                              "group rounded-lg shadow-md p-2 m-0.5 flex flex-col justify-center cursor-pointer border-r border-base-300",
+                              colorClasses[session.color]
+                            ]}
+                            style={`grid-column: ${dayIndex + 2}; grid-row: ${startSlot} / span ${spanSlots};`}
+                          >
+                            <div class="text-[10px] font-semibold hidden group-hover:block mb-0.5">
+                              {session.timeStart} - {session.timeEnd}
+                            </div>
+                            <div class="text-xs font-bold leading-tight" set:html={session.title} />
+                            {session.subtitle && (
+                              <div class="text-[10px] opacity-80 mt-0.5 leading-tight">{session.subtitle}</div>
+                            )}
+                            {session.instructors && (
+                              <div class="text-[10px] mt-0.5 opacity-70 leading-tight">
+                                {session.instructors.join(' / ')}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })
+                    ))}
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        )}
+        
+        <!-- Desktop Timeline View - Saturdays -->
+        {saturdays.length > 0 && (
+          <div class="hidden lg:block overflow-x-auto mb-8">
+            <h3 class="text-lg font-bold mb-2">Lördagar</h3>
+            <div class="inline-block min-w-full">
+              {(() => {
+                const totalSlots = (saturdayRange.totalHours * 60) / minuteIntervals;
+                const timeSlots = Array.from({ length: saturdayRange.totalHours + 1 }, (_, i) => {
+                  const hour = saturdayRange.startHour + i;
+                  return `${hour.toString().padStart(2, '0')}:00`;
+                });
+                
+                return (
+                  <div class="grid gap-0 border border-base-300 rounded-lg overflow-hidden bg-base-200" style={`grid-template-columns: 80px repeat(${saturdays.length}, minmax(200px, 1fr)); grid-template-rows: auto repeat(${totalSlots}, ${slotHeight}px);`}>
+                    <!-- Header Row -->
+                    <div class="bg-base-300 p-3 font-bold border-b border-r border-base-300" style="grid-column: 1; grid-row: 1;">
+                      Tid
+                    </div>
+                    {saturdays.map((daySchedule, dayIndex) => (
+                      <div class="bg-base-300 p-3 font-bold text-center border-b border-base-300" style={`grid-column: ${dayIndex + 2}; grid-row: 1;`}>
+                        {daySchedule.day}
+                      </div>
+                    ))}
+                    
+                    <!-- Time labels -->
+                    {timeSlots.map((time, rowIndex) => {
+                      const slotsPerHour = 60 / minuteIntervals;
+                      const gridRow = rowIndex * slotsPerHour + 2;
+                      return (
+                        <div 
+                          class="bg-base-200 p-1 text-xs text-base-content/60 border-r border-t border-base-300 flex items-start justify-end pr-2" 
+                          style={`grid-column: 1; grid-row: ${gridRow} / span ${slotsPerHour};`}
+                        >
+                          {time}
+                        </div>
+                      );
+                    })}
+                    
+                    <!-- Session cards -->
+                    {saturdays.map((daySchedule, dayIndex) => (
+                      daySchedule.sessions.map(session => {
+                        const start = timeToMinutes(session.timeStart);
+                        const end = timeToMinutes(session.timeEnd);
+                        const durationMinutes = end - start;
+                        const offsetMinutes = start - saturdayRange.startMinutes;
+                        
+                        const startSlot = Math.floor(offsetMinutes / minuteIntervals) + 2;
+                        const spanSlots = Math.ceil(durationMinutes / minuteIntervals);
+                        
+                        return (
+                          <div 
+                            class:list={[
+                              "group rounded-lg shadow-md p-2 m-0.5 flex flex-col justify-center cursor-pointer border-r border-base-300",
+                              colorClasses[session.color]
+                            ]}
+                            style={`grid-column: ${dayIndex + 2}; grid-row: ${startSlot} / span ${spanSlots};`}
+                          >
+                            <div class="text-[10px] font-semibold hidden group-hover:block mb-0.5">
+                              {session.timeStart} - {session.timeEnd}
+                            </div>
+                            <div class="text-xs font-bold leading-tight" set:html={session.title} />
+                            {session.subtitle && (
+                              <div class="text-[10px] opacity-80 mt-0.5 leading-tight">{session.subtitle}</div>
+                            )}
+                            {session.instructors && (
+                              <div class="text-[10px] mt-0.5 opacity-70 leading-tight">
+                                {session.instructors.join(' / ')}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })
+                    ))}
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        )}
+
+        <!-- Mobile/Tablet View - Stack days vertically -->
+        <div class="lg:hidden space-y-6">
+          {activeSchedule.days.map((daySchedule, dayIdx) => {
+            const dayRange = dayTimeRanges[dayIdx];
+            const dayTotalSlots = (dayRange.totalHours * 60) / minuteIntervals;
+            const dayTimeSlots = Array.from({ length: dayRange.totalHours + 1 }, (_, i) => {
+              const hour = dayRange.startHour + i;
+              return `${hour.toString().padStart(2, '0')}:00`;
+            });
+            
+            return (
+              <div class="card card-border bg-base-200">
+                <div class="card-body p-4">
+                  <h3 class="card-title text-lg mb-4">{daySchedule.day}</h3>
+                  <div class="grid gap-0" style={`grid-template-columns: 60px 1fr; grid-template-rows: repeat(${dayTotalSlots}, ${slotHeight}px);`}>
+                    <!-- Time axis labels -->
+                    {dayTimeSlots.map((time, index) => {
+                      const slotsPerHour = 60 / minuteIntervals;
+                      const gridRow = index * slotsPerHour + 1;
+                      return (
+                        <div 
+                          class="text-xs text-base-content/60 pr-2 text-right border-r border-base-300 flex items-start justify-end"
+                          style={`grid-column: 1; grid-row: ${gridRow} / span ${slotsPerHour};`}
+                        >
+                          {time}
+                        </div>
+                      );
+                    })}
+                    
+                    <!-- Sessions -->
+                    {daySchedule.sessions.map(session => {
+                      const start = timeToMinutes(session.timeStart);
+                      const end = timeToMinutes(session.timeEnd);
+                      const durationMinutes = end - start;
+                      const offsetMinutes = start - dayRange.startMinutes;
+                      
+                      const startSlot = Math.floor(offsetMinutes / minuteIntervals) + 1;
+                      const spanSlots = Math.ceil(durationMinutes / minuteIntervals);
+                      
+                      return (
+                        <div 
+                          class:list={[
+                            "group rounded-lg shadow-md p-2 m-0.5 flex flex-col justify-center cursor-pointer",
+                            colorClasses[session.color]
+                          ]}
+                          style={`grid-column: 2; grid-row: ${startSlot} / span ${spanSlots};`}
+                        >
+                          <div class="text-[10px] font-semibold hidden group-hover:block mb-0.5">
+                            {session.timeStart} - {session.timeEnd}
+                          </div>
+                          <div class="text-xs font-bold leading-tight" set:html={session.title} />
+                          {session.subtitle && (
+                            <div class="text-[10px] opacity-80 mt-0.5 leading-tight">{session.subtitle}</div>
+                          )}
+                          {session.instructors && (
+                            <div class="text-[10px] mt-0.5 opacity-70 leading-tight">
+                              {session.instructors.join(' / ')}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div class="flex flex-wrap mt-8 gap-8">
+          <div class="w-full md:w-[60%] lg:w-[65%]">
+            <ul class="space-y-2 list-disc list-inside text-sm sm:text-base">
+              <li>Intag av nybörjare till alla grupper sker löpande.</li>
+              <li>
+                <em>Fri träning</em> innebär att någon med nyckel måste vara med, om du inte har det fråga runt om någon annan kommer.
+              </li>
+              <li>
+                <em>Tema träningen</em> är också enligt överenskommelse, info kommer att postas på WhatsApp gruppen.
+              </li>
+              <li>
+                Generellt gäller att <strong>röda dagar är det ingen träning</strong>. 
+                <em>Om inget annat sägs eller annonseras i god tid, svarta dagar blir det träning som vanligt</em> 
+                (till exempel valborgsmässoafton).
+              </li>
+              <li>
+                Under sommaren blir det ingen schemalagd träning på torsdagar och söndagar (om man inte ordnar det själv).
+              </li>
+            </ul>
+          </div>
+
+          <div class="w-full md:w-[35%] lg:w-[30%]">
+            <h3 class="font-bold mb-2">Instruktörer</h3>
+            <ul class="space-y-1 text-sm text-base-content/60">
+              {instructors.map((instructor) => (
+                <li>{instructor.initials} = {instructor.name}, {instructor.rank}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

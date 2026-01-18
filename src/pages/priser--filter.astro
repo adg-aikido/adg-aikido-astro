@@ -1,0 +1,380 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import PriceCard from "../components/common/PriceCard.astro";
+import PriceCalculator from "../components/common/PriceCalculator.astro";
+import { getCollection } from 'astro:content';
+
+const pricesCollection = await getCollection('prices');
+const priceCategories = pricesCollection
+  .sort((a, b) => {
+    const order = ['trialTraining', 'regularFees', 'otherFees', 'discounts'];
+    return order.indexOf(a.data.category) - order.indexOf(b.data.category);
+  })
+  .map(p => p.data);
+
+// Organize categories by their type
+const trialCategory = priceCategories.find(cat => cat.category === 'trialTraining');
+const regularFeesCategory = priceCategories.find(cat => cat.category === 'regularFees');
+const otherFeesCategory = priceCategories.find(cat => cat.category === 'otherFees');
+const discountsCategory = priceCategories.find(cat => cat.category === 'discounts');
+---
+
+<Layout
+  title="Priser och avgifter - Aikido Dojo Gamlestaden"
+  description="Information om priser, avgifter och rabatter för träning hos Aikido Dojo Gamlestaden i Göteborg."
+>
+  <main class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+    <!-- Payment Hero Section -->
+    <div class="hero bg-primary text-primary-content rounded-2xl shadow-xl">
+      <div class="hero-content flex-col gap-8 py-8 lg:flex-row-reverse lg:justify-between">
+        <!-- Swish QR Code -->
+        <div class="text-center lg:text-right">
+          <div class="inline-block rounded-xl bg-base-100 p-4 shadow-lg">
+            <img 
+              src="/assets/swish-qr.svg" 
+              class="h-40 w-40" 
+              alt="QR kod för Swish-betalning"
+            />
+          </div>
+          <p class="mt-2 text-sm opacity-90">Swish: <strong>123-1617109</strong></p>
+        </div>
+
+        <!-- Payment Info -->
+        <div class="max-w-2xl">
+          <h1 class="text-4xl font-bold">Börja träna hos oss!</h1>
+          <p class="mt-4 text-lg">
+            Vi har kontinuerlig intagning och tar hand om nybörjare så att man kan lära sig grunderna i egen takt.
+          </p>
+          
+          <div class="mt-6 space-y-3">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <div>
+                <p class="text-sm opacity-80">Plusgiro</p>
+                <p class="text-xl font-bold">462 37 05-3</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <a href="mailto:info@adg-aikido.se" class="link link-hover text-xl font-bold">
+                info@adg-aikido.se
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-4 text-sm opacity-90">
+            Specificera vad betalningen gäller (t ex "träning &lt;namn&gt; HT 2024")
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Special Offer Alert -->
+    <div class="alert alert-info mt-8 shadow-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <div>
+        <h3 class="font-bold">Våren 2024 – Särskilt erbjudande!</h3>
+        <div class="text-sm">Vi erbjuder 600 kr i rabatt för vuxna nybörjare första terminen.</div>
+      </div>
+    </div>
+
+    <!-- Price Comparison Section with Filter -->
+    <div class="mt-12">
+      <SectionHeading level="h2">Prisöversikt</SectionHeading>
+      
+      <div class="mt-3">
+        <p>
+          <em>Medlemsavgift</em> betalas av alla medlemmar och ingår i respektive terminsavgift. 
+          Inbakad i denna är också en avgift till Svenska Budoförbundet. Alla som tränar är därmed 
+          <a href="#forsakring" class="link link-primary">försäkrade mot olycksfall</a>.
+        </p>
+      </div>
+
+      <!-- Age Filter Controls -->
+      <div 
+        x-data="{
+          selectedAge: 'all',
+          ageGroups: [
+            { id: 'all', label: 'Alla åldrar', icon: '👥' },
+            { id: 'barn', label: 'Barn 7-9 år', icon: '🧒' },
+            { id: 'ungdom', label: 'Ungdom 10-18 år', icon: '👦' },
+            { id: 'vuxna', label: 'Vuxna 19+ år', icon: '👨' }
+          ]
+        }"
+        class="mt-6"
+      >
+        <div class="flex flex-wrap gap-2">
+          <span class="self-center text-sm font-semibold">Visa priser för:</span>
+          <template x-for="group in ageGroups" :key="group.id">
+            <button
+              @click="selectedAge = group.id"
+              :class="selectedAge === group.id ? 'btn-primary' : 'btn-ghost'"
+              class="btn btn-sm gap-2"
+            >
+              <span x-text="group.icon"></span>
+              <span x-text="group.label"></span>
+            </button>
+          </template>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="mt-6 overflow-x-auto">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Typ av avgift</th>
+                <th 
+                  x-show="selectedAge === 'all' || selectedAge === 'barn'"
+                  class="bg-accent/10 text-center"
+                >
+                  🧒 Barn<br><span class="text-xs font-normal opacity-70">7-9 år</span>
+                </th>
+                <th 
+                  x-show="selectedAge === 'all' || selectedAge === 'ungdom'"
+                  class="bg-secondary/10 text-center"
+                >
+                  👦 Ungdom<br><span class="text-xs font-normal opacity-70">10-18 år</span>
+                </th>
+                <th 
+                  x-show="selectedAge === 'all' || selectedAge === 'vuxna'"
+                  class="bg-primary/10 text-center"
+                >
+                  👨 Vuxna<br><span class="text-xs font-normal opacity-70">19+ år</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Trial Training -->
+              <tr class="hover">
+                <td class="font-semibold">
+                  <div>Provträning</div>
+                  <div class="text-xs opacity-70">Två träningstillfällen</div>
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'barn'"
+                  class="text-center text-lg font-bold"
+                >
+                  <span class="badge badge-accent badge-lg">0 kr</span>
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'ungdom'"
+                  class="text-center text-lg font-bold"
+                >
+                  <span class="badge badge-accent badge-lg">0 kr</span>
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'vuxna'"
+                  class="text-center text-lg font-bold"
+                >
+                  <span class="badge badge-primary badge-lg">100 kr</span>
+                  <div class="text-xs font-normal opacity-70 mt-1">Dras av vid fortsatt träning</div>
+                </td>
+              </tr>
+
+              <!-- Regular Term Fee -->
+              <tr class="hover">
+                <td class="font-semibold">
+                  <div>Terminsavgift</div>
+                  <div class="text-xs opacity-70">Per termin (ca 6 månader)</div>
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'barn'"
+                  class="text-center text-2xl font-bold text-accent"
+                >
+                  700 kr
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'ungdom'"
+                  class="text-center text-2xl font-bold text-accent"
+                >
+                  1000 kr
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'vuxna'"
+                  class="text-center text-2xl font-bold text-primary"
+                >
+                  2300 kr
+                </td>
+              </tr>
+
+              <!-- Discounted Adult (Students, etc.) -->
+              <tr 
+                class="hover"
+                x-show="selectedAge === 'all' || selectedAge === 'vuxna'"
+              >
+                <td class="font-semibold">
+                  <div>Terminsavgift (reducerad)</div>
+                  <div class="text-xs opacity-70">Studerande, pensionärer, arbetslösa</div>
+                </td>
+                <td class="text-center text-muted" x-show="selectedAge === 'all'">—</td>
+                <td class="text-center text-muted" x-show="selectedAge === 'all'">—</td>
+                <td 
+                  class="text-center text-2xl font-bold text-primary"
+                  x-show="selectedAge === 'all' || selectedAge === 'vuxna'"
+                >
+                  1700 kr
+                </td>
+              </tr>
+
+              <!-- Mat Fee -->
+              <tr class="hover">
+                <td class="font-semibold">
+                  <div>Mattavgift</div>
+                  <div class="text-xs opacity-70">Enstaka tillfällen</div>
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'barn'"
+                  class="text-center font-bold"
+                  colspan="1"
+                >
+                  100 kr
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'ungdom'"
+                  class="text-center font-bold"
+                  colspan="1"
+                >
+                  100 kr
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'vuxna'"
+                  class="text-center font-bold"
+                  colspan="1"
+                >
+                  100 kr
+                </td>
+              </tr>
+
+              <!-- Grading Fee -->
+              <tr class="hover">
+                <td class="font-semibold">
+                  <div>Graderingsavgift</div>
+                  <div class="text-xs opacity-70">För kyu grader</div>
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'barn'"
+                  class="text-center font-bold"
+                  colspan="1"
+                >
+                  100 kr
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'ungdom'"
+                  class="text-center font-bold"
+                  colspan="1"
+                >
+                  100 kr
+                </td>
+                <td 
+                  x-show="selectedAge === 'all' || selectedAge === 'vuxna'"
+                  class="text-center font-bold"
+                  colspan="1"
+                >
+                  100 kr
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="mt-4 space-y-3">
+          <div class="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div>
+              <p class="font-semibold">För barn under 7 år</p>
+              <p class="text-sm">En förälder ska vara med på träningen tills vi kan se att barnet fungerar bra i gruppen. Föräldern är med utan extra kostnad.</p>
+            </div>
+          </div>
+
+          <div class="card card-border bg-base-100">
+            <div class="card-body">
+              <h3 class="card-title text-base">Börjar mitt i terminen?</h3>
+              <p class="text-sm">Om man börjar i mitten eller slutet på en termin, får man betala träningsavgift för delen av terminen som man tränar (dvs en månadsavgift som är terminsavgiften delat på 6). Vi föredrar att man betalar för en termin eller ett år i taget, men det går bra att betala månadsvis också.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discounts Section -->
+    {discountsCategory && (
+      <div class="mt-12">
+        <SectionHeading level="h2">💰 Rabatter</SectionHeading>
+        
+        <div class="mt-3">
+          <p>Vi erbjuder flera rabatter för att göra träningen tillgänglig för fler!</p>
+        </div>
+
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          {discountsCategory.prices.map((discount) => (
+            <div class="card card-border bg-success/10">
+              <div class="card-body">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <h3 class="card-title text-base">{discount.title}</h3>
+                    <p class="text-sm opacity-80">{discount.subtitle}</p>
+                    {discount.description && (
+                      <p class="mt-2 text-xs opacity-70">{discount.description}</p>
+                    )}
+                  </div>
+                  <div class="text-right">
+                    <div class="badge badge-success badge-lg gap-1">
+                      <span class="text-xl font-bold">{discount.amount}</span>
+                      <span class="text-xs">{discount.unit}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="alert alert-warning mt-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <span><strong>Viktigt:</strong> Det är upp till er att meddela oss om rabatter gäller i ert fall!</span>
+        </div>
+      </div>
+    )}
+
+    <!-- Price Calculator -->
+    <PriceCalculator variant="card" cardBgColor="bg-secondary" textColor="text-secondary-content" />
+
+    <!-- Insurance Section -->
+    <div class="mt-12">
+      <SectionHeading level="h3" id="forsakring">Försäkringar</SectionHeading>
+      
+      <div class="mt-3">
+        <p>
+          Alla medlemmar är försäkrade mot olycksfall genom medlemskapet i Budo och Kampsportsförbundet. 
+          Villkor och detaljer finns 
+          <a 
+            href="https://www.budokampsport.se/klubb/forsakring/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="link link-primary"
+          >på Budo och Kampsportsförbundets webbsida</a>. 
+          Observera att för att försäkringen ska gälla på läger utomlands, måste man 
+          <a 
+            href="https://www.budokampsport.se/ansokningar/anmalningar/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="link link-primary"
+          >lämna in en ansökan</a>.
+        </p>
+      </div>
+    </div>
+  </main>
+</Layout>

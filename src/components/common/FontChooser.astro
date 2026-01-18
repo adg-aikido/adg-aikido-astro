@@ -1,0 +1,68 @@
+---
+import { SERIF_FONTS, SANS_SERIF_FONTS, DEFAULT_FONTS } from '../../utils/fontConfig';
+import FontDropdown from './FontDropdown.astro';
+
+// Create font list data that Alpine can access
+const serifFonts = SERIF_FONTS;
+const sansFonts = SANS_SERIF_FONTS;
+---
+
+<div class="flex flex-col gap-2" x-data="{
+  headingFont: localStorage.getItem('font-heading') || 'Playfair Display',
+  bodyFont: localStorage.getItem('font-body') || 'Poppins',
+
+  init() {
+    // Apply fonts immediately
+    document.documentElement.style.setProperty('--font-serif', `'` + this.headingFont + `', serif`);
+    document.documentElement.style.setProperty('--font-sans', `'` + this.bodyFont + `', sans-serif`);
+
+    // Load font files
+    this.loadFont(this.headingFont, [{ family: 'Playfair Display', weights: [400, 700] }, { family: 'Merriweather', weights: [400, 700] }, { family: 'Lora', weights: [400, 700] }, { family: 'Crimson Text', weights: [400, 700] }, { family: 'EB Garamond', weights: [400, 700] }]);
+    this.loadFont(this.bodyFont, [{ family: 'Poppins', weights: [400, 500, 700] }, { family: 'Inter', weights: [300, 400, 500, 600, 700] }, { family: 'Open Sans', weights: [400, 600, 700] }, { family: 'Roboto', weights: [400, 500, 700] }, { family: 'Montserrat', weights: [400, 600, 700] }]);
+  },
+
+  setHeadingFont(fontFamily) {
+    this.headingFont = fontFamily;
+    localStorage.setItem('font-heading', fontFamily);
+    document.documentElement.style.setProperty('--font-serif', `'` + fontFamily + `', serif`);
+    this.loadFont(fontFamily, [{ family: 'Playfair Display', weights: [400, 700] }, { family: 'Merriweather', weights: [400, 700] }, { family: 'Lora', weights: [400, 700] }, { family: 'Crimson Text', weights: [400, 700] }, { family: 'EB Garamond', weights: [400, 700] }]);
+  },
+
+  setBodyFont(fontFamily) {
+    this.bodyFont = fontFamily;
+    localStorage.setItem('font-body', fontFamily);
+    document.documentElement.style.setProperty('--font-sans', `'` + fontFamily + `', sans-serif`);
+    this.loadFont(fontFamily, [{ family: 'Poppins', weights: [400, 500, 700] }, { family: 'Inter', weights: [300, 400, 500, 600, 700] }, { family: 'Open Sans', weights: [400, 600, 700] }, { family: 'Roboto', weights: [400, 500, 700] }, { family: 'Montserrat', weights: [400, 600, 700] }]);
+  },
+
+  loadFont(fontFamily, fontList) {
+    const font = fontList.find(f => f.family === fontFamily);
+    if (!font) return;
+
+    const fontId = 'dynamic-font-' + fontFamily.replace(/\s+/g, '-');
+    const existing = document.getElementById(fontId);
+    if (existing) return;
+
+    const link = document.createElement('link');
+    link.id = fontId;
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=' + fontFamily.replace(/ /g, '+') + ':wght@' + font.weights.join(';') + '&display=swap';
+    document.head.appendChild(link);
+  }
+}">
+  <!-- Heading Font Dropdown -->
+  <FontDropdown 
+    fonts={serifFonts} 
+    type="heading" 
+    currentFont="headingFont"
+    label="Välj rubrikfont"
+  />
+
+  <!-- Body Font Dropdown -->
+  <FontDropdown 
+    fonts={sansFonts} 
+    type="body" 
+    currentFont="bodyFont"
+    label="Välj brödtextfont"
+  />
+</div>

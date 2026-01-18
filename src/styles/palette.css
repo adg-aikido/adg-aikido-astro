@@ -1,0 +1,41 @@
+/*
+  Generated via Harmonizer: https://harmonizer.evilmartians.com/#hZHNTsMwEITfZbhayHb-Wt-gHIED7Q1xcNMliZrYwXEqoOq7o1S0dYoUfJzZ_byzu8eOXFdZAyUYatpR3UG97mF0Q1AQnIMht8Y73XmoecKQl842Gorf8jiJhEz4-aUnd6FbKNPX9YGdWfKKlfGQJZI0JPFoChVdodIxKpunsyyZAsTTgCiOsmAYOYVKpmNd5ZqMlf6zbSlmwVjiL-qNoexpdMEX2oBBm6ImKMGD3-6aNbmLNwu9Ve8-elt1FPSOCp7JmosnsxH4u3dBo4yTwFxuvwJL8mHmjryvTNFB7c_pn-yGaijoNtdg2FSOcl9ZM-hQeC9W9r7AaQW_aqM_wbAuFra27rEqSg-FGyK6qA_abQdRCHEUj1VLr52HGo4z1CxbnQ-4NsLh8AM
+*/
+:root {
+  --red-100: oklch(0.95 0.03 10);
+  --red-200: oklch(0.83 0.12 10);
+  --red-300: oklch(0.78 0.17 10);
+  --red-400: oklch(0.59 0.27 10);
+  --red-500: oklch(0.51 0.23 10);
+  --red-600: oklch(0.17 0.08 10);
+  --amber-100: oklch(0.94 0.06 80);
+  --amber-200: oklch(0.82 0.2 80);
+  --amber-300: oklch(0.77 0.18 80);
+  --amber-400: oklch(0.58 0.14 80);
+  --amber-500: oklch(0.5 0.12 80);
+  --amber-600: oklch(0.19 0.04 80);
+  --turquoise-100: oklch(0.93 0.12 180);
+  --turquoise-200: oklch(0.79 0.19 180);
+  --turquoise-300: oklch(0.74 0.18 180);
+  --turquoise-400: oklch(0.55 0.14 180);
+  --turquoise-500: oklch(0.48 0.12 180);
+  --turquoise-600: oklch(0.18 0.04 180);
+  --neon-100: oklch(0.94 0.03 270);
+  --neon-200: oklch(0.82 0.1 270);
+  --neon-300: oklch(0.77 0.13 270);
+  --neon-400: oklch(0.59 0.24 270);
+  --neon-500: oklch(0.52 0.29 270);
+  --neon-600: oklch(0.17 0.11 270);
+  --azure-100: oklch(0.94 0.03 245);
+  --azure-200: oklch(0.81 0.11 245);
+  --azure-300: oklch(0.76 0.14 245);
+  --azure-400: oklch(0.57 0.19 245);
+  --azure-500: oklch(0.49 0.16 245);
+  --azure-600: oklch(0.18 0.06 245);
+  --sky-100: oklch(0.94 0.05 220);
+  --sky-200: oklch(0.8 0.16 220);
+  --sky-300: oklch(0.74 0.18 220);
+  --sky-400: oklch(0.56 0.13 220);
+  --sky-500: oklch(0.49 0.12 220);
+  --sky-600: oklch(0.18 0.04 220);
+}

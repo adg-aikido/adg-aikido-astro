@@ -1,0 +1,334 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import PriceCard from "../components/common/PriceCard.astro";
+import Image from "../components/common/Image.astro";
+import { getCollection } from 'astro:content';
+
+const pricesCollection = await getCollection('prices');
+const priceCategories = pricesCollection
+  .sort((a, b) => {
+    const order = ['trialTraining', 'regularFees', 'otherFees', 'discounts'];
+    return order.indexOf(a.data.category) - order.indexOf(b.data.category);
+  })
+  .map(p => p.data);
+
+// Organize categories by their type
+const trialCategory = priceCategories.find(cat => cat.category === 'trialTraining');
+const regularFeesCategory = priceCategories.find(cat => cat.category === 'regularFees');
+const otherFeesCategory = priceCategories.find(cat => cat.category === 'otherFees');
+const discountsCategory = priceCategories.find(cat => cat.category === 'discounts');
+---
+
+<Layout
+  title="Priser och avgifter - Aikido Dojo Gamlestaden"
+  description="Information om priser, avgifter och rabatter för träning hos Aikido Dojo Gamlestaden i Göteborg."
+>
+  <main class="mx-auto max-w-7xl px-4 py-2 sm:px-6 lg:px-8">
+    <!-- Hero Section -->
+    <div class="flow-root">
+      <SectionHeading level="h1">Börja träna!</SectionHeading>
+      
+      <div class="mt-3">
+        <div>
+          <div class="float-right ml-2 sm:ml-4">
+            <Image src="/assets/welcome-1.jpg" alt="Välkommen till träning" />
+          </div>
+        </div>
+        
+        <div class="space-y-5">
+          <p>Vi har kontinuerlig intagning och inga särskilda nybörjarpass. Vi tar naturligtvis hand om nybörjarna så att man kan lära sig grunderna i egen takt.</p>
+          <p>
+            Om du har frågor, kan du alltid ställa dem via e-post till 
+            <a href="mailto:info@adg-aikido.se" class="link link-primary">info@adg-aikido.se</a>, 
+            men det går lika bra att komma förbi, kolla läget och stilla nyfikenheten på plats.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Special Offer Alert -->
+    <div class="alert alert-info mt-8 shadow-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <div>
+        <h3 class="font-bold">Våren 2024 – Särskilt erbjudande!</h3>
+        <div class="text-sm">Vi erbjuder 600 kr i rabatt för vuxna nybörjare första terminen.</div>
+      </div>
+    </div>
+
+    <!-- Main Content Grid: Tabs + Sticky Payment Panel -->
+    <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_320px]">
+      <!-- Left Column: Tabbed Content -->
+      <div 
+        x-data="{
+          activeTab: 'trial',
+          tabs: [
+            { id: 'trial', label: 'Provträning', icon: '🎯' },
+            { id: 'regular', label: 'Avgifter', icon: '📅' },
+            { id: 'other', label: 'Övriga avgifter', icon: '📋' },
+            { id: 'discounts', label: 'Rabatter', icon: '💰' }
+          ]
+        }"
+        class="w-full"
+      >
+        <SectionHeading level="h2">Priser och avgifter</SectionHeading>
+        
+        <div class="mt-3">
+          <p>
+            <em>Medlemsavgift</em> betalas av alla medlemmar och ingår i respektive terminsavgift. 
+            Inbakad i denna är också en avgift till Svenska Budoförbundet. Alla som tränar är därmed 
+            <a href="#forsakring" class="link link-primary">försäkrade mot olycksfall</a>.
+          </p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs tabs-box mt-6 flex-wrap gap-2 bg-base-200 p-2" role="tablist">
+          <template x-for="tab in tabs" :key="tab.id">
+            <button
+              @click="activeTab = tab.id"
+              :class="activeTab === tab.id ? 'tab-active' : ''"
+              class="tab tab-lg gap-2 flex-1"
+              :aria-selected="activeTab === tab.id"
+              role="tab"
+            >
+              <span x-text="tab.icon"></span>
+              <span x-text="tab.label"></span>
+            </button>
+          </template>
+        </div>
+
+        <!-- Tab Panels -->
+        <div class="mt-6">
+          <!-- Trial Training Panel -->
+          {trialCategory && (
+            <div x-show="activeTab === 'trial'" x-transition class="space-y-4">
+              <div class="flex flex-wrap gap-2">
+                <span class="badge badge-accent">Barn & Ungdom</span>
+                <span class="badge badge-primary">Vuxna</span>
+              </div>
+              
+              <ul class="-mx-2 flex flex-wrap list-none justify-start">
+                {trialCategory.prices.map((card) => (
+                  <li class="w-full p-2 md:max-w-sm">
+                    <PriceCard
+                      title={card.title}
+                      subtitle={card.subtitle}
+                      description={card.description}
+                      amount={card.amount}
+                      unit={card.unit}
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              <div class="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>Provträningsavgiften för vuxna dras av från terminsavgiften om du fortsätter träna.</span>
+              </div>
+            </div>
+          )}
+
+          <!-- Regular Fees Panel -->
+          {regularFeesCategory && (
+            <div x-show="activeTab === 'regular'" x-transition class="space-y-4">
+              <div class="flex flex-wrap gap-2">
+                <span class="badge badge-accent">Barn 7-9 år</span>
+                <span class="badge badge-secondary">Ungdom 10-18 år</span>
+                <span class="badge badge-primary">Vuxna 19+ år</span>
+              </div>
+
+              <div class="alert alert-warning">
+                <span>I alla avgifter ingår medlemsavgift 100 kr/termin.</span>
+              </div>
+              
+              <ul class="-mx-2 flex flex-wrap list-none justify-start">
+                {regularFeesCategory.prices.map((card) => (
+                  <li class="w-full p-2 md:max-w-sm">
+                    <PriceCard
+                      title={card.title}
+                      subtitle={card.subtitle}
+                      description={card.description}
+                      amount={card.amount}
+                      unit={card.unit}
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              <div class="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div>
+                  <p class="font-semibold">För barn under 7 år</p>
+                  <p class="text-sm">En förälder ska vara med på träningen tills vi kan se att barnet fungerar bra i gruppen. Föräldern är med utan extra kostnad och ska finnas på mattan för att hjälpa till; det går bra att träna med, om så önskas.</p>
+                </div>
+              </div>
+
+              <div class="card card-border bg-base-100">
+                <div class="card-body">
+                  <h3 class="card-title">Börjar mitt i terminen?</h3>
+                  <p>Om man börjar i mitten eller slutet på en termin, får man betala träningsavgift för delen av terminen som man tränar (dvs en månadsavgift som är terminsavgiften delat på 6). Vi föredrar att man betalar för en termin eller ett år i taget, men det går bra att betala månadsvis också: prata med oss om det.</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <!-- Other Fees Panel -->
+          {otherFeesCategory && (
+            <div x-show="activeTab === 'other'" x-transition class="space-y-4">
+              <p>För dig som vill träna enstaka gånger eller genomgå gradering.</p>
+              
+              <ul class="-mx-2 flex flex-wrap list-none justify-start">
+                {otherFeesCategory.prices.map((card) => (
+                  <li class="w-full p-2 md:max-w-sm">
+                    <PriceCard
+                      title={card.title}
+                      subtitle={card.subtitle}
+                      amount={card.amount}
+                      unit={card.unit}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- Discounts Panel -->
+          {discountsCategory && (
+            <div x-show="activeTab === 'discounts'" x-transition class="space-y-4">
+              <div class="alert alert-success">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Vi erbjuder flera rabatter för att göra träningen tillgänglig för fler!</span>
+              </div>
+              
+              <ul class="-mx-2 flex flex-wrap list-none justify-start">
+                {discountsCategory.prices.map((card) => (
+                  <li class="w-full p-2 md:w-1/2">
+                    <PriceCard
+                      title={card.title}
+                      subtitle={card.subtitle}
+                      description={card.description}
+                      amount={card.amount}
+                      unit={card.unit}
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              <div class="alert alert-warning">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <span><strong>Viktigt:</strong> Det är upp till er att meddela oss om rabatter gäller i ert fall!</span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <!-- Insurance Section -->
+        <div class="mt-8">
+          <SectionHeading level="h3" id="forsakring">Försäkringar</SectionHeading>
+          
+          <div class="mt-3">
+            <p>
+              Alla medlemmar är försäkrade mot olycksfall genom medlemskapet i Budo och Kampsportsförbundet. 
+              Villkor och detaljer finns 
+              <a 
+                href="https://www.budokampsport.se/klubb/forsakring/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="link link-primary"
+              >på Budo och Kampsportsförbundets webbsida</a>. 
+              Observera att för att försäkringen ska gälla på läger utomlands, måste man 
+              <a 
+                href="https://www.budokampsport.se/ansokningar/anmalningar/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="link link-primary"
+              >lämna in en ansökan</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Sticky Payment Panel -->
+      <div class="lg:sticky lg:top-20 lg:h-fit">
+        <div class="card card-border bg-primary text-primary-content shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              Betalning
+            </h3>
+            
+            <div class="divider"></div>
+
+            <div class="space-y-4">
+              <!-- Plusgiro -->
+              <div>
+                <p class="text-sm opacity-80">Plusgiro</p>
+                <p class="text-2xl font-bold">462 37 05-3</p>
+              </div>
+
+              <!-- Swish -->
+              <div>
+                <p class="text-sm opacity-80">Swish</p>
+                <p class="text-2xl font-bold">123-1617109</p>
+                <div class="mt-3 flex justify-center">
+                  <div class="rounded-lg bg-base-100 p-3">
+                    <img 
+                      src="/assets/swish-qr.svg" 
+                      class="h-32 w-32" 
+                      alt="QR kod för Swish-betalning"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-5 w-5 shrink-0 stroke-current">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="text-xs">Vänligen specificera vad betalningen gäller (t ex "träning &lt;namn&gt; HT 2024")</span>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Contact -->
+            <div>
+              <p class="text-sm opacity-80">Frågor?</p>
+              <a href="mailto:info@adg-aikido.se" class="btn btn-ghost btn-sm normal-case">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                info@adg-aikido.se
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Reference -->
+        <div class="card card-border mt-4 bg-base-100 shadow">
+          <div class="card-body p-4">
+            <h4 class="font-bold text-sm">Snabbreferens</h4>
+            <ul class="space-y-1 text-sm">
+              <li>🧒 <strong>Barn 7-9 år:</strong> 700 kr/termin</li>
+              <li>👦 <strong>Ungdom 10-18 år:</strong> 1000 kr/termin</li>
+              <li>👨 <strong>Vuxna 19+ år:</strong> 2300 kr/termin</li>
+              <li>🎓 <strong>Student/pensionär:</strong> 1700 kr/termin</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

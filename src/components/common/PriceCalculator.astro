@@ -1,0 +1,222 @@
+---
+export interface Props {
+  variant?: 'card' | 'collapse';
+  cardBgColor?: string;
+  textColor?: string;
+  checkboxColor?: string;
+  selectBgColor?: string;
+  selectTextColor?: string;
+}
+
+const { 
+  variant = 'card',
+  cardBgColor = 'bg-secondary',
+  textColor = 'text-secondary-content',
+  checkboxColor = 'checkbox-primary',
+  selectBgColor = 'bg-base-100',
+  selectTextColor = 'text-base-content'
+} = Astro.props;
+---
+
+{variant === 'card' && (
+  <div 
+    x-data="{
+      ageGroup: 'vuxna',
+      familySize: 1,
+      isStudent: false,
+      isBeginner: false,
+      calculate() {
+        let basePrice = 2300;
+        
+        if (this.ageGroup === 'barn') basePrice = 700;
+        else if (this.ageGroup === 'ungdom') basePrice = 1000;
+        else if (this.ageGroup === 'vuxna' && this.isStudent) basePrice = 1700;
+        
+        let discount = 0;
+        if (this.isBeginner && this.ageGroup === 'vuxna') discount += 600;
+        
+        if (this.familySize === 2) discount += 200;
+        else if (this.familySize >= 3) discount += 400;
+        
+        return Math.max(0, basePrice - discount);
+      }
+    }"
+    class="mt-12"
+  >
+    <div class="card card-border bg-gradient-to-br from-primary/5 to-accent/5">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+          </svg>
+          Räkna ut ditt pris
+        </h2>
+        <p class="opacity-80">Använd kalkylatorn för att se vad träningen kostar för just dig.</p>
+
+        <div class="mt-6 grid gap-6 md:grid-cols-2">
+          <!-- Input Section -->
+          <div class="space-y-4">
+            <!-- Age Group -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold">Åldersgrupp</span>
+              </label>
+              <select x-model="ageGroup" class="select select-bordered">
+                <option value="barn">🧒 Barn 7-9 år</option>
+                <option value="ungdom">👦 Ungdom 10-18 år</option>
+                <option value="vuxna">👨 Vuxna 19+ år</option>
+              </select>
+            </div>
+
+            <!-- Student/Retired -->
+            <div class="form-control" x-show="ageGroup === 'vuxna'">
+              <label class="label cursor-pointer">
+                <input type="checkbox" x-model="isStudent" class={`checkbox ${checkboxColor}`} />
+                <span class="label-text">Studerande, pensionär eller arbetslös?</span>
+              </label>
+            </div>
+
+            <!-- Beginner -->
+            <div class="form-control" x-show="ageGroup === 'vuxna'">
+              <label class="label cursor-pointer">
+                <input type="checkbox" x-model="isBeginner" class={`checkbox ${checkboxColor}`} />
+                <span class="label-text">Nybörjare (första terminen)?</span>
+              </label>
+            </div>
+
+            <!-- Family Size -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold">Antal familjemedlemmar som tränar</span>
+              </label>
+              <select x-model.number="familySize" class="select select-bordered">
+                <option value="1">1 person (ingen familjerabatt)</option>
+                <option value="2">2 personer</option>
+                <option value="3">3 eller fler personer</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Result Section -->
+          <div class="flex flex-col justify-center">
+            <div class={`rounded-2xl ${cardBgColor} p-8 text-center ${textColor} shadow-lg`}>
+              <p class="text-lg opacity-90">Ditt pris per termin</p>
+              <div class="mt-4">
+                <span class="text-6xl font-bold" x-text="calculate()"></span>
+                <span class="ml-2 text-2xl">kr</span>
+              </div>
+              <p class="mt-4 text-sm opacity-80">
+                Inkluderar medlemsavgift 100 kr
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+{variant === 'collapse' && (
+  <div 
+    x-data="{
+      ageGroup: 'vuxna',
+      familySize: 1,
+      isStudent: false,
+      isBeginner: false,
+      calculate() {
+        let basePrice = 2300;
+        
+        if (this.ageGroup === 'barn') basePrice = 700;
+        else if (this.ageGroup === 'ungdom') basePrice = 1000;
+        else if (this.ageGroup === 'vuxna' && this.isStudent) basePrice = 1700;
+        
+        let discount = 0;
+        if (this.isBeginner && this.ageGroup === 'vuxna') discount += 600;
+        
+        if (this.familySize === 2) discount += 200;
+        else if (this.familySize >= 3) discount += 400;
+        
+        return Math.max(0, basePrice - discount);
+      }
+    }"
+    class="mt-8"
+  >
+    <div class="collapse collapse-arrow bg-primary text-primary-content">
+      <input type="checkbox" />
+      <div class="collapse-title text-xl font-bold">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">🧮</span>
+          <span>Räkna ut ditt pris</span>
+          <span class="badge badge-accent">Interaktiv</span>
+        </div>
+      </div>
+      <div class="collapse-content">
+        <p class="mb-6 opacity-90">
+          Använd kalkylatorn för att se vad träningen kostar för just dig med alla rabatter inräknade.
+        </p>
+
+        <div class="grid gap-6 lg:grid-cols-[2fr_1fr]">
+          <!-- Input Section -->
+          <div class="space-y-4">
+            <!-- Age Group -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold text-primary-content">Åldersgrupp</span>
+              </label>
+              <select x-model="ageGroup" class={`select select-bordered w-full ${selectBgColor} ${selectTextColor}`}>
+                <option value="barn">🧒 Barn 7-9 år</option>
+                <option value="ungdom">👦 Ungdom 10-18 år</option>
+                <option value="vuxna">👨 Vuxna 19+ år</option>
+              </select>
+            </div>
+
+            <!-- Student/Retired -->
+            <div class="form-control" x-show="ageGroup === 'vuxna'">
+              <label class="label cursor-pointer justify-start gap-3">
+                <input type="checkbox" x-model="isStudent" class={`checkbox ${checkboxColor}`} />
+                <span class="label-text text-primary-content">Studerande, pensionär eller arbetslös</span>
+              </label>
+            </div>
+
+            <!-- Beginner -->
+            <div class="form-control" x-show="ageGroup === 'vuxna'">
+              <label class="label cursor-pointer justify-start gap-3">
+                <input type="checkbox" x-model="isBeginner" class={`checkbox ${checkboxColor}`} />
+                <span class="label-text text-primary-content">Nybörjare (första terminen, -600 kr)</span>
+              </label>
+            </div>
+
+            <!-- Family Size -->
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text font-semibold text-primary-content">Antal familjemedlemmar som tränar</span>
+              </label>
+              <select x-model.number="familySize" class={`select select-bordered w-full ${selectBgColor} ${selectTextColor}`}>
+                <option value="1">1 person (ingen familjerabatt)</option>
+                <option value="2">2 personer (-200 kr/person)</option>
+                <option value="3">3 eller fler personer (-400 kr/person)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Result Section -->
+          <div class="flex flex-col justify-center">
+            <div class="rounded-2xl bg-accent p-8 text-center text-accent-content shadow-xl">
+              <p class="text-sm font-semibold uppercase tracking-wide opacity-90">Ditt pris</p>
+              <div class="mt-3">
+                <div class="flex items-baseline justify-center">
+                  <span class="text-6xl font-bold" x-text="calculate()"></span>
+                  <span class="ml-2 text-2xl">kr</span>
+                </div>
+                <p class="mt-1 text-sm opacity-90">per termin</p>
+              </div>
+              <p class="mt-4 text-xs opacity-75">
+                Inkl. medlemsavgift 100 kr
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}

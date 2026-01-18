@@ -3,7 +3,6 @@ import HomeIcon from "../../assets/home-icon-3abd86.svg";
 import FacebookIcon from "../../assets/facebook-icon-929f10.svg";
 import NavigationDropdown from "./NavigationDropdown.astro";
 import Information from "./Information.astro";
-import ThemeChooser from "./ThemeChooser.astro";
 import { discoverPageVariants, buildNavigationConfig } from "../../utils/navigationBuilder";
 
 interface Props {
@@ -34,7 +33,7 @@ const navItems = buildNavigationConfig(baseNavItems, variantMap);
 ---
 
 <nav class="text-sm">
-  <ul class="flex flex-wrap justify-center items-center space-x-6">
+  <ul class="flex flex-wrap justify-center items-center space-x-1">
     {navItems.map((item) => {
       // Check if current path matches base page or any variant
       const isActive = !item.external && (
@@ -45,8 +44,8 @@ const navItems = buildNavigationConfig(baseNavItems, variantMap);
       return (
         <li
           class:list={[
-            "border-b-4 flex items-center gap-x-1 transition ease-in-out duration-400",
-            isActive ? "border-primary-darker" : "border-transparent",
+            "btn btn-link border-b-4 flex items-center gap-x-1 transition ease-in-out duration-100 rounded-t-lg hover:bg-secondary/30",
+            isActive ? "border-secondary/50 bg-secondary/50" : "border-transparent",
           ]}
         >
           <a
@@ -66,11 +65,8 @@ const navItems = buildNavigationConfig(baseNavItems, variantMap);
         </li>
       );
     })}
-    <li class="flex items-center">
+    <!--li class="flex items-center">
       <Information />
-    </li>
-    <li class="flex items-center">
-      <ThemeChooser />
-    </li>
+    </li-->
   </ul>
 </nav>

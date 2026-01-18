@@ -17,12 +17,12 @@ const columnClasses = {
 };
 ---
 
-<ul class:list={["flex flex-wrap", className]}>
+<ul class:list={["flex flex-wrap not-prose", className]}>
   {items.map((item) => (
     <li class:list={["w-full px-2 py-1", columnClasses[columns]]}>
       <a 
         href={item.href} 
-        class="link link-hover"
+        class="link"
       >
         {item.label}
       </a>

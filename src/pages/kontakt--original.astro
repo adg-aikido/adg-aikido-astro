@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import Image from "../components/common/Image.astro";
+import clubInfo from "../data/club-info.yaml";
+---
+
+<Layout
+  title="Kontakta oss - Aikido Dojo Gamlestaden"
+  description="Kontaktinformation, adress och vägbeskrivning till Aikido Dojo Gamlestaden i Göteborg."
+>
+  <main class="container mx-auto max-w-6xl px-4 py-2 sm:px-6 lg:px-8">
+    <div class="pb-8">
+      <SectionHeading level="h1">Kontakta oss</SectionHeading>
+
+      <div class="mt-3 md:flex md:items-start md:gap-x-8">
+        <div class="mx-auto mb-4 w-fit shrink-0 md:mx-0">
+          <Image src="/assets/kontakt.jpg" alt="Entrance to the dojo" />
+        </div>
+        <p>
+          Om det är något du undrar över så får du gärna besöka oss, lämna ett
+          meddelande eller slå en signal när vi har träning. Se våra <a
+            href="/schema"
+            class="link link-primary">träningstider</a
+          > och vägbeskrivning längre ner på denna sida.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-wrap -mx-2">
+        <!-- Address Section -->
+        <div class="w-full px-2 md:w-1/2">
+          <h2 class="font-serif text-3xl font-bold">Adress</h2>
+          <ul class="mt-4 flex flex-col space-y-1">
+            <li>{clubInfo.name}</li>
+            <li>{clubInfo.address.street}</li>
+            <li>{clubInfo.address.postalCode} {clubInfo.address.city}</li>
+            <li class="pt-3">
+              <span class="font-semibold">Plusgiro</span> {clubInfo.payment.plusgiro}
+            </li>
+            <li>
+              <span class="font-semibold">Swish</span> {clubInfo.payment.swish}
+            </li>
+            <li>
+              <span class="font-semibold">E-post</span>
+              <a href={`mailto:${clubInfo.contact.email}`} class="link link-primary">
+                {clubInfo.contact.email}
+              </a>
+            </li>
+            <li class="flex items-center">
+              <span class="font-semibold">Facebook</span>
+              <a
+                href={clubInfo.contact.facebook}
+                class="ml-2 inline-block align-middle"
+                aria-label="Vår Facebook-sida"
+              >
+                <img
+                  src="http://static.viewbook.com/images/social_icons/facebook_32.png"
+                  alt="Facebook"
+                  class="h-8 w-8"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Board Section -->
+        <div class="w-full px-2 mt-8 md:w-1/2 md:mt-0">
+          <h2 class="font-serif text-3xl font-bold">Styrelsen</h2>
+          <dl class="mt-4">
+            <dt class="font-semibold">E-post</dt>
+            <dd class="mb-2 ml-8">
+              <a
+                href={`mailto:${clubInfo.board.email}`}
+                class="link link-primary"
+              >
+                {clubInfo.board.email}
+              </a>
+            </dd>
+            {clubInfo.board.members.map((member) => (
+              <>
+                <dt class="font-semibold">{member.role}</dt>
+                <dd class="mb-2 ml-8">{member.name}</dd>
+              </>
+            ))}
+          </dl>
+        </div>
+      </div>
+
+      <SectionHeading level="h2" class="mt-12">Hitta till oss</SectionHeading>
+
+      <div class="mt-3">
+        <p>Välj någon av möjligheterna nedan för att ta dig till oss!</p>
+
+        <ul class="mt-4 mb-4 list-disc list-inside space-y-2 text-base-content">
+          {clubInfo.directions.publicTransport.map((option) => (
+            <li>Ta {option}</li>
+          ))}
+          <li>
+            Ta bilen (se kartor nedan). {clubInfo.directions.parking.note}
+          </li>
+        </ul>
+
+        <p>
+          {clubInfo.directions.walkingDirections}
+        </p>
+      </div>
+
+      <SectionHeading level="h2" class="mt-12">Välkommen!</SectionHeading>
+
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-center">
+        {clubInfo.maps.map((map) => (
+          <Image src={map.src} alt={map.alt} />
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>

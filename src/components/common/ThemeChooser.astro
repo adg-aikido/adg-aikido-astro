@@ -2,7 +2,7 @@
 // Theme swap controller for daisyUI theme switching
 ---
 
-<label class="swap swap-rotate btn btn-ghost btn-sm text-primary-content" x-data="{
+<label class="swap swap-rotate btn btn-ghost btn-sm " x-data="{
   theme: localStorage.getItem('theme') || 'adg-dark',
   init() {
     document.documentElement.setAttribute('data-theme', this.theme);

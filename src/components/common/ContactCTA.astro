@@ -1,0 +1,86 @@
+---
+/**
+ * ContactCTA Component
+ * 
+ * Call-to-action for contacting the dojo with 3 variants:
+ * - inline: Simple text with email link
+ * - card: Card-based with buttons
+ * - section: Full section with collapse/expandable content
+ */
+
+export interface Props {
+  variant?: 'inline' | 'card' | 'section';
+  description?: string;
+  email?: string;
+  showVisitButton?: boolean;
+}
+
+const { 
+  variant = 'inline',
+  description = 'För frågor om träning, priser eller klubben, kontakta oss via e-post eller kom förbi!',
+  email = 'info@adg-aikido.se',
+  showVisitButton = true
+} = Astro.props;
+---
+
+{variant === 'inline' && (
+  <p>
+    {description}
+    {' '}
+    <a href={`mailto:${email}`} class="link link-primary">
+      {email}
+    </a>
+  </p>
+)}
+
+{variant === 'card' && (
+  <div class="card card-border bg-base-100 shadow-lg">
+    <div class="card-body">
+      <h3 class="card-title">Har du frågor?</h3>
+      <p class="text-sm">{description}</p>
+      <div class="card-actions justify-end mt-4">
+        <a href={`mailto:${email}`} class="btn btn-primary gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          {email}
+        </a>
+        {showVisitButton && (
+          <a href="/kontakt" class="btn btn-ghost">
+            Hitta till oss
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
+{variant === 'section' && (
+  <div class="collapse collapse-arrow bg-base-200">
+    <input type="checkbox" />
+    <div class="collapse-title font-bold">
+      <div class="flex items-center gap-3">
+        <span class="text-xl">📧</span>
+        <span>Har du frågor?</span>
+      </div>
+    </div>
+    <div class="collapse-content">
+      <p class="text-sm mb-4">
+        {description}
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href={`mailto:${email}`} class="btn btn-primary btn-sm gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          {email}
+        </a>
+        {showVisitButton && (
+          <a href="/kontakt" class="btn btn-ghost btn-sm">
+            Hitta till oss
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+)}

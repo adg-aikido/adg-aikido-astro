@@ -4,19 +4,27 @@ import SectionHeading from "../../components/common/SectionHeading.astro";
 import SectionNav from "../../components/common/SectionNav.astro";
 import EventScheduleCard from "../../components/common/EventScheduleCard.astro";
 import SimplePriceCard from "../../components/common/SimplePriceCard.astro";
-import eventsData from "../../data/events.yaml";
+import { getCollection } from 'astro:content';
+import { formatDateRange } from "../../utils/contentFilters";
 import { marked } from 'marked';
 
 export async function getStaticPaths() {
-  return eventsData.events.map((event) => ({
-    params: { id: event.id },
-    props: { event }
-  }));
+  const events = await getCollection('events');
+  const senseis = await getCollection('senseis');
+  return events.map((event) => {
+    const sensei = senseis.find(s => s.id === event.data.senseiId);
+    return {
+      params: { id: event.id },
+      props: { event: event.data, sensei: sensei?.data }
+    };
+  });
 }
 
-const { event } = Astro.props;
-const { name, eventDate, paymentDeadline, senseiInfo, schedule, prices } = event;
-const senseiInfo0 = marked.parse(senseiInfo);
+const { event, sensei } = Astro.props;
+const { startDate, endDate, paymentDeadline, schedule, prices } = event;
+const eventDate = formatDateRange(startDate, endDate);
+const name = `${sensei.name}, ${sensei.rank}`;
+const senseiInfo0 = marked.parse(sensei.bio);
 ---
 
 <Layout
@@ -30,15 +38,15 @@ const senseiInfo0 = marked.parse(senseiInfo);
     
     <div class="px-4 pb-5">
       <h2 class="px-8 -mt-4 text-center font-serif text-3xl font-bold text-primary">
-        We welcome all aikidoka, regardless of rank or style, to a seminar with {name}
+        We welcome all aikidoka, regardless of rank or style, to a seminar with {sensei.title} {sensei.name}
       </h2>
 
       <div class="mt-8 flow-root">
-        {event.image && (
+        {sensei.image && (
           <img 
-            src={event.image} 
+            src={sensei.image} 
             class="w-[250px] p-2 shadow-lg md:float-right md:ml-6 md:mb-4" 
-            alt="Sensei {name}"
+            alt="{sensei.title} {sensei.name}"
           />
         )}
         
@@ -83,13 +91,13 @@ const senseiInfo0 = marked.parse(senseiInfo);
         
         <p class="text-lg">
           Contact information: 
-          <a href="mailto:info@adg-aikido.se" class="font-medium text-gray-400 underline decoration-primary-500 underline-offset-1">
+          <a href="mailto:info@adg-aikido.se" class="font-medium text-base-content/60 underline decoration-primary-500 underline-offset-1">
             info@adg-aikido.se
           </a> or 
-          <a href="tel:+46768800674" class="font-medium text-gray-400 underline decoration-primary-500 underline-offset-1">
+          <a href="tel:+46768800674" class="font-medium text-base-content/60 underline decoration-primary-500 underline-offset-1">
             +46&nbsp;768&nbsp;800&nbsp;674&nbsp;(Vlad)
           </a> or 
-          <a href="tel:+46739659090" class="font-medium text-gray-400 underline decoration-primary-500 underline-offset-1">
+          <a href="tel:+46739659090" class="font-medium text-base-content/60 underline decoration-primary-500 underline-offset-1">
             +46&nbsp;739&nbsp;659&nbsp;090&nbsp;(Alula)
           </a>
         </p>

@@ -1,0 +1,21 @@
+---
+interface Link {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  links: Link[];
+}
+
+const { links } = Astro.props;
+---
+
+<ul class="list-disc list-inside space-y-1">
+  {links.map((link) => (
+    <li>
+      <a href={link.href} class="link link-primary">{link.label}</a>
+    </li>
+  ))}
+</ul>
+

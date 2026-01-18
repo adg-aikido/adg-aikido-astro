@@ -1,0 +1,112 @@
+---
+// Magazine-style homepage variant
+import Layout from "../layouts/Layout.astro";
+import MagazineCoverHero from "../components/sections/magazine/MagazineCoverHero.astro";
+import MagazineStoryGrid from "../components/sections/magazine/MagazineStoryGrid.astro";
+import WeeklyTimeline from "../components/sections/magazine/WeeklyTimeline.astro";
+import PhotoEssay from "../components/sections/magazine/PhotoEssay.astro";
+import SenseiCorner from "../components/sections/magazine/SenseiCorner.astro";
+
+const title = "Aikido Dojo Gamlestaden – Konsten att falla och resa sig igen";
+const description = "Upptäck aikido i Göteborg. Magazine-edition med nyheter, schema, bildgalleri och visdom från mattan.";
+---
+
+<Layout title={title} description={description}>
+  <!-- Magazine Cover Hero -->
+  <MagazineCoverHero />
+
+  <!-- Featured Stories Grid -->
+  <MagazineStoryGrid />
+
+  <!-- This Week's Schedule Timeline -->
+  <WeeklyTimeline />
+
+  <!-- Photo Essay Strip -->
+  <PhotoEssay />
+
+  <!-- Sensei's Corner -->
+  <SenseiCorner />
+</Layout>
+
+<style>
+  /* Magazine-specific typography enhancements */
+  :global(body) {
+    /* Smooth scroll behavior for navigation */
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar for photo essay */
+  :global(.overflow-x-auto) {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(var(--bc) / 0.2) transparent;
+  }
+
+  :global(.overflow-x-auto::-webkit-scrollbar) {
+    height: 8px;
+  }
+
+  :global(.overflow-x-auto::-webkit-scrollbar-track) {
+    background: transparent;
+  }
+
+  :global(.overflow-x-auto::-webkit-scrollbar-thumb) {
+    background-color: oklch(var(--bc) / 0.2);
+    border-radius: 20px;
+  }
+
+  :global(.overflow-x-auto::-webkit-scrollbar-thumb:hover) {
+    background-color: oklch(var(--bc) / 0.3);
+  }
+
+  /* Handwriting font loading hint */
+  @supports (font-variation-settings: normal) {
+    .font-handwriting {
+      font-variation-settings: "wght" 400;
+    }
+  }
+
+  /* Smooth transitions for interactive elements */
+  :global(.card),
+  :global(.btn) {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Magazine page turn effect on scroll */
+  @media (prefers-reduced-motion: no-preference) {
+    section {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    section:nth-child(1) { animation-delay: 0s; }
+    section:nth-child(2) { animation-delay: 0.2s; }
+    section:nth-child(3) { animation-delay: 0.4s; }
+    section:nth-child(4) { animation-delay: 0.6s; }
+    section:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  /* Respect user preferences */
+  @media (prefers-reduced-motion: reduce) {
+    section {
+      opacity: 1;
+      animation: none;
+    }
+    
+    :global(*) {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

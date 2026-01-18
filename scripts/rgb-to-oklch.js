@@ -32,7 +32,7 @@ try {
   // Also show individual values for easy copying
   console.log(`\nInput:  ${hex}`);
   console.log(`OKLCH:  ${oklchStr}`);
-  console.log(`\nValues:`);
+  console.log("\nValues:");
   console.log(`  L: ${(color.l * 100).toFixed(2)}%`);
   console.log(`  C: ${color.c.toFixed(3)}`);
   console.log(`  H: ${color.h ? color.h.toFixed(2) : '0'}`);

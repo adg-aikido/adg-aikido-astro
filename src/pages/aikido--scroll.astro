@@ -1,0 +1,256 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const sections = await getCollection("aikido-sections");
+const orderedSections = sections.sort((a, b) => {
+  const order = [
+    "aikido",
+    "historia",
+    "om-traningen",
+    "taijutsu",
+    "aikiken",
+    "aikijo",
+  ];
+  const indexA = order.indexOf(a.data.id);
+  const indexB = order.indexOf(b.data.id);
+  if (indexA === -1) return 1;
+  if (indexB === -1) return -1;
+  return indexA - indexB;
+});
+
+const renderedSections = await Promise.all(
+  orderedSections.map(async (section) => ({
+    ...section,
+    Content: (await section.render()).Content,
+  })),
+);
+
+// Visual icons for each section
+const sectionIcons = {
+  aikido: "🥋",
+  historia: "📜",
+  "om-traningen": "💪",
+  taijutsu: "🤺",
+  aikiken: "⚔️",
+  aikijo: "🦯",
+};
+---
+
+<Layout
+  title="Vad är aikido? - Aikido Dojo Gamlestaden"
+  description="Aikido är en modern kampkonst utvecklad från urgamla tekniker. Lär dig mer om aikidons historia, träning och filosofi."
+>
+  <!-- Scroll Progress Indicator -->
+  <div 
+    class="fixed top-0 left-0 z-50 h-1 bg-primary transition-all duration-300"
+    x-data="{ progress: 0 }"
+    x-init="
+      window.addEventListener('scroll', () => {
+        const winScroll = document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        progress = (winScroll / height) * 100;
+      });
+    "
+    x-bind:style="`width: ${progress}%`"
+  ></div>
+
+  <!-- Timeline Navigation Sidebar -->
+  <div class="fixed left-8 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
+    <nav 
+      class="flex flex-col gap-4"
+      x-data="{
+        activeSection: 'aikido',
+        updateActive() {
+          const sections = document.querySelectorAll('section[data-section]');
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  this.activeSection = entry.target.dataset.section;
+                }
+              });
+            },
+            { rootMargin: '-40% 0px -40% 0px' }
+          );
+          sections.forEach((s) => observer.observe(s));
+        }
+      }"
+      x-init="updateActive()"
+    >
+      {
+        renderedSections.map((section) => (
+          <a
+            href={`#${section.data.id}`}
+            class="group relative"
+            x-bind:class={`activeSection === '${section.data.id}' ? 'scale-125' : 'scale-100'`}
+          >
+            <div class="tooltip tooltip-right" data-tip={section.data.title}>
+              <div 
+                class="h-3 w-3 rounded-full border-2 border-base-content/30 bg-base-100 transition-all group-hover:border-primary group-hover:bg-primary"
+                x-bind:class={`activeSection === '${section.data.id}' ? 'border-primary bg-primary' : ''`}
+              ></div>
+            </div>
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+
+  <!-- Immersive Story-scroll Layout -->
+  <div class="relative">
+    {
+      renderedSections.map((section, index: number) => {
+        const icon = sectionIcons[section.data.id as keyof typeof sectionIcons] || "✦";
+        const isFirst = index === 0;
+        
+        return (
+          <section
+            id={section.data.id}
+            data-section={section.data.id}
+            class={`relative min-h-screen scroll-mt-0 ${isFirst ? 'flex items-center justify-center' : ''}`}
+          >
+            <div class="container mx-auto max-w-4xl px-4 py-16">
+              {/* Section Header with Animation */}
+              <div 
+                class="mb-8 text-center opacity-100 translate-y-0"
+                x-data="{ visible: false }"
+                x-intersect.threshold.50="visible = true"
+                x-bind:class="visible ? 'scale-105' : 'scale-100'"
+                style="transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);"
+              >
+                <div class="mb-4 text-7xl">{icon}</div>
+                <h2 class="mb-2 text-3xl font-bold tracking-tight text-base-content md:text-4xl">
+                  {section.data.title}
+                </h2>
+                <div class="mx-auto mt-4 h-1 w-24 bg-linear-to-r from-primary via-secondary to-accent"></div>
+              </div>
+
+              {/* Content with Reveal Animation */}
+              <div 
+                class="relative opacity-100 translate-y-0"
+                x-data="{ visible: false }"
+                x-intersect.threshold.30="visible = true"
+                style="transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;"
+              >
+                {/* Decorative Quote Mark for First Section */}
+                {isFirst && (
+                  <div class="absolute -left-8 top-0 text-9xl font-serif text-primary/10 lg:-left-16">
+                    "
+                  </div>
+                )}
+
+                <div class="prose max-w-none text-base-content/90">
+                  <section.Content />
+                </div>
+
+                {/* Quick Links on First Section */}
+                {isFirst && (
+                  <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {orderedSections.slice(1).map((s) => (
+                      <a 
+                        href={`#${s.data.id}`}
+                        class="group card card-border bg-base-100 shadow-md transition-all hover:shadow-xl hover:-translate-y-1"
+                      >
+                        <div class="card-body">
+                          <div class="text-3xl">{sectionIcons[s.data.id as keyof typeof sectionIcons]}</div>
+                          <h3 class="card-title text-base group-hover:text-primary">
+                            {s.data.title}
+                          </h3>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                {/* Content Enhancement Suggestions */}
+                {section.data.id === 'historia' && (
+                  <div class="mt-8 alert alert-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div>
+                      <h3 class="font-bold">Förslag: Tidslinje-infografik</h3>
+                      <div class="text-sm">Lägg till en visuell tidslinje från Morihei Ueshibas födelse till aikidons spridning globalt</div>
+                    </div>
+                  </div>
+                )}
+
+                {section.data.id === 'aikiken' && (
+                  <div class="mt-8 card bg-base-200">
+                    <div class="card-body">
+                      <h3 class="card-title text-warning">💡 Föreslagen komplettering</h3>
+                      <p class="text-sm text-base-content/70">
+                        Lägg till en jämförelsetabell mellan aikiken-tekniker och traditionell kenjutsu. 
+                        Inkludera också videodemonstrationer av grundläggande suburi (svängningar).
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Next Section Hint */}
+              {index < renderedSections.length - 1 && (
+                <div class="mt-16 flex justify-center">
+                  <a 
+                    href={`#${renderedSections[index + 1].data.id}`}
+                    class="group flex flex-col items-center gap-2 text-base-content/50 transition-colors hover:text-primary"
+                  >
+                    <span class="text-sm font-medium uppercase tracking-wider">
+                      Nästa
+                    </span>
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      class="h-8 w-8 animate-bounce" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </a>
+                </div>
+              )}
+            </div>
+          </section>
+        );
+      })
+    }
+
+    {/* Final Call-to-Action */}
+    <section class="relative overflow-hidden bg-linear-to-br from-primary via-secondary to-accent py-32">
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-20"></div>
+      <div class="container relative mx-auto max-w-4xl px-4 text-center text-white">
+        <div class="mb-6 text-6xl">🥋</div>
+        <h2 class="mb-6 text-3xl font-bold md:text-4xl">
+          Din aikido-resa börjar här
+        </h2>
+        <p class="mb-12 text-base opacity-90">
+          Alla är välkomna – från nybörjare till erfarna utövare
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/priser" class="btn btn-lg bg-white text-primary hover:bg-white/90">
+            Se priser
+          </a>
+          <a href="/schema" class="btn btn-outline btn-lg border-white text-white hover:bg-white hover:text-primary">
+            Träningsschema
+          </a>
+          <a href="/kontakt" class="btn btn-outline btn-lg border-white text-white hover:bg-white hover:text-primary">
+            Kontakt
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<!-- Suggested additional content for aikido--scroll:
+  1. Historical timeline graphic showing aikido's evolution (1883-present)
+  2. Animated technique demonstrations (GIFs or short videos)
+  3. Instructor profiles with photos
+  4. Student testimonials with photos
+  5. Comparison table: aikido vs other martial arts
+  6. Photo gallery of dojo training sessions
+  7. Infographic: "What to expect in your first class"
+  8. Interactive quiz: "Which aikido weapon suits you?"
+-->

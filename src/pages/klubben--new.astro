@@ -1,0 +1,240 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import Image from "../components/common/Image.astro";
+import dojosData from "../data/dojos.yaml";
+
+const dojoSections = dojosData.dojoLinks;
+---
+
+<Layout
+  title="Klubben - Aikido Dojo Gamlestaden"
+  description="Information om Aikido Dojo Gamlestaden, våra instruktörer och aikidovänner runt om i världen."
+>
+  <main class="container mx-auto max-w-7xl px-4 py-8">
+    <!-- Dojon Section -->
+    <section class="mb-16">
+      <SectionHeading level="h1">Dojon</SectionHeading>
+
+      <!-- Main Dojo Card -->
+      <div class="card bg-base-200 shadow-xl border-2 border-base-300 mt-6">
+        <div class="card-body">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <h2 class="card-title text-2xl">
+                <span class="badge badge-primary badge-lg">Est. 1989</span>
+                Aikido Dojo Gamlestaden
+              </h2>
+              <p class="text-base-content/90">
+                <strong class="font-bold">Aikido Dojo Gamlestaden</strong> är en ideell
+                förening som startades 1989. Föreningens mål är att skapa god Aikido och
+                en trevlig samvaro inom föreningens ramar.
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-start gap-3">
+                  <span class="badge badge-secondary">📍</span>
+                  <div>
+                    <p class="font-semibold">Lokal</p>
+                    <p class="text-sm text-base-content/70">
+                      Byfogdegatan 3B - En väldigt fin lokal anpassad för verksamheten
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="badge badge-accent">🥋</span>
+                  <div>
+                    <p class="font-semibold">Träning</p>
+                    <p class="text-sm text-base-content/70">
+                      Vuxen-, barn- och ungdomsträning i flera nivåer
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="badge badge-info">⭐</span>
+                  <div>
+                    <p class="font-semibold">Fokus</p>
+                    <p class="text-sm text-base-content/70">
+                      Vi strävar efter att hålla hög nivå på både aikido och trivsel!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-center">
+              <figure class="rounded-lg overflow-hidden shadow-md">
+                <Image 
+                  src="/assets/adg-dojon.jpg" 
+                  alt="Photo of the inside of the dojo, showing a large matted area." 
+                />
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Instruktörer Section -->
+    <section class="mb-16">
+      <SectionHeading level="h2">Huvudinstruktörer</SectionHeading>
+
+      <!-- Instructor Card -->
+      <div class="card bg-base-200 shadow-xl border-2 border-base-300 mt-6">
+        <div class="card-body">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 class="card-title">Träningsrådet</h3>
+              <p class="text-sm text-base-content/70 mb-4">
+                Ett träningsråd med höggraderade instruktörer som leder och planerar verksamheten.
+              </p>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3 p-3 bg-base-300 rounded-lg shadow-sm">
+                  <div class="avatar placeholder">
+                    <div class="bg-primary text-primary-content rounded-full w-12">
+                      <span class="text-xl">7</span>
+                    </div>
+                  </div>
+                  <div class="flex-1">
+                    <p class="font-semibold">John Patrick Johnsen</p>
+                    <p class="text-sm text-base-content/70">7 dan (vuxna)</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-base-300 rounded-lg shadow-sm">
+                  <div class="avatar placeholder">
+                    <div class="bg-secondary text-secondary-content rounded-full w-12">
+                      <span class="text-xl">6</span>
+                    </div>
+                  </div>
+                  <div class="flex-1">
+                    <p class="font-semibold">Ylva Beckman</p>
+                    <p class="text-sm text-base-content/70">6 dan (vuxna, barn)</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-base-300 rounded-lg shadow-sm">
+                  <div class="avatar placeholder">
+                    <div class="bg-accent text-accent-content rounded-full w-12">
+                      <span class="text-xl">5</span>
+                    </div>
+                  </div>
+                  <div class="flex-1">
+                    <p class="font-semibold">Alula Kassa</p>
+                    <p class="text-sm text-base-content/70">5 dan (vuxna)</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-actions justify-end mt-4">
+                <a href="mailto:radet@adg-aikido.se" class="btn btn-primary btn-sm">
+                  📧 Kontakta instruktörerna
+                </a>
+              </div>
+            </div>
+            <div class="flex items-center justify-center">
+              <figure class="rounded-lg overflow-hidden shadow-md">
+                <Image 
+                  src="/assets/hemsida1.jpg" 
+                  alt="Two aikido instructors performing a technique." 
+                />
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Aikido Friends Section -->
+    <section class="mb-16">
+      <SectionHeading level="h2">Några aikidovänner</SectionHeading>
+
+      {
+        dojoSections.map((section) => (
+          <div class="mt-8">
+            {section.section === "Aikido Friends" && (
+              <div class="card bg-base-200 shadow-xl border-2 border-base-300">
+                <div class="card-body">
+                  <h3 class="card-title">
+                    <span class="badge badge-primary">🌍</span>
+                    Internationella organisationer
+                  </h3>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    {section.links.map((link) => (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-ghost justify-start text-left h-auto py-3"
+                      >
+                        <span class="text-primary">🔗</span>
+                        <span class="flex-1">{link.label}</span>
+                        <span class="text-base-content/50">→</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {section.section === "Svenska dojos" && (
+              <div class="card bg-base-200 shadow-xl border-2 border-base-300">
+                <div class="card-body">
+                  <h3 class="card-title">
+                    <span class="badge badge-secondary">🇸🇪</span>
+                    Svenska dojos
+                  </h3>
+                  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-4">
+                    {section.links.map((link) => (
+                      <a
+                        href={link.href}
+                        target={link.href !== "#" ? "_blank" : undefined}
+                        rel={link.href !== "#" ? "noopener noreferrer" : undefined}
+                        class={`btn btn-ghost btn-sm justify-start text-left h-auto py-2 ${
+                          link.href === "#" ? "btn-disabled" : ""
+                        }`}
+                      >
+                        <span class="text-xs">🥋</span>
+                        <span class="flex-1 text-sm">{link.label}</span>
+                        {link.href !== "#" && (
+                          <span class="text-base-content/30 text-xs">↗</span>
+                        )}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {section.section === "CAA-dojos" && (
+              <div class="card bg-base-200 shadow-xl border-2 border-base-300">
+                <div class="card-body">
+                  <h3 class="card-title">
+                    <span class="badge badge-accent">🌐</span>
+                    CAA-dojos
+                  </h3>
+                  <p class="text-sm text-base-content/70 mb-4">
+                    California Aikido Association - Internationella partnerklubbar
+                  </p>
+                  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {section.links.map((link) => (
+                      <a
+                        href={link.href}
+                        target={link.href !== "#" ? "_blank" : undefined}
+                        rel={link.href !== "#" ? "noopener noreferrer" : undefined}
+                        class={`btn btn-ghost btn-sm justify-start text-left h-auto py-2 ${
+                          link.href === "#" ? "btn-disabled" : ""
+                        }`}
+                      >
+                        <span class="text-xs">🥋</span>
+                        <span class="flex-1 text-sm">{link.label}</span>
+                        {link.href !== "#" && (
+                          <span class="text-base-content/30 text-xs">↗</span>
+                        )}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ))
+      }
+    </section>
+  </main>
+</Layout>

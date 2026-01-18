@@ -1,0 +1,159 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import schemaData from "../data/schema.yaml";
+import { getCollection } from 'astro:content';
+
+const { schedule, summer_schedule } = schemaData;
+const instructorsCollection = await getCollection('instructors');
+const instructors = instructorsCollection.map(i => i.data);
+
+// Determine which schedule to display
+const activeSchedule = summer_schedule.enabled ? summer_schedule : schedule;
+const scheduleTitle = summer_schedule.enabled ? "Sommarprogrammet" : "Schema";
+
+const colorClasses = {
+  primary: 'border-l-primary',
+  accent: 'border-l-accent',
+  secondary: 'border-l-secondary'
+};
+---
+
+<Layout
+  title="Schema - Aikido Dojo Gamlestaden"
+  description="Träningsschema för Aikido Dojo Gamlestaden. Se våra träningstider för barn, ungdomar och vuxna."
+>
+  <main class="container mx-auto max-w-6xl px-4 py-2 sm:px-6 lg:px-8">
+    <div class="pb-8 mt-4">
+      <SectionHeading level="h1">{scheduleTitle}</SectionHeading>
+      
+      <div class="mt-3">
+        <!-- Alert component for announcement -->
+        <div class="alert alert-info mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span class="font-semibold">Vårterminen börjar den 17 januari</span>
+        </div>
+        
+        <!-- Schedule grid -->
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {activeSchedule.days.map((daySchedule) => (
+            <div class="card card-border bg-base-200 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <div class="card-body p-0">
+                <!-- Day header -->
+                <div class="bg-base-300">
+                  <h3 class="card-title justify-center py-3 px-6 text-lg font-bold">
+                    {daySchedule.day}
+                  </h3>
+                </div>
+                
+                <!-- Sessions list -->
+                <ul class="p-2 pb-3 space-y-2">
+                  {daySchedule.sessions.map((session) => (
+                    <li class:list={[
+                      "card card-border bg-base-300 border-l-8 shadow-md hover:shadow-lg transition-shadow duration-200",
+                      colorClasses[session.color]
+                    ]}>
+                      <div class="card-body p-3 gap-1">
+                        <!-- Time display -->
+                        <div class="flex justify-between items-center text-sm">
+                          <span class="font-bold flex items-center gap-1">
+                            <svg class="w-4 h-4 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg> 
+                            {session.timeStart}
+                          </span>
+                          <span class="opacity-60 text-xs">{session.timeEnd}</span>
+                        </div>
+                        
+                        <!-- Session title -->
+                        <div class="text-center font-semibold" set:html={session.title} />
+                        
+                        <!-- Subtitle -->
+                        <div class="text-xs text-center opacity-60 min-h-[1rem]">
+                          {session.subtitle ? session.subtitle : '\u00A0'}
+                        </div>
+                        
+                        <!-- Instructors -->
+                        {session.instructors && (
+                          <div class="flex items-center justify-end gap-1 text-xs opacity-50 pt-1 border-t border-base-content/10">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            <span>{session.instructors.join(' / ')}</span>
+                          </div>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Information section -->
+        <div class="flex flex-wrap mt-10 gap-8">
+          <!-- Information list -->
+          <div class="w-full md:w-[60%] lg:w-[65%]">
+            <div class="card card-border bg-base-100 shadow-lg">
+              <div class="card-body">
+                <h3 class="card-title text-base mb-3">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  Information
+                </h3>
+                <ul class="space-y-3 text-sm sm:text-base list-disc list-inside">
+                  <li>Intag av nybörjare till alla grupper sker löpande.</li>
+                  <li>
+                    <em class="font-semibold">Fri träning</em> innebär att någon med nyckel måste vara med, om du inte har det fråga runt om någon annan kommer.
+                  </li>
+                  <li>
+                    <em class="font-semibold">Tema träningen</em> är också enligt överenskommelse, info kommer att postas på WhatsApp gruppen.
+                  </li>
+                  <li>
+                    Generellt gäller att <strong class="text-error">röda dagar är det ingen träning</strong>. 
+                    <em>Om inget annat sägs eller annonseras i god tid, svarta dagar blir det träning som vanligt</em> 
+                    (till exempel valborgsmässoafton).
+                  </li>
+                  <li>
+                    Under sommaren blir det ingen schemalagd träning på torsdagar och söndagar (om man inte ordnar det själv).
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Instructor legend -->
+          <div class="w-full md:w-[35%] lg:w-[30%]">
+            <div class="card card-border bg-base-100 shadow-lg sticky top-4">
+              <div class="card-body">
+                <h3 class="card-title text-base mb-3">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                  </svg>
+                  Instruktörer
+                </h3>
+                <ul class="space-y-2">
+                  {instructors.map((instructor) => (
+                    <li class="text-sm p-2 rounded hover:bg-base-200 transition-colors">
+                      <div class="flex items-center gap-2">
+                        <span class="badge badge-primary badge-sm font-mono font-bold">
+                          {instructor.initials}
+                        </span>
+                        <span class="flex-1">
+                          <span class="font-medium">{instructor.name}</span>
+                          <span class="text-xs opacity-60 ml-1">{instructor.rank}</span>
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

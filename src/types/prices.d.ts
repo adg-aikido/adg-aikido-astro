@@ -4,6 +4,15 @@ export interface Price {
   description?: string;
   amount: string;
   unit: string;
+  validFrom?: string;
+  validUntil?: string;
+  image?: string;
+  link?: string;
+  linkText?: string;
+  highlight?: boolean;
+  popular?: boolean;
+  eligibilityCriteria?: string[];
+  order?: number;
 }
 
 export interface PriceCategory {
@@ -12,8 +21,18 @@ export interface PriceCategory {
   heading: string;
   id?: string;
   prices: Price[];
+  icon?: string;
+  description?: string;
+  order?: number;
+  visible?: boolean;
+  featured?: boolean;
 }
 
 export interface Prices {
   priceCategories: PriceCategory[];
+}
+
+declare module "*/prices.yaml" {
+  const data: Prices;
+  export default data;
 }

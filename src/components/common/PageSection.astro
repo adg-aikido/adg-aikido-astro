@@ -1,0 +1,18 @@
+---
+export interface Props {
+  maxWidth?: "5xl" | "6xl" | "7xl";
+  class?: string;
+}
+
+const { maxWidth = "6xl", class: className } = Astro.props;
+
+const widthClasses = {
+  "5xl": "max-w-5xl",
+  "6xl": "max-w-6xl",
+  "7xl": "max-w-7xl",
+};
+---
+
+<section class:list={["container mx-auto px-4 py-2 sm:px-6 lg:px-8", widthClasses[maxWidth], className]}>
+  <slot />
+</section>

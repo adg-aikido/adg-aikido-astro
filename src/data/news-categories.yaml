@@ -1,0 +1,16 @@
+categories:
+  - id: graderingar
+    name: graderingar
+    description: Nyheter om graderingar och utmärkelser i aikido
+
+  - id: event
+    name: event
+    description: Kommande aikidoevenemang och seminarier
+
+  - id: traningslager
+    name: träningsläger
+    description: Träningsläger och särskilda träningspass
+
+  - id: nyhetsbrev
+    name: nyhetsbrev
+    description: Nyhetsbrevsutskick och meddelanden

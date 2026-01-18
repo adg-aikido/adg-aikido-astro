@@ -84,6 +84,34 @@ import { marked } from "marked";
 <div set:html={marked.parse(item.description)} />
 ```
 
+### Font System
+
+The site uses a runtime font switcher that allows users to customize both heading and body fonts:
+
+**Architecture:**
+- **Font Configuration**: `src/utils/fontConfig.ts` defines available fonts
+  - `SERIF_FONTS`: 5 serif options for headings (Playfair Display, Merriweather, Lora, Crimson Text, EB Garamond)
+  - `SANS_SERIF_FONTS`: 5 sans-serif options for body text (Poppins, Inter, Open Sans, Roboto, Montserrat)
+  - `DEFAULT_FONTS`: Playfair Display (heading) and Poppins (body)
+
+**Implementation:**
+- Fonts loaded dynamically via Google Fonts API at runtime
+- User preferences stored in localStorage with keys: `font-heading`, `font-body`
+- Fonts applied by overriding CSS custom properties: `--font-serif`, `--font-sans`
+- FontChooser component uses Alpine.js for state management
+- Changes apply instantly without page reload
+
+**CSS Integration:**
+```css
+/* In adg.css */
+@theme {
+  --font-sans: 'Poppins', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+}
+```
+
+These custom properties are overridden at runtime via `document.documentElement.style.setProperty()` when users select different fonts. All components using `font-sans` or `font-serif` Tailwind utilities automatically inherit the user's font choice.
+
 ### Layout System
 
 Two layouts with different purposes:
@@ -153,6 +181,8 @@ Use color names with weight: `primary-600`, `accent-500`, etc. Changing colors r
 - `EventScheduleCard.astro` - Event schedule with time slots
 - `Navigation.astro` - Main site navigation
 - `CTAButton.astro` - Call-to-action button
+- `ThemeChooser.astro` - Dark/light theme switcher with localStorage persistence
+- `FontChooser.astro` - Runtime font switcher for heading and body fonts
 
 **`src/components/sections/`** - Page-specific sections organized by page type:
 - `sections/homepage/` - Homepage-specific sections

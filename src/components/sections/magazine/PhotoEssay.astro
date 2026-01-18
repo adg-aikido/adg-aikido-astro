@@ -1,0 +1,118 @@
+---
+// Horizontal scrolling photo essay with polaroid-style frames
+import { getCollection } from 'astro:content';
+
+const mediaItems = await getCollection('media');
+const photos = mediaItems
+  .filter(item => item.data.type === 'image')
+  .slice(0, 8);
+---
+
+<section id="photo-essay" class="py-20 bg-base-100 overflow-hidden">
+  <div class="container mx-auto px-6 max-w-7xl mb-12">
+    <!-- Section Header -->
+    <div class="text-center mb-4">
+      <div class="inline-block">
+        <p class="text-xs tracking-[0.3em] uppercase text-base-content/60 mb-2">Ögonblick från Mattan</p>
+        <h2 class="text-5xl md:text-7xl font-bold italic" style="font-family: 'Playfair Display', 'Crimson Pro', Georgia, serif;">
+          Bildgalleri
+        </h2>
+        <div class="h-1 w-24 bg-accent mx-auto mt-4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Horizontal Scroll Container -->
+  <div class="relative">
+    <!-- Scroll Hint (Left) -->
+    <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-base-100 to-transparent z-10 pointer-events-none hidden lg:block"></div>
+    
+    <!-- Scroll Hint (Right) -->
+    <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-base-100 to-transparent z-10 pointer-events-none hidden lg:block"></div>
+
+    <!-- Scrollable Photos -->
+    <div 
+      class="flex gap-8 px-6 pb-8 overflow-x-auto scroll-smooth snap-x snap-mandatory"
+      style="scrollbar-width: thin; scrollbar-color: oklch(var(--bc) / 0.2) transparent;"
+      x-data="{ isDragging: false, startX: 0, scrollLeft: 0 }"
+      x-ref="scrollContainer"
+      @mousedown="isDragging = true; startX = $event.pageX - $refs.scrollContainer.offsetLeft; scrollLeft = $refs.scrollContainer.scrollLeft"
+      @mousemove="if (isDragging) { const x = $event.pageX - $refs.scrollContainer.offsetLeft; const walk = (x - startX) * 2; $refs.scrollContainer.scrollLeft = scrollLeft - walk; }"
+      @mouseup="isDragging = false"
+      @mouseleave="isDragging = false"
+    >
+      {photos.length > 0 ? (
+        photos.map((photo, index) => (
+          <div 
+            class="flex-shrink-0 snap-center group cursor-pointer"
+            style={`transform: rotate(${(index % 2 === 0 ? 1 : -1) * (Math.random() * 3)}deg);`}
+          >
+            <!-- Polaroid Frame -->
+            <div class="bg-base-100 p-4 shadow-2xl hover:shadow-3xl transition-all duration-300 group-hover:-translate-y-2 group-hover:scale-105 border border-base-content/10">
+              <div class="w-72 h-80 bg-base-200 mb-4 overflow-hidden">
+                {photo.data.thumbnail ? (
+                  <img 
+                    src={photo.data.thumbnail} 
+                    alt={photo.data.title}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center text-base-content/20">
+                    <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                )}
+              </div>
+              
+              <!-- Handwritten Caption -->
+              <p class="text-center text-sm text-base-content/70 italic font-handwriting" style="font-family: 'Caveat', 'Patrick Hand', cursive;">
+                {photo.data.title}
+              </p>
+            </div>
+          </div>
+        ))
+      ) : (
+        // Fallback with decorative placeholders
+        Array.from({ length: 6 }).map((_, index) => (
+          <div 
+            class="flex-shrink-0 snap-center"
+            style={`transform: rotate(${(index % 2 === 0 ? 1 : -1) * 2}deg);`}
+            key={index}
+          >
+            <div class="bg-base-100 p-4 shadow-2xl border border-base-content/10">
+              <div class="w-72 h-80 bg-gradient-to-br from-primary/10 to-secondary/10 mb-4 flex items-center justify-center">
+                <span class="text-6xl">
+                  {['🥋', '🤸', '⚡', '🌸', '🎯', '💪'][index]}
+                </span>
+              </div>
+              <p class="text-center text-sm text-base-content/70 italic font-handwriting" style="font-family: 'Caveat', 'Patrick Hand', cursive;">
+                {['Träning', 'Teknik', 'Harmoni', 'Gemenskap', 'Fokus', 'Styrka'][index]}
+              </p>
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  </div>
+
+  <!-- View All CTA -->
+  <div class="text-center mt-12">
+    <a href="/media" class="btn btn-accent btn-lg gap-3">
+      <span>Se alla bilder & videos</span>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Decorative Divider -->
+  <div class="container mx-auto px-6 max-w-7xl mt-20">
+    <div class="flex items-center gap-4">
+      <div class="h-px flex-1 bg-gradient-to-r from-transparent via-base-content/20 to-transparent"></div>
+      <div class="w-2 h-2 bg-accent rounded-full"></div>
+      <div class="h-px flex-1 bg-gradient-to-r from-transparent via-base-content/20 to-transparent"></div>
+    </div>
+  </div>
+</section>

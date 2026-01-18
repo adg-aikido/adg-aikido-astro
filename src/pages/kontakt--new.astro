@@ -1,0 +1,256 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeading from "../components/common/SectionHeading.astro";
+import Image from "../components/common/Image.astro";
+---
+
+<Layout
+  title="Kontakta oss - Aikido Dojo Gamlestaden"
+  description="Kontaktinformation, adress och vägbeskrivning till Aikido Dojo Gamlestaden i Göteborg."
+>
+  <main class="container mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <!-- Hero Section with Image -->
+    <div class="hero min-h-[300px] rounded-xl bg-base-200 mb-12">
+      <div class="hero-content flex-col lg:flex-row-reverse gap-8">
+        <div class="flex-shrink-0">
+          <Image 
+            src="/assets/kontakt.jpg" 
+            alt="Entrance to the dojo"
+            class="rounded-lg shadow-2xl max-w-sm"
+          />
+        </div>
+        <div>
+          <h1 class="text-5xl font-bold font-serif">Kontakta oss</h1>
+          <p class="py-6 text-lg">
+            Om det är något du undrar över så får du gärna besöka oss, lämna ett
+            meddelande eller slå en signal när vi har träning. Se våra <a
+              href="/schema"
+              class="link link-primary font-semibold">träningstider</a
+            > och vägbeskrivning längre ner på denna sida.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Information Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <!-- Address Card -->
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-3xl font-serif mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Adress
+          </h2>
+          <div class="space-y-3">
+            <div>
+              <p class="font-semibold text-lg">Aikido Dojo Gamlestaden</p>
+              <p>Byfogdegatan 3B</p>
+              <p>415 05 Göteborg</p>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="space-y-2">
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+                <span class="font-semibold">Plusgiro:</span> 462 37 05-3
+              </div>
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span class="font-semibold">Swish:</span> 123-1617109
+              </div>
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span class="font-semibold">E-post:</span>
+                <a href="mailto:info@adg-aikido.se" class="link link-primary">
+                  info@adg-aikido.se
+                </a>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                <span class="font-semibold">Facebook:</span>
+                <a
+                  href="https://www.facebook.com/aikidodojogamlestaden/"
+                  class="link link-primary"
+                  aria-label="Vår Facebook-sida"
+                >
+                  /aikidodojogamlestaden
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Board Card -->
+      <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-3xl font-serif mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            Styrelsen
+          </h2>
+          <div class="space-y-4">
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <a
+                href="mailto:styrelsen@adg-aikido.se"
+                class="link link-primary font-semibold"
+              >
+                styrelsen@adg-aikido.se
+              </a>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="grid grid-cols-1 gap-3">
+              <div class="flex items-start gap-3">
+                <div class="badge badge-outline badge-primary badge-lg">Ordförande</div>
+                <span class="pt-1">Åke Sandberg</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="badge badge-outline badge-primary badge-lg">Sekreterare</div>
+                <span class="pt-1">Henrik Andersen</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="badge badge-outline badge-primary badge-lg">Kassör/webmaster</div>
+                <span class="pt-1">Vlad Dumitrescu</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="badge badge-outline badge-primary badge-lg">Suppleant</div>
+                <span class="pt-1">Ylva Beckman</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Directions Section -->
+    <div class="card bg-base-200 shadow-xl mb-12">
+      <div class="card-body">
+        <h2 class="card-title text-4xl font-serif mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+          </svg>
+          Hitta till oss
+        </h2>
+        
+        <p class="text-lg mb-6">Välj någon av möjligheterna nedan för att ta dig till oss!</p>
+
+        <!-- Transportation Options -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div class="alert shadow-lg bg-base-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-info shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <h3 class="font-bold">Spårvagn</h3>
+              <div class="text-xs">Linje 4, 6, 7, 8, 9 eller 11 → Gamlestadstorget</div>
+            </div>
+          </div>
+          
+          <div class="alert shadow-lg bg-base-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-info shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <h3 class="font-bold">Buss (Kristinedal)</h3>
+              <div class="text-xs">Linje 58 eller 510 → Kristinedal</div>
+            </div>
+          </div>
+          
+          <div class="alert shadow-lg bg-base-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-info shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <h3 class="font-bold">Buss (Gamlestadstorget)</h3>
+              <div class="text-xs">Linje 21, 78 eller 79 → Gamlestadstorget</div>
+            </div>
+          </div>
+          
+          <div class="alert shadow-lg bg-base-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-warning shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div>
+              <h3 class="font-bold">Bil</h3>
+              <div class="text-xs">Parkering framför dojon (avgift krävs!)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Walking Directions -->
+        <div class="alert bg-base-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div>
+            <h3 class="font-bold mb-2">Vägbeskrivning till fots</h3>
+            <p class="text-sm">
+              Framför Kristinedals träningsanläggning finns en stor parkering. Om du
+              står på denna parkering och har ryggen mot Kristinedal, ta dig över
+              till andra sidan gatan (Byfogdegatan), och gå in på ytterligare en
+              stor parkeringsplats. Du kommer nu att ha låssmeden Alexandersson till
+              vänster. Sväng nu till höger runt den byggnad du har på höger sida,
+              och du kommer att se en brun/svart byggnad (två våningar) framför dig.
+              En vit skylt med texten "Aikido" bör du se på denna byggnad. Gå in i
+              dörren som finns till höger. Inne i trapphuset fortsätter du rakt fram
+              mot en trädörr och du är framme. Ta av dig skorna och ställ dem i
+              skohyllan!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Maps Section -->
+    <div class="text-center mb-8">
+      <h2 class="text-4xl font-bold font-serif mb-8">Välkommen!</h2>
+      <div class="grid grid-cols-2 lg:grid-cols-2 gap-6">
+        <div class="card bg-base-200 shadow-xl">
+          <figure class="px-4 pt-4">
+            <Image 
+              src="/assets/kalleman-karta.jpg" 
+              alt="Overview map of Gamlestaden area"
+              class="rounded-xl"
+            />
+          </figure>
+          <div class="card-body items-center text-center">
+            <h3 class="card-title">Översiktskarta</h3>
+            <p>Gamlestaden och omgivning</p>
+          </div>
+        </div>
+        
+        <div class="card bg-base-200 shadow-xl">
+          <figure class="px-4 pt-4">
+            <Image 
+              src="/assets/karta.jpg" 
+              alt="Detailed map showing directions to the dojo"
+              class="rounded-xl"
+            />
+          </figure>
+          <div class="card-body items-center text-center">
+            <h3 class="card-title">Detaljkarta</h3>
+            <p>Vägen till dojon</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

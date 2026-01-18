@@ -1,0 +1,11 @@
+section: foreningsdokument
+title: Föreningsdokument
+id: foreningsdokument
+gridCols: grid-cols-1 md:grid-cols-3
+items:
+  - href: /assets/library/styrelse/ADG_Stadgar.pdf
+    title: Stadgar
+  - href: /assets/library/styrelse/ADG_Integritetspolicy.pdf
+    title: Integritetspolicy
+  - href: /assets/library/styrelse/ADG_Jamstalldhetsplan.pdf
+    title: Jämställdhetsplan

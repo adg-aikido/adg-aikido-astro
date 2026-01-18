@@ -1,0 +1,116 @@
+---
+// Magazine-style hero section with dramatic typography and "issue" branding
+const currentDate = new Date();
+const monthNames = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", 
+  "Juli", "Augusti", "September", "Oktober", "November", "December"];
+const issueNumber = `Vol. ${currentDate.getFullYear()} / ${monthNames[currentDate.getMonth()]}`;
+---
+
+<section 
+  class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-base-100 via-base-200 to-base-300"
+  x-data="{ showToc: false }"
+>
+  <!-- Decorative Elements -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute top-20 left-20 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 right-20 w-96 h-96 bg-secondary rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+  </div>
+
+  <!-- Magazine Cover Content -->
+  <div class="relative z-10 container mx-auto px-6 py-20">
+    <!-- Issue Number -->
+    <div class="text-center mb-8">
+      <div class="inline-block">
+        <p class="text-xs tracking-[0.3em] uppercase text-base-content/60 mb-2">Aikido Dojo Gamlestaden</p>
+        <div class="h-px w-full bg-gradient-to-r from-transparent via-base-content/20 to-transparent mb-2"></div>
+        <p class="text-sm font-light text-base-content/80">{issueNumber}</p>
+      </div>
+    </div>
+
+    <!-- Main Headline -->
+    <div class="max-w-6xl mx-auto text-center space-y-6">
+      <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold leading-none tracking-tight">
+        <span class="block text-base-content italic" style="font-family: 'Playfair Display', 'Crimson Pro', Georgia, serif;">
+          Konsten
+        </span>
+        <span class="block text-primary font-black -mt-4 md:-mt-8" style="font-family: 'Oswald', 'Impact', sans-serif; letter-spacing: 0.02em;">
+          ATT FALLA
+        </span>
+        <span class="block text-base-content/70 text-4xl md:text-6xl mt-2 font-light italic" style="font-family: 'Playfair Display', 'Crimson Pro', Georgia, serif;">
+          och resa sig igen
+        </span>
+      </h1>
+
+      <div class="flex justify-center gap-8 py-8">
+        <div class="h-px w-16 bg-base-content/30 my-auto"></div>
+        <p class="text-xl md:text-2xl text-base-content/70 max-w-2xl font-light leading-relaxed">
+          En resa genom harmoni, styrka och gemenskap i hjärtat av Göteborg
+        </p>
+        <div class="h-px w-16 bg-base-content/30 my-auto"></div>
+      </div>
+    </div>
+
+    <!-- Table of Contents Trigger -->
+    <div class="text-center mt-16">
+      <button 
+        @click="showToc = !showToc"
+        class="btn btn-ghost btn-lg gap-3 group"
+      >
+        <span class="text-sm tracking-widest uppercase">Innehåll</span>
+        <svg class="w-5 h-5 transition-transform" :class="showToc ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Table of Contents (Slide Down) -->
+    <div 
+      x-show="showToc"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 transform -translate-y-4"
+      x-transition:enter-end="opacity-100 transform translate-y-0"
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100 transform translate-y-0"
+      x-transition:leave-end="opacity-0 transform -translate-y-4"
+      class="max-w-3xl mx-auto mt-12 bg-base-100/50 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-base-content/10"
+    >
+      <nav class="grid md:grid-cols-2 gap-6">
+        <a href="#featured-stories" class="group flex items-start gap-4 p-4 rounded-xl hover:bg-base-200/50 transition-colors">
+          <span class="text-3xl font-serif text-primary">01</span>
+          <div>
+            <h3 class="font-bold text-lg group-hover:text-primary transition-colors">Senaste nytt</h3>
+            <p class="text-sm text-base-content/60">Från dojon</p>
+          </div>
+        </a>
+        <a href="#this-week" class="group flex items-start gap-4 p-4 rounded-xl hover:bg-base-200/50 transition-colors">
+          <span class="text-3xl font-serif text-secondary">02</span>
+          <div>
+            <h3 class="font-bold text-lg group-hover:text-secondary transition-colors">Veckans schema</h3>
+            <p class="text-sm text-base-content/60">Din träningsresa</p>
+          </div>
+        </a>
+        <a href="#photo-essay" class="group flex items-start gap-4 p-4 rounded-xl hover:bg-base-200/50 transition-colors">
+          <span class="text-3xl font-serif text-accent">03</span>
+          <div>
+            <h3 class="font-bold text-lg group-hover:text-accent transition-colors">Bildgalleri</h3>
+            <p class="text-sm text-base-content/60">Ögonblick från mattan</p>
+          </div>
+        </a>
+        <a href="#sensei-corner" class="group flex items-start gap-4 p-4 rounded-xl hover:bg-base-200/50 transition-colors">
+          <span class="text-3xl font-serif text-primary">04</span>
+          <div>
+            <h3 class="font-bold text-lg group-hover:text-primary transition-colors">Från Sensei</h3>
+            <p class="text-sm text-base-content/60">Visdom från mattan</p>
+          </div>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-base-content/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
+</section>

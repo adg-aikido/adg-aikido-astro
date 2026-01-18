@@ -1,0 +1,61 @@
+---
+/**
+ * InsuranceInfo Component
+ * 
+ * Displays information about insurance coverage through Budo och Kampsportsförbundet.
+ * Shows membership insurance details and foreign camp requirements.
+ */
+
+export interface Props {
+  variant?: 'standard' | 'compact';
+}
+
+const { variant = 'standard' } = Astro.props;
+---
+
+{variant === 'standard' && (
+  <div class="mt-3">
+    <p>
+      Alla medlemmar är försäkrade mot olycksfall genom medlemskapet i Budo och Kampsportsförbundet. 
+      Villkor och detaljer finns 
+      <a 
+        href="https://www.budokampsport.se/klubb/forsakring/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="link link-primary"
+      >på Budo och Kampsportsförbundets webbsida</a>. 
+      Observera att för att försäkringen ska gälla på läger utomlands, måste man 
+      <a 
+        href="https://www.budokampsport.se/ansokningar/anmalningar/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="link link-primary"
+      >lämna in en ansökan</a>.
+    </p>
+  </div>
+)}
+
+{variant === 'compact' && (
+  <div class="text-sm space-y-2">
+    <p>
+      Alla medlemmar försäkrade mot olycksfall via Budo och Kampsportsförbundet.
+    </p>
+    <p>
+      <a 
+        href="https://www.budokampsport.se/klubb/forsakring/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="link link-primary"
+      >Villkor och detaljer</a>
+    </p>
+    <p class="italic">
+      Obs: För utlandsläger krävs 
+      <a 
+        href="https://www.budokampsport.se/ansokningar/anmalningar/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="link link-primary"
+      >ansökan</a>.
+    </p>
+  </div>
+)}

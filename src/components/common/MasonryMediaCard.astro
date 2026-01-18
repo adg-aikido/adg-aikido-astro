@@ -1,0 +1,94 @@
+---
+export interface Props {
+  href: string;
+  title: string;
+  thumbnail?: string;
+  thumbnailAlt?: string;
+  category: string;
+  tags?: string[];
+  isYouTube?: boolean;
+  size?: 'small' | 'medium' | 'large';
+  class?: string;
+}
+
+const { 
+  href, 
+  title, 
+  thumbnail, 
+  thumbnailAlt = '',
+  category,
+  tags = [],
+  isYouTube = false,
+  size = 'medium',
+  class: className 
+} = Astro.props;
+---
+
+<div class:list={["card card-border bg-base-100 shadow-md hover:shadow-xl transition-shadow group h-full", className]}>
+  {isYouTube && thumbnail ? (
+    <a href={href} class="relative block h-full flex flex-col">
+      <div class="p-2 flex items-center justify-center bg-base-200/30 flex-1">
+        <div class="relative w-full overflow-hidden rounded shadow-lg">
+          <img 
+            src={thumbnail} 
+            alt={thumbnailAlt}
+            class="w-full h-auto group-hover:scale-105 transition-transform duration-300"
+          />
+          <div class="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/20 transition-colors">
+            <span class:list={["text-white drop-shadow-2xl", size === 'large' ? 'text-5xl' : 'text-3xl']}>▶</span>
+          </div>
+        </div>
+      </div>
+      <div class="p-2">
+        <span class="badge badge-primary badge-xs mb-1">{category}</span>
+        <h3 class:list={["font-medium group-hover:text-primary transition-colors", size === 'small' ? 'text-xs' : 'text-sm']}>
+          {title}
+        </h3>
+        {tags && tags.length > 0 && size !== 'small' && (
+          <div class="flex flex-wrap gap-1 mt-1">
+            {tags.map((tag) => (
+              <span class="badge badge-ghost badge-xs">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </a>
+  ) : thumbnail ? (
+    <a href={href} class="block h-full flex flex-col">
+      <div class="p-2 flex items-center justify-center bg-base-200/30 flex-1">
+        <img 
+          src={thumbnail} 
+          class="max-w-full h-auto shadow-lg rounded group-hover:shadow-xl transition-shadow" 
+          alt={thumbnailAlt}
+        />
+      </div>
+      <div class="p-2">
+        <span class="badge badge-primary badge-xs mb-1">{category}</span>
+        <h3 class:list={["font-medium group-hover:text-primary transition-colors", size === 'small' ? 'text-xs' : 'text-sm']}>
+          {title}
+        </h3>
+        {tags && tags.length > 0 && size !== 'small' && (
+          <div class="flex flex-wrap gap-1 mt-1">
+            {tags.map((tag) => (
+              <span class="badge badge-ghost badge-xs">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </a>
+  ) : (
+    <a href={href} class="block h-full flex flex-col">
+      <div class:list={["p-3 flex flex-col items-center justify-center bg-base-200/50 flex-1", size === 'small' ? 'min-h-[80px]' : 'min-h-[120px]']}>
+        <svg class:list={["text-base-content/30", size === 'small' ? 'w-8 h-8' : 'w-12 h-12']} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      </div>
+      <div class="p-2">
+        <span class="badge badge-primary badge-xs mb-1">{category}</span>
+        <h3 class:list={["font-medium group-hover:text-primary transition-colors", size === 'small' ? 'text-xs' : 'text-sm']}>
+          {title}
+        </h3>
+      </div>
+    </a>
+  )}
+</div>

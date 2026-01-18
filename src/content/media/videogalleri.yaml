@@ -1,0 +1,17 @@
+section: videogalleri
+title: Videogalleri
+id: videogalleri
+gridCols: grid-cols-1 md:grid-cols-3
+items:
+  - href: https://www.youtube.com/watch?v=dT_fGAt6R2s
+    title: Presentationsfilm
+    thumbnail: https://img.youtube.com/vi/dT_fGAt6R2s/hqdefault.jpg
+    isYouTube: true
+  - href: https://www.youtube.com/watch?v=Adzo-K9mSvE
+    title: Uppvisning kulturkalaset 1
+    thumbnail: https://img.youtube.com/vi/Adzo-K9mSvE/hqdefault.jpg
+    isYouTube: true
+  - href: https://www.youtube.com/watch?v=lUzVPqTXqHo
+    title: Uppvisning kulturkalaset 2
+    thumbnail: https://img.youtube.com/vi/lUzVPqTXqHo/hqdefault.jpg
+    isYouTube: true

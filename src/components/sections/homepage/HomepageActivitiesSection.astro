@@ -1,38 +1,18 @@
 ---
-import activitiesData from "../../../data/activities.yaml";
+import { getCollection } from 'astro:content';
+import { getUpcomingActivities, formatDateTime } from "../../../utils/contentFilters";
 import { marked } from "marked";
+import { dateVisibilityFilter } from "../../../utils/alpineFilters";
 
-const activities = activitiesData.activities;
+interface Props {
+  maxItems?: number;
+}
 
-const formatDate = (dateStr: string) => {
-  const date = new Date(dateStr);
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  return date.toLocaleDateString("sv-SE", options);
-};
+const { maxItems } = Astro.props;
 
-const formatDateRange = (
-  startDate: string,
-  startTime: string | null,
-  endDate: string | null,
-  endTime: String | null
-) => {
-  if (startDate === endDate) {
-    return formatDate(startDate);
-  }
-  return `${formatDate(startDate)} - ${formatDate(endDate)}`;
-};
-
-const formatDateTime = (date: string, time: string | null) => {
-  const formattedDate = formatDate(date);
-  if (time) {
-    return `${formattedDate} ${time}`;
-  }
-  return formattedDate;
-};
+const allActivities = await getCollection('activities');
+const activitiesData = allActivities.map(a => a.data);
+const activities = getUpcomingActivities(activitiesData, maxItems);
 ---
 
 <div
@@ -43,12 +23,14 @@ const formatDateTime = (date: string, time: string | null) => {
   </h2>
   <ul class="flex flex-col mt-4 space-y-4">
     {
-      activities.map((activity) => {
+      activities.map((activity, index) => {
         const dateDisplay = formatDateTime(
-          activity.date_start,
-          activity.time_start
+          activity.dateStart,
+          activity.timeStart,
+          false
         );
         const descriptionHtml = marked.parse(activity.description);
+        
         return (
           <li>
             <div>

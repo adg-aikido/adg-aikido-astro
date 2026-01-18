@@ -1,0 +1,19 @@
+section: dokument
+title: Dokument
+id: dokument
+items:
+  - href: /assets/library/Graderingskrav_vuxna.pdf
+    title: Anmälan och kravlista gradering vuxna
+  - href: /assets/library/Graderingsansokan_barn_ungdomar.pdf
+    title: Anmälan gradering barn och ungdom
+  - href: /assets/library/Graderingskrav_barn_ungdomar.pdf
+    title: Kravlista gradering barn under 10 år
+  - href: /assets/library/Graderingskrav_barn_ungdomar_2025.pdf
+    title: Kravlista gradering barn 10+ och ungdom
+  - href: /assets/library/Infoblad.pdf
+    title: Introduktionsblad för nybörjare
+  - href: /assets/library/adg_booklet_original.pdf
+    title: Handbok för nybörjare
+  - href: /assets/library/adg-traning-hosten-2020.pdf
+    title: Träningsplanering [Hösten 2020]
+    thumbnail: /assets/adg-traning-schema.jpg

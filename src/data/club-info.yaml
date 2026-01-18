@@ -1,0 +1,42 @@
+name: Aikido Dojo Gamlestaden
+address:
+  street: Byfogdegatan 3B
+  postalCode: "415 05"
+  city: Göteborg
+
+payment:
+  plusgiro: 462 37 05-3
+  swish: 123-1617109
+  swish-image: /assets/swish-qr.svg
+
+contact:
+  email: info@adg-aikido.se
+  facebook: https://www.facebook.com/aikidodojogamlestaden/
+
+board:
+  email: styrelsen@adg-aikido.se
+  members:
+    - role: Ordförande
+      name: Åke Sandberg
+    - role: Sekreterare
+      name: Henrik Andersen
+    - role: Kassör/webmaster
+      name: Vlad Dumitrescu
+    - role: Suppleant
+      name: Ylva Beckman
+
+directions:
+  publicTransport:
+    - Spårvagn 4, 6, 7, 8, 9 eller 11 till hållplats Gamlestadstorget
+    - Buss 58 eller 510 till hållplats Kristinedal
+    - Buss 21, 78 eller 79 till hållplats Gamlestadstorget
+  parking:
+    note: "Parkeringsplatser finns framför dojon (parkeringsavgift krävs!). Notera att parkeringsplatsen framför Kristinedal endast är till för besökare till deras träningsanläggning."
+  walkingDirections: |
+    Framför Kristinedals träningsanläggning finns en stor parkering. Om du står på denna parkering och har ryggen mot Kristinedal, ta dig över till andra sidan gatan (Byfogdegatan), och gå in på ytterligare en stor parkeringsplats. Du kommer nu att ha låssmeden Alexandersson till vänster. Sväng nu till höger runt den byggnad du har på höger sida, och du kommer att se en brun/svart byggnad (två våningar) framför dig. En vit skylt med texten "Aikido" bör du se på denna byggnad. Gå in i dörren som finns till höger. Inne i trapphuset fortsätter du rakt fram mot en trädörr och du är framme. Ta av dig skorna och ställ dem i skohyllan!
+
+maps:
+  - src: /assets/kalleman-karta.jpg
+    alt: Overview map of Gamlestaden area
+  - src: /assets/karta.jpg
+    alt: Detailed map showing directions to the dojo

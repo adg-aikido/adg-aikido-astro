@@ -1,0 +1,62 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ContentSection from "../components/common/ContentSection.astro";
+import WavyDivider from "../components/common/WavyDivider.astro";
+import LinkList from "../components/common/LinkList.astro";
+import { getCollection } from "astro:content";
+
+const sections = await getCollection("aikido-sections");
+const orderedSections = sections.sort((a, b) => {
+  const order = [
+    "aikido",
+    "historia",
+    "om-traningen",
+    "taijutsu",
+    "aikiken",
+    "aikijo",
+  ];
+  const indexA = order.indexOf(a.data.id);
+  const indexB = order.indexOf(b.data.id);
+  // If not in order array, push to end
+  if (indexA === -1) return 1;
+  if (indexB === -1) return -1;
+  return indexA - indexB;
+});
+
+// Render each section's MDX content
+const renderedSections = await Promise.all(
+  orderedSections.map(async (section) => ({
+    ...section,
+    Content: (await section.render()).Content,
+  })),
+);
+---
+
+<Layout
+  title="Vad är aikido? - Aikido Dojo Gamlestaden"
+  description="Aikido är en modern kampkonst utvecklad från urgamla tekniker. Lär dig mer om aikidons historia, träning och filosofi."
+>
+  {
+    renderedSections.map((section, index: number) => (
+      <>
+        {index > 0 && <WavyDivider />}
+        <div class="container mx-auto max-w-4xl">
+          <ContentSection title={section.data.title} id={section.data.id}>
+            <div class="space-y-5">
+              <section.Content />
+              {section.data.id === "aikido" && (
+                <LinkList
+                  items={orderedSections.slice(1).map((s) => ({
+                    href: `#${s.data.id}`,
+                    label: s.data.title,
+                  }))},
+                  columns={2}
+                />
+              )}
+            </div>
+          </ContentSection>
+        </div>
+      </>
+    ))
+  }
+</Layout>
