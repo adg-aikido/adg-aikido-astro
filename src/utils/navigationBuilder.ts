@@ -43,7 +43,7 @@ export function formatVariantLabel(variantName: string): string {
 }
 
 /**
- * Discovers page variants from Astro.glob results
+ * Discovers page variants from import.meta.glob results
  * Returns a Map of basename → variants[]
  */
 export function discoverPageVariants(pageFiles: any[]): Map<string, NavVariant[]> {

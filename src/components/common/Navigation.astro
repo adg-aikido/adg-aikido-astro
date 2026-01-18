@@ -24,7 +24,8 @@ const baseNavItems = [
 ];
 
 // Discover page variants at build time
-const pageFiles = await Astro.glob('../../pages/**/*.astro');
+const pageFilesGlob = import.meta.glob('../../pages/**/*.astro');
+const pageFiles = Object.entries(pageFilesGlob).map(([path]) => ({ file: path }));
 const variantMap = discoverPageVariants(pageFiles);
 
 // Build complete navigation config with variants
