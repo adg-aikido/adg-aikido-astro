@@ -16,46 +16,49 @@ const dojoSections = dojosData.dojoLinks;
     <!-- Dojon Section -->
     <section class="overflow-auto px-2 pt-4 pb-8">
       <SectionHeading level="h1">Dojon</SectionHeading>
-      
+
       <div class="mt-3 flow-root">
         <div class="float-left mr-2 w-fit max-w-xs sm:mr-4">
           <div class="p-1 mb-4 bg-gray-50 shadow-lg">
-            <img 
-              src="/assets/adg-dojon.jpg" 
+            <img
+              src="/assets/adg-dojon.jpg"
               alt="Photo of the inside of the dojo, showing a large matted area."
               class="w-full h-auto"
             />
           </div>
         </div>
-        
+
         <div class="space-y-5">
           <p>
-            <strong class="font-bold">Aikido Dojo Gamlestaden</strong> är en ideell förening som startades 1989. 
-            Föreningens mål är att skapa god Aikido och en trevlig samvaro inom föreningens ramar. Vi har vuxen-, 
-            barn- och ungdomsträning i flera nivåer och ett träningsråd med höggraderade instruktörer som leder 
+            <strong class="font-bold">Aikido Dojo Gamlestaden</strong> är en ideell
+            förening som startades 1989. Föreningens mål är att skapa god Aikido och
+            en trevlig samvaro inom föreningens ramar. Vi har vuxen-, barn- och ungdomsträning
+            i flera nivåer och ett träningsråd med höggraderade instruktörer som leder
             och planerar verksamheten.
           </p>
           <p>
-            Vi finns på Byfogdegatan 3B i en väldigt fin lokal anpassad för verksamheten. Träningens 
-            innehåll och andan i klubben är viktigast för oss. Vi strävar efter att hålla hög nivå på både 
-            aikido och trivsel!
+            Vi finns på Byfogdegatan 3B i en väldigt fin lokal anpassad för
+            verksamheten. Träningens innehåll och andan i klubben är viktigast
+            för oss. Vi strävar efter att hålla hög nivå på både aikido och
+            trivsel!
           </p>
         </div>
       </div>
 
-      <SectionHeading level="h2" class="mt-12">Huvudinstruktörer</SectionHeading>
-      
+      <SectionHeading level="h2" class="mt-12">Huvudinstruktörer</SectionHeading
+      >
+
       <div class="mt-3 flow-root">
         <div class="float-right ml-2 max-w-xs sm:ml-4">
           <div class="p-1 mb-4 bg-gray-50 shadow-lg">
-            <img 
-              src="/assets/hemsida1.jpg" 
+            <img
+              src="/assets/hemsida1.jpg"
               alt="Two aikido instructors performing a technique."
               class="w-full h-auto"
             />
           </div>
         </div>
-        
+
         <div>
           <ul class="mb-5 list-none space-y-1">
             <li>John Patrick Johnsen, 7 dan (vuxna)</li>
@@ -63,11 +66,8 @@ const dojoSections = dojosData.dojoLinks;
             <li>Alula Kassa, 5 dan (vuxna)</li>
           </ul>
           <p>
-            Du kan kontakta instruktörerna på 
-            <a 
-              href="mailto:radet@adg-aikido.se" 
-              class="text-gray-800 font-medium underline decoration-primary-500 underline-offset-1"
-            >
+            Du kan kontakta instruktörerna på
+            <a href="mailto:radet@adg-aikido.se" class="link link-primary">
               radet@adg-aikido.se
             </a>
           </p>
@@ -81,40 +81,46 @@ const dojoSections = dojosData.dojoLinks;
     <!-- Aikido Friends Section -->
     <section class="overflow-auto px-2 pt-4 pb-8">
       <SectionHeading level="h2">Några aikidovänner</SectionHeading>
-      
+
       <div class="mt-3">
-        {dojoSections.map((section) => (
-          <>
-            {section.section === 'Aikido Friends' && (
-              <ul class="mb-5 space-y-2">
-                {section.links.map((friend) => (
-                  <li class="px-2 py-1">
-                    <a 
-                      href={friend.href} 
-                      class="font-normal text-gray-800 no-underline hover:underline"
-                    >
-                      {friend.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
+        {
+          dojoSections.map((section) => (
+            <>
+              {section.section === "Aikido Friends" && (
+                <>
+                  <LinkList
+                    items={section.links}
+                    columns={section.columns || 1}
+                  />
+                </>
+              )}
 
-            {section.section === 'Svenska dojos' && (
-              <>
-                <h3 class="font-serif text-2xl font-bold mt-8 mb-6">Svenska dojos</h3>
-                <LinkList items={section.links} columns={section.columns || 3} />
-              </>
-            )}
+              {section.section === "Svenska dojos" && (
+                <>
+                  <h3 class="font-serif text-2xl font-bold mt-8 mb-6">
+                    Svenska dojos
+                  </h3>
+                  <LinkList
+                    items={section.links}
+                    columns={section.columns || 3}
+                  />
+                </>
+              )}
 
-            {section.section === 'CAA-dojos' && (
-              <>
-                <h3 class="font-serif text-2xl font-bold mt-8 mb-6">CAA-dojos</h3>
-                <LinkList items={section.links} columns={section.columns || 3} />
-              </>
-            )}
-          </>
-        ))}
+              {section.section === "CAA-dojos" && (
+                <>
+                  <h3 class="font-serif text-2xl font-bold mt-8 mb-6">
+                    CAA-dojos
+                  </h3>
+                  <LinkList
+                    items={section.links}
+                    columns={section.columns || 3}
+                  />
+                </>
+              )}
+            </>
+          ))
+        }
       </div>
     </section>
   </main>

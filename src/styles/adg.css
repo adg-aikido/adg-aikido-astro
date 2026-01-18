@@ -8,7 +8,7 @@
 @import "./adg-dark.css";
 
 @plugin "daisyui"{
-  themes: adg-light --default, adg-dark --prefersdark, light, dark, sweettown, cupcake, bumblebee, emerald, corporate, synthwave, retro, garden, forest, aqua, lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn, business, acid, lemonade, night, coffee, winter, dim, nord, sunset;
+  themes: adg-light --default, adg-dark --prefersdark;
 }
 
 @plugin "@tailwindcss/typography";
