@@ -2,6 +2,7 @@
 import HomeIcon from "../../assets/home-icon-3abd86.svg";
 import FacebookIcon from "../../assets/facebook-icon-929f10.svg";
 import NavigationDropdown from "./NavigationDropdown.astro";
+import Information from "./Information.astro";
 import ThemeChooser from "./ThemeChooser.astro";
 import { discoverPageVariants, buildNavigationConfig } from "../../utils/navigationBuilder";
 
@@ -65,6 +66,9 @@ const navItems = buildNavigationConfig(baseNavItems, variantMap);
         </li>
       );
     })}
+    <li class="flex items-center">
+      <Information />
+    </li>
     <li class="flex items-center">
       <ThemeChooser />
     </li>
