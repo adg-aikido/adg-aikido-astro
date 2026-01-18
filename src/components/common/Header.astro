@@ -11,7 +11,7 @@ const { currentPath } = Astro.props;
 
 <header
   id="stickyHeader"
-  class="sticky top-0 z-50 shadow bg-linear-to-br from-primary to-secondary transition-all duration-300"
+  class="sticky top-0 z-50 shadow bg-linear-to-br from-primary/60 to-primary transition-all duration-300"
 >
   <div
     id="headerImages"
@@ -19,7 +19,7 @@ const { currentPath } = Astro.props;
   >
     <a
       href="/"
-      class="w-16 h-8 text-gray-800 shrink-0 md:h-16 lg:h-24 md:w-24 lg:w-32 transition-all duration-300"
+      class="w-16 h-8 text-primary-content shrink-0 md:h-16 lg:h-24 md:w-24 lg:w-32 transition-all duration-300"
       aria-label="ADG logo"
     >
       <AdgLogo class="fill-current" />

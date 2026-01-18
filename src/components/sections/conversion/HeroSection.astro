@@ -1,6 +1,5 @@
 ---
 import "../../../styles/adg.css";
-import Button from "../../common/Button.astro";
 
 ---
 
@@ -22,20 +21,18 @@ import Button from "../../common/Button.astro";
     </h2>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-      <Button
+      <a
         href="/priser#provtraning"
-        variant="primary"
-        size="large"
+        class="btn btn-primary btn-lg"
       >
         Starta din kostnadsfria provträning idag
-      </Button>
-      <Button
+      </a>
+      <a
         href="/schema"
-        variant="accent"
-        size="large"
+        class="btn btn-accent btn-lg"
       >
         Se schema
-      </Button>
+      </a>
     </div>
 
     <a

@@ -14,7 +14,7 @@ const { day, items, class: className } = Astro.props;
 ---
 
 <div class:list={[
-  "flex h-full flex-col justify-between overflow-hidden rounded-lg border-t-2 border-primary-500 shadow-lg",
+  "flex h-full flex-col justify-between overflow-hidden rounded-lg border-t-2 border-primary shadow-lg",
   className
 ]}>
   <h4 class="font-serif text-xl font-bold -mt-8 bg-primary text-primary-content pt-12 pb-4 text-center">
@@ -24,7 +24,7 @@ const { day, items, class: className } = Astro.props;
     {items.map((item) => (
       <li class="flex justify-between">
         <span>{item.timeStart}{item.timeEnd && <> &ndash; {item.timeEnd}</>}</span>
-        <span class:list={[item.subdued && "text-gray-600"]}>{item.activity}</span>
+        <span class:list={[item.subdued && "text-base-content/60"]}>{item.activity}</span>
       </li>
     ))}
   </ul>
