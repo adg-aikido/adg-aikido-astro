@@ -1,0 +1,48 @@
+@plugin "daisyui/theme" {
+  name: "adg-dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+
+ --color-base-100: var(--color-gray-900);
+  --color-base-200: var(--color-gray-800);
+  --color-base-300: var(--color-gray-700);
+  --color-base-content: var(--color-white);
+  
+  --color-primary: var(--color-blue-500);
+  --color-primary-content: var(--color-white);
+  
+  --color-secondary: var(--color-green-400);
+  --color-secondary-content: var(--color-black);
+  
+  --color-accent: var(--color-purple-500);
+  --color-accent-content: var(--color-black);
+  
+  --color-neutral: var(--color-gray-800);
+  --color-neutral-content: var(--color-white);
+  
+  --color-info: var(--color-teal-300);
+  --color-info-content: var(--color-black);
+  
+  --color-success: var(--color-green-400);
+  --color-success-content: var(--color-black);
+  
+  --color-warning: var(--color-yellow-300);
+  --color-warning-content: var(--color-black);
+  
+  --color-error: var(--color-red-500);
+  --color-error-content: var(--color-white);
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+  --radius-badge: 0.25rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+
+  --depth: 1;
+  --noise: 0;
+}

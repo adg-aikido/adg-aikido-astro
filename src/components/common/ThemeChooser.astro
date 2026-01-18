@@ -19,14 +19,14 @@
     </svg>
   </div>
   <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-50 w-52 p-2 shadow-2xl max-h-96 overflow-y-auto">
+    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="ADG Light" value="adg-light" :checked="theme === 'adg-light'" @change="setTheme('adg-light')" /></li>
+    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="ADG Dark" value="adg-dark" :checked="theme === 'adg-dark'" @change="setTheme('adg-dark')" /></li>
+
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Light" value="light" :checked="theme === 'light'" @change="setTheme('light')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dark" value="dark" :checked="theme === 'dark'" @change="setTheme('dark')" /></li>
-    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="ADG Custom" value="adg" :checked="theme === 'adg'" @change="setTheme('adg')" /></li>
 
-    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="GitHub Light" value="githublight" :checked="theme === 'githublight'" @change="setTheme('githublight')" /></li>
-    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="GitHub Dark" value="githubdark" :checked="theme === 'githubdark'" @change="setTheme('githubdark')" /></li>
+    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="codesurf" value="codesurf" :checked="theme === 'codesurf'" @change="setTheme('codesurf')" /></li>
 
-    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Cupcake" value="cupcake" :checked="theme === 'cupcake'" @change="setTheme('cupcake')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Emerald" value="emerald" :checked="theme === 'emerald'" @change="setTheme('emerald')"/></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Corporate" value="corporate" :checked="theme === 'corporate'" @change="setTheme('corporate')" /></li>
     <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Synthwave" value="synthwave" :checked="theme === 'synthwave'" @change="setTheme('synthwave')" /></li>
