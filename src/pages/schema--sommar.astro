@@ -53,7 +53,7 @@ const scheduleTitle = summer_schedule.enabled ? "Sommarprogrammet" : "Schema";
           </div>
 
           <div class="w-full md:w-[35%] lg:w-[30%]">
-            <ul class="space-y-1 text-sm sm:text-base text-gray-700">
+            <ul class="space-y-1 text-sm">
               {instructors.map((instructor) => (
                 <li>{instructor.initials} = {instructor.name}, {instructor.grade}</li>
               ))}

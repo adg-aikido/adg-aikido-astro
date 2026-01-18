@@ -8,7 +8,7 @@ import WavyDivider from "../components/common/WavyDivider.astro";
   title="Vad är aikido? - Aikido Dojo Gamlestaden"
   description="Aikido är en modern kampkonst utvecklad från urgamla tekniker. Lär dig mer om aikidons historia, träning och filosofi."
 >
-  <main class="container mx-auto max-w-6xl">
+  <div class="container mx-auto max-w-6xl">
     <!-- Vad är aikido? -->
     <ContentSection title="Vad är aikido?" id="aikido">
       <div class="mt-3 flow-root">
@@ -52,10 +52,12 @@ import WavyDivider from "../components/common/WavyDivider.astro";
         </div>
       </div>
     </ContentSection>
-  </main>
+  </div>
+
   <WavyDivider />
 
   <!-- Kort historia -->
+  <div class="container mx-auto max-w-6xl">
   <ContentSection title="Kort historia" id="historia">
     <p>
       Aikidons grunder går att leda tillbaka till 1000-talet då två bröder ur
@@ -124,6 +126,7 @@ import WavyDivider from "../components/common/WavyDivider.astro";
       </div>
     </div>
   </ContentSection>
+</div>
 
   <WavyDivider />
 
