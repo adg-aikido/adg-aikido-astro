@@ -6,7 +6,7 @@ export interface Props {
     endTime: string;
     title: string;
     subtitle?: string;
-    instructors?: string;
+    instructors?: Array<string>;
     color: 'primary' | 'secondary';
   }>;
 }
@@ -14,12 +14,13 @@ export interface Props {
 const { day, sessions } = Astro.props;
 
 const colorClasses = {
-  primary: 'border-l-primary',
-  secondary: 'border-l-secondary'
+  primary: 'border-l-primary/50',
+  accent: 'border-l-accent/50',
+  secondary: 'border-l-secondary/50'
 };
 ---
 
-<div class="card card-border bg-base-100/50 shadow-md backdrop-blur-sm">
+<div class="card card-border bg-base-200 shadow-md backdrop-blur-sm">
   <div class="card-body p-0">
     <h3 class="card-title justify-center py-2 mx-6 border-b border-primary">
       {day}
@@ -27,7 +28,7 @@ const colorClasses = {
     <ul class="p-1 pb-2">
       {sessions.map((session) => (
         <li class:list={[
-          "card card-border bg-base-100 m-1 border-l-8",
+          "card card-border bg-base-300 m-1 border-l-8",
           colorClasses[session.color]
         ]}>
           <div class="card-body p-2 gap-1">
@@ -40,7 +41,7 @@ const colorClasses = {
               {session.subtitle ? session.subtitle : '\u00A0'}
             </div>
             {session.instructors && (
-              <div class="text-xs text-right opacity-40">{session.instructors}</div>
+              <div class="text-xs text-right opacity-40">/{session.instructors.join(' /')}</div>
             )}
           </div>
         </li>
