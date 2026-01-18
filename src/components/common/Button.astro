@@ -1,7 +1,7 @@
 ---
 export interface Props {
   href: string;
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "accent" | "ghost";
   size?: "small" | "medium" | "large";
   class?: string;
 }
@@ -14,8 +14,9 @@ const {
 } = Astro.props;
 
 const variantClasses = {
-  primary: "btn-accent",
-  secondary: "btn-outline",
+  primary: "btn-primary",
+  secondary: "btn-secondary",
+  accent: "btn-accent",
   ghost: "btn-ghost"
 };
 

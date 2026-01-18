@@ -10,7 +10,7 @@ const { title, id, class: className } = Astro.props;
 
 <section class:list={["overflow-auto px-2 pt-4 pb-8", className]}>
   <h2 class="mt-6 mb-6" id={id}>
-    <span class="inline-block border-b-4 border-accent pr-12">{title}</span>
+    <span class="inline-block border-b-4 border-secondary pr-12">{title}</span>
   </h2>
   <div class="space-y-5">
     <slot />

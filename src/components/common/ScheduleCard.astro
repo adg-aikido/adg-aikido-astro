@@ -7,7 +7,7 @@ export interface Props {
     title: string;
     subtitle?: string;
     instructors?: string;
-    color: 'primary' | 'accent';
+    color: 'primary' | 'secondary';
   }>;
 }
 
@@ -15,7 +15,7 @@ const { day, sessions } = Astro.props;
 
 const colorClasses = {
   primary: 'border-l-primary',
-  accent: 'border-l-accent'
+  secondary: 'border-l-secondary'
 };
 ---
 

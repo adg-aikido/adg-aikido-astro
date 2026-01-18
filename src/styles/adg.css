@@ -4,15 +4,13 @@
 @import 'tailwindcss';
 @import './elements.css' layer(components);
 
-@plugin "daisyui"{
-  themes: light, dark, sweettown, cupcake, bumblebee, emerald, corporate, synthwave, retro, garden, forest, aqua, lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn, business, acid, lemonade, night, coffee, winter, dim, nord, sunset;
-}
-
 @import "./adg-light.css";
 @import "./adg-dark.css";
-@import "./codesurf.css";
 
-@plugin "@tailwindcss/forms";
+@plugin "daisyui"{
+  themes: adg-light --default, adg-dark --prefersdark, light, dark, sweettown, cupcake, bumblebee, emerald, corporate, synthwave, retro, garden, forest, aqua, lofi, pastel, fantasy, wireframe, black, luxury, dracula, cmyk, autumn, business, acid, lemonade, night, coffee, winter, dim, nord, sunset;
+}
+
 @plugin "@tailwindcss/typography";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
